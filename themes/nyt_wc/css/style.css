@@ -17,7 +17,7 @@ body {
 	color: #7c807e;
 	-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #dcdcdc;
+    /*background-color: #dcdcdc;*/
 }
 
 #wrapper {
@@ -3041,7 +3041,7 @@ noUi-target,
 .noUi-handle {
 	border-radius: 3px;
 	background: #7bae23;
-	cursor: default;,
+	cursor: default;
 }
 .noUi-active {
 	
@@ -3255,7 +3255,7 @@ noUi-target,
 }
 
 .category-accordion h4 {
-	color:#;
+	/*color:#;*/
 }
  .category-accordion-list  {
 	list-style-type:disc;
