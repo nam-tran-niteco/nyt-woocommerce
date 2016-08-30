@@ -51,12 +51,11 @@
                                     <ul id="top-links" class="clearfix">
                                         <li><a href="#" title="My Wishlist"><span class="top-icon top-icon-pencil"></span><span class="hide-for-xs">My Wishlist</span></a></li>
                                         <li><a href="#" title="My Account"><span class="top-icon top-icon-user"></span><span class="hide-for-xs">My Account</span></a></li>
-                                        <li><a href="cart.html" title="My Cart"><span class="top-icon top-icon-cart"></span><span class="hide-for-xs">My Cart</span></a></li>
-                                        <li><a href="checkout.html" title="Checkout"><span class="top-icon top-icon-check"></span><span class="hide-for-xs">Checkout</span></a></li>
+                                        <li><a href="/cart" title="My Cart"><span class="top-icon top-icon-cart"></span><span class="hide-for-xs">My Cart</span></a></li>
+                                        <li><a href="/checkout" title="Checkout"><span class="top-icon top-icon-check"></span><span class="hide-for-xs">Checkout</span></a></li>
                                     </ul>
                                 </div><!-- End .header-top-left -->
                                 <div class="header-top-right">
-
                                     <div class="header-top-dropdowns pull-right">
                                         <div class="btn-group dropdown-money">
                                             <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
@@ -97,7 +96,7 @@
                             <div class="col-md-5 col-sm-5 col-xs-12 logo-container">
                                 <h1 class="logo clearfix">
                                     <span>Responsive eCommerce Template</span>
-                                    <a href="index-2.html" title="Venedor eCommerce Template"><img src="<?php echo get_template_directory_uri() ?>/images/logo.png" alt="Venedor Commerce Template" width="238" height="76"></a>
+                                    <a href="/" title="Venedor eCommerce Template"><img src="<?php echo get_template_directory_uri() ?>/images/logo.png" alt="Venedor Commerce Template" width="238" height="76"></a>
                                 </h1>
                             </div><!-- End .col-md-5 -->
                             <div class="col-md-7 col-sm-7 col-xs-12 header-inner-right">
@@ -131,115 +130,15 @@
                                             <div id="responsive-nav-button">
                                                 Menu <span id="responsive-nav-button-icon"></span>
                                             </div><!-- responsive-nav-button -->
-<!--                                            <ul class="clearfix responsive-nav">
-                                                <li><span class="menu-button"></span>
-                                                    <a class="active" href="index-2.html">HOME</a>
-                                                    <ul>
-                                                        <li><a href="index-2.html">Home 1</a></li>
-                                                        <li><a href="../blue/index-2.html">Home 2</a></li>
-                                                        <li><a href="../orange/index-2.html">Home 3</a></li>
-                                                        <li><a href="../pink/index-2.html">Home 4</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class=""><span class="menu-button"></span><a href="#">SHOP</a>
-                                                    <div class="mega-menu clearfix">
-                                                        <div class="col-5"><span class="menu-button"></span>
-                                                            <a href="category.html" class="mega-menu-title">Clothing</a> End .mega-menu-title 
-                                                            <ul class="mega-menu-list clearfix">
-                                                                <li><a href="#">Dresses</a></li>
-                                                                <li><a href="#">Jeans &amp; Trousers</a></li>
-                                                                <li><a href="#">Blouses &amp; Shirts</a></li>
-                                                                <li><a href="#">Tops &amp; T-Shirts</a></li>
-                                                                <li><a href="#">Jackets &amp; Coats</a></li>
-                                                                <li><a href="#">Skirts</a></li>
-                                                            </ul>
-                                                        </div> End .col-5 
-                                                        <div class="col-5"><span class="menu-button"></span>
-                                                            <a href="category.html" class="mega-menu-title">Shoes</a> End .mega-menu-title 
-                                                            <ul class="mega-menu-list clearfix">
-                                                                <li><a href="#">Formal Shoes</a></li>
-                                                                <li><a href="#">Casual Shoes</a></li>
-                                                                <li><a href="#">Sandals</a></li>
-                                                                <li><a href="#">Boots</a></li>
-                                                                <li><a href="#">Wide Fit</a></li>
-                                                                <li><a href="#">Slippers</a></li>
-                                                            </ul>
-                                                        </div> End .col-5 
-                                                        <div class="col-5"><span class="menu-button"></span>
-                                                            <a href="category.html" class="mega-menu-title">Accessories</a> End .mega-menu-title 
-                                                            <ul class="mega-menu-list clearfix">
-                                                                <li><a href="#">Bags &amp; Purses</a></li>
-                                                                <li><a href="#">Belts</a></li>
-                                                                <li><a href="#">Gloves</a></li>
-                                                                <li><a href="#">Jewellery</a></li>
-                                                                <li><a href="#">Sunglasses</a></li>
-                                                                <li><a href="#">Hair Accessories</a></li>
-                                                            </ul>
-                                                        </div> End .col-5 
-                                                        <div class="col-5"><span class="menu-button"></span>
-                                                            <a href="category.html" class="mega-menu-title">Sports</a> End .mega-menu-title 
-                                                            <ul class="mega-menu-list clearfix">
-                                                                <li><a href="#">Sport Tops &amp; Vests</a></li>
-                                                                <li><a href="#">Swimwear</a></li>
-                                                                <li><a href="#">Footwear</a></li>
-                                                                <li><a href="#">Sports Underwear</a></li>
-                                                                <li><a href="#">Bags</a></li>
-                                                            </ul>
-                                                        </div> End .col-5 
-
-                                                        <div class="col-5"><span class="menu-button"></span>
-                                                            <a href="category.html" class="mega-menu-title">Maternity</a> End .mega-menu-title 
-                                                            <ul class="mega-menu-list clearfix">
-                                                                <li><a href="#">Tops &amp; Skirts</a></li>
-                                                                <li><a href="#">Dresses</a></li>
-                                                                <li><a href="#">Trousers &amp; Shorts</a></li>
-                                                                <li><a href="#">Knitwear</a></li>
-                                                                <li><a href="#">Jackets &amp; Coats</a></li>
-                                                            </ul>
-                                                        </div> End .col-5 
-                                                    </div> End .mega-menu 
-                                                </li>
-
-                                                <li><span class="menu-button"></span>
-                                                    <a href="#">PAGES</a>
-                                                    <ul>
-                                                        <li><a href="product.html">Product</a></li>
-                                                        <li><a href="cart.html">Cart</a></li>
-                                                        <li><span class="menu-button"></span><a href="category.html">Category</a>
-                                                            <ul>
-                                                                <li><a href="category-list.html">Category list</a></li>
-                                                                <li><a href="category.html">Category Banner 1</a></li>
-                                                                <li><a href="category-banner-2.html">Category Banner 2</a></li>
-                                                                <li><a href="category-banner-3.html">Category Banner 3</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a href="checkout.html">Checkout</a></li>
-                                                        <li><a href="aboutus.html">About Us</a></li>
-                                                        <li><a href="register-account.html">Register Account</a></li>
-                                                        <li><a href="compare-products.html">Compare Products</a></li>
-                                                        <li><a href="404.html">404 Page</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><span class="menu-button"></span><a href="#">Portfolio</a>
-                                                    <ul>
-                                                        <li><a href="portfolio-2.html">Two Columns</a></li>
-                                                        <li><a href="portfolio-3.html">Three Columns</a></li>
-                                                        <li><a href="portfolio-4.html">Four Columns</a></li>
-                                                        <li><a href="single-portfolio.html">Portfolio Post</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><span class="menu-button"></span><a href="blog.html">Blog</a>
-                                                    <ul>
-                                                        <li><a href="single.html">Blog Post</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="contact.html">Contact Us</a></li>
-                                            </ul>-->
+                                            
+                                            <!--Mobile Menu-->
                                             <?php wp_nav_menu(array(
                                                 'theme_location' => 'mobile_menu', 
                                                 'container' => '',
                                                 'menu_class' => 'clearfix responsive-nav'))?>
                                         </div>
+                                        
+                                        <!--Top Menu-->
                                         <?php wp_nav_menu(array(
                                             'theme_location' => 'top_menu',
                                             'container' => '',
@@ -305,12 +204,13 @@
                                         </div><!-- End .dropdown-cart-menu-container -->
 
 
-                                        <form class="form-inline quick-search-form" role="form" action="#">
+<!--                                        <form class="form-inline quick-search-form" role="form" action="#">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Search here">
-                                            </div><!-- End .form-inline -->
+                                            </div> End .form-inline 
                                             <button type="submit" id="quick-search" class="btn btn-custom"></button>
-                                        </form>
+                                        </form>-->
+                                        <?php get_product_search_form(true)?>
                                     </div><!-- End #quick-access -->
                                 </div><!-- End .col-md-12 -->
                             </div><!-- End .row -->

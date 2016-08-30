@@ -2,7 +2,7 @@
 get_header()
 ?>
 
-<div class="container-fluid" style="height: 4000px">
+<div class="container-fluid" style="height: 400px">
     
 </div>
 
