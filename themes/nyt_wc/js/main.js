@@ -3,6 +3,21 @@
 (function ($) {
 	"use strict";
 
+	// Sequence.js Slider Plugin
+	var options = {
+		nextButton: true,
+		prevButton: true,
+		pagination:true,
+		autoPlay: true,
+		autoPlayDelay: 8500,
+		pauseOnHover: true,
+		preloader: true,
+		theme: 'slide',
+		speed: 700,
+		animateStartingFrameIn: true
+    },
+    homeSlider = $('#slider-sequence').sequence(options).data("sequence");
+
 	// Check for Mobile device
 	var mobileDetected;
 	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -1333,6 +1348,7 @@ style += '#option-panel-tabs-container li.active a:after { border-top-color : #'
 		}
 	});
 
+		
 	
-	
+
 }(jQuery));
