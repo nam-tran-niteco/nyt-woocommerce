@@ -8,6 +8,7 @@ add_theme_support('post-thumbnails');
 register_nav_menus(
         array(
             'top_menu' => 'Top Menu',
+            'mobile_menu' => 'Mobile Menu',
             'footer_menu' => 'Footer Menu'
         )
 );
