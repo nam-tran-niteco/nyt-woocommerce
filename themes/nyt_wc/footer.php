@@ -1,23 +1,6 @@
         </div>
         
         <footer id="footer">
-<!--        	<div id="twitterfeed-container">
-        		<div class="container">
-        			<div class="row">
-        				
-        				<div class="twitterfeed col-md-12">
-        					<div class="twitter-icon"><i class="fa fa-twitter"></i></div> End .twitter-icon 
-        					<div class="row">
-        						<div class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-        							<div class="twitter_feed flexslider"><p class="loading">searching twitter...</p></div>
-        						</div>
-        					</div>
-        					
-        				</div> End .twiitterfeed .col-md-12 
-        				
-        			</div> End .row 
-    			</div> End .container 
-        	</div> End #twitterfeed-container -->
         	<div id="inner-footer">
         		
 				<div class="container">
@@ -65,9 +48,9 @@
 						<div class="col-md-3 col-sm-12 col-xs-12 widget">
 							<h3>FACEBOOK LIKE BOX</h3>
 							
-							<div class="facebook-likebox">
+							<!-- <div class="facebook-likebox">
 								<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fenvato&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false"></iframe>
-							</div>
+							</div> -->
 							
 							
 						</div><!-- End .widget -->
