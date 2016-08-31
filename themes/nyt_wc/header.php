@@ -202,14 +202,8 @@
                                                 </div><!-- End .dropdown-cart -->
                                             </div><!-- End .btn-group -->
                                         </div><!-- End .dropdown-cart-menu-container -->
-
-
-<!--                                        <form class="form-inline quick-search-form" role="form" action="#">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Search here">
-                                            </div> End .form-inline 
-                                            <button type="submit" id="quick-search" class="btn btn-custom"></button>
-                                        </form>-->
+                                        
+                                        <!--Search form-->
                                         <?php get_product_search_form(true)?>
                                     </div><!-- End #quick-access -->
                                 </div><!-- End .col-md-12 -->
