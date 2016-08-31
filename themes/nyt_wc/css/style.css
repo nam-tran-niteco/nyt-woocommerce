@@ -4895,11 +4895,11 @@ noUi-target,
 	text-transform:uppercase;
 }
 
-#footer .links {
+#footer .menu {
 	display:block;
 }
 
-#footer .links li {
+#footer .menu li {
 	padding-left:16px;
 	background-image:url(../images/sprites/footer-menu-list-type.png);
 	background-repeat:no-repeat;
