@@ -2,10 +2,8 @@
 	        	<div id="inner-footer">
 					<div class="container">
 						<div class="row">
-						
-						 	<?php if( dynamic_sidebar( 'footer' ) ); ?>
 
-							<div class="clearfix visible-sm"></div>
+						 	<?php if( dynamic_sidebar( 'footer' ) ); ?>
 
 							<div class="col-md-3 col-sm-12 col-xs-12 widget">
 								<h3>FACEBOOK LIKE BOX</h3>
@@ -17,9 +15,9 @@
 							</div>
 						</div>
 					</div>
-	        	
+
 	        	</div>
-	        	
+
 	        	<div id="footer-bottom">
 	        		<div class="container">
 	        			<div class="row">
@@ -27,15 +25,10 @@
 	        					<ul class="social-links clearfix">
 	        						<li><a href="#" class="social-icon icon-facebook"></a></li>
 	        						<li><a href="#" class="social-icon icon-twitter"></a></li>
-	        						<li><a href="#" class="social-icon icon-rss"></a></li>
-	        						<li><a href="#" class="social-icon icon-delicious"></a></li>
-	        						<li><a href="#" class="social-icon icon-linkedin"></a></li>
-	        						<li><a href="#" class="social-icon icon-flickr"></a></li>
-	        						<li><a href="#" class="social-icon icon-skype"></a></li>
 	        						<li><a href="#" class="social-icon icon-email"></a></li>
 	        					</ul>
 	        				</div>
-	        				
+
 	        				<div class="col-md-5 col-sm-5 col-xs-12 footer-text-container">
 	        					<p>&copy; <?php echo date('Y'); ?> Powered by Company™. All Rights Reserved.</p>
 	        				</div>

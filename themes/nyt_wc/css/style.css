@@ -1569,6 +1569,7 @@ parent's font-size:0
 }
 .item-action {
 	line-height:15px;
+	text-align: center;
 }
 
 .item-action * {
