@@ -70,12 +70,11 @@
                                     <ul id="top-links" class="clearfix">
                                         <li><a href="#" title="My Wishlist"><span class="top-icon top-icon-pencil"></span><span class="hide-for-xs">My Wishlist</span></a></li>
                                         <li><a href="#" title="My Account"><span class="top-icon top-icon-user"></span><span class="hide-for-xs">My Account</span></a></li>
-                                        <li><a href="cart.html" title="My Cart"><span class="top-icon top-icon-cart"></span><span class="hide-for-xs">My Cart</span></a></li>
-                                        <li><a href="checkout.html" title="Checkout"><span class="top-icon top-icon-check"></span><span class="hide-for-xs">Checkout</span></a></li>
+                                        <li><a href="/cart" title="My Cart"><span class="top-icon top-icon-cart"></span><span class="hide-for-xs">My Cart</span></a></li>
+                                        <li><a href="/checkout" title="Checkout"><span class="top-icon top-icon-check"></span><span class="hide-for-xs">Checkout</span></a></li>
                                     </ul>
                                 </div><!-- End .header-top-left -->
                                 <div class="header-top-right">
-
                                     <div class="header-top-dropdowns pull-right">
                                         <div class="btn-group dropdown-money">
                                             <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
@@ -116,7 +115,7 @@
                             <div class="col-md-5 col-sm-5 col-xs-12 logo-container">
                                 <h1 class="logo clearfix">
                                     <span>Responsive eCommerce Template</span>
-                                    <a href="index-2.html" title="Venedor eCommerce Template"><img src="<?php echo get_template_directory_uri() ?>/images/logo.png" alt="Venedor Commerce Template" width="238" height="76"></a>
+                                    <a href="/" title="Venedor eCommerce Template"><img src="<?php echo get_template_directory_uri() ?>/images/logo.png" alt="Venedor Commerce Template" width="238" height="76"></a>
                                 </h1>
                             </div><!-- End .col-md-5 -->
                             <div class="col-md-7 col-sm-7 col-xs-12 header-inner-right">
@@ -148,12 +147,16 @@
                                         <div id="responsive-nav">
                                             <div id="responsive-nav-button">
                                                 Menu <span id="responsive-nav-button-icon"></span>
-                                            </div>
+                                            </div><!-- responsive-nav-button -->
+                                            
+                                            <!--Mobile Menu-->
                                             <?php wp_nav_menu(array(
                                                 'theme_location' => 'mobile_menu', 
                                                 'container' => '',
                                                 'menu_class' => 'clearfix responsive-nav'))?>
                                         </div>
+                                        
+                                        <!--Top Menu-->
                                         <?php wp_nav_menu(array(
                                             'theme_location' => 'top_menu',
                                             'container' => '',
@@ -217,14 +220,9 @@
                                                 </div><!-- End .dropdown-cart -->
                                             </div><!-- End .btn-group -->
                                         </div><!-- End .dropdown-cart-menu-container -->
-
-
-                                        <form class="form-inline quick-search-form" role="form" action="#">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Search here">
-                                            </div><!-- End .form-inline -->
-                                            <button type="submit" id="quick-search" class="btn btn-custom"></button>
-                                        </form>
+                                        
+                                        <!--Search form-->
+                                        <?php get_product_search_form(true)?>
                                     </div><!-- End #quick-access -->
                                 </div><!-- End .col-md-12 -->
                             </div><!-- End .row -->
