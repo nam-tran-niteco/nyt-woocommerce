@@ -126,7 +126,22 @@
                             <div class="row">
                                 <div class="col-md-12 clearfix">
                                     <nav id="main-nav">
+
                                         <?php wp_nav_menu(array('theme_location', 'main-nav'))?>
+                                        <div id="responsive-nav">
+                                            <div id="responsive-nav-button">
+                                                Menu <span id="responsive-nav-button-icon"></span>
+                                            </div>
+                                            <?php wp_nav_menu(array(
+                                                'theme_location' => 'mobile_menu', 
+                                                'container' => '',
+                                                'menu_class' => 'clearfix responsive-nav'))?>
+                                        </div>
+                                        <?php wp_nav_menu(array(
+                                            'theme_location' => 'top_menu',
+                                            'container' => '',
+                                            'menu_class' => 'menu clearfix'))?>
+
                                     </nav>
                                     <div id="quick-access">
                                         <div class="dropdown-cart-menu-container pull-right">
