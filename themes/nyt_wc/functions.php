@@ -8,7 +8,8 @@ add_theme_support('post-thumbnails');
 register_nav_menus(
         array(
             'top_menu' => 'Top Menu',
-            'footer_menu' => 'Footer Menu'
+            'footer_menu' => 'Footer Menu',
+            'main-nav' => 'Main menu'
         )
 );
 
