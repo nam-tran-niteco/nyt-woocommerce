@@ -11,12 +11,12 @@ register_nav_menus(
             'top_menu' => 'Top Menu',
             'footer_menu' => 'Footer Menu',
             'main-nav' => 'Main menu'
+        ),
+        array(
+            'top_menu' => 'Top Menu',
+            'mobile_menu' => 'Mobile Menu',
+            'footer_menu' => 'Footer Menu'
         )
-    array(
-        'top_menu' => 'Top Menu',
-        'mobile_menu' => 'Mobile Menu',
-        'footer_menu' => 'Footer Menu'
-    )
 );
 
 function nyt_create_widget( $name, $id, $description ) {

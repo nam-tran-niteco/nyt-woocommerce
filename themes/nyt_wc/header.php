@@ -38,6 +38,25 @@
         </style>
         
         <?php wp_head() ?>
+        <script>
+            window.fbAsyncInit = function() {
+            FB.init({
+            appId      : 'YOUR_APP_ID', // App ID
+            channelUrl : 'www.nyt.woocommerce.dev', // Channel File
+            status     : true, // check login status
+            cookie     : true, // enable cookies to allow the server to access the session
+            xfbml      : true  // parse XFBML
+        });
+        };
+        // Load the SDK Asynchronously
+        (function(d){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+        }(document));
+     </script>
     </head>
 
     <body>
@@ -126,8 +145,6 @@
                             <div class="row">
                                 <div class="col-md-12 clearfix">
                                     <nav id="main-nav">
-
-                                        <?php wp_nav_menu(array('theme_location', 'main-nav'))?>
                                         <div id="responsive-nav">
                                             <div id="responsive-nav-button">
                                                 Menu <span id="responsive-nav-button-icon"></span>
