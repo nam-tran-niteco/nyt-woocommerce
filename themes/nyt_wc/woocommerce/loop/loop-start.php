@@ -16,6 +16,6 @@
  * @version     2.0.0
  */
 ?>
-<div class="md-margin"></div><!-- .space -->
+<div class="md-margin"></div>
 <div class="category-item-container">
 	<div class="row">

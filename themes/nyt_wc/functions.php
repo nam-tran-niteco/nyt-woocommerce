@@ -75,8 +75,8 @@ add_action('wp_enqueue_scripts', 'venedor_scripts');
 /*
  * CUSTOMIZE SHOP PAGE
  * */
-// change shop column
-add_filter('loop_shop_columns', function() { return 3; });
+add_filter( 'loop_shop_columns', function() { return 3; } );
+add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 9;' ), 20 );
 
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 
@@ -88,6 +88,11 @@ add_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loo
 
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 add_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 10 );
+
+remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10 );
+add_action( 'woocommerce_before_shop_loop', 'woocommerce_pagination', 30 );
+add_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 8 );
+
 
 // override
 if (  ! function_exists( 'woocommerce_template_loop_product_title' ) ) {
@@ -119,6 +124,44 @@ if ( ! function_exists( 'woocommerce_breadcrumb' ) ) {
     }
 }
 
+if ( ! function_exists( 'woocommerce_catalog_ordering' ) ) {
+
+    /**
+     * Output the product sorting options.
+     *
+     * @subpackage  Loop
+     */
+    function woocommerce_catalog_ordering() {
+        global $wp_query;
+
+        if ( 1 === $wp_query->found_posts || ! woocommerce_products_will_display() ) {
+            return;
+        }
+
+        $orderby                 = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+        $show_default_orderby    = 'menu_order' === apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+        $catalog_orderby_options = apply_filters( 'woocommerce_catalog_orderby', array(
+            'menu_order' => __( 'Default', 'woocommerce' ),
+            'popularity' => __( 'Popularity', 'woocommerce' ),
+            'rating'     => __( 'Average rating', 'woocommerce' ),
+            'date'       => __( 'Newnest', 'woocommerce' ),
+            'price'      => __( 'Price: low to high', 'woocommerce' ),
+            'price-desc' => __( 'Price: high to low', 'woocommerce' )
+        ) );
+
+        if ( ! $show_default_orderby ) {
+            unset( $catalog_orderby_options['menu_order'] );
+        }
+
+        if ( 'no' === get_option( 'woocommerce_enable_review_rating' ) ) {
+            unset( $catalog_orderby_options['rating'] );
+        }
+
+        wc_get_template( 'loop/orderby.php', array( 'catalog_orderby_options' => $catalog_orderby_options, 'orderby' => $orderby, 'show_default_orderby' => $show_default_orderby ) );
+    }
+}
+
+
 if (  ! function_exists( 'nyt_template_loop_product_item_meta_container_open' ) ) {
     function nyt_template_loop_product_item_meta_container_open() {
         echo '<div class="item-meta-container">';
@@ -132,6 +175,7 @@ if (  ! function_exists( 'nyt_template_loop_product_item_meta_container_close' )
     }
 }
 add_action( 'woocommerce_after_shop_loop_item_title', 'nyt_template_loop_product_item_meta_container_close', 15 );
+
 
 if (  ! function_exists( 'nyt_template_loop_product_item_image_container_open' ) ) {
     function nyt_template_loop_product_item_image_container_open() {
@@ -147,19 +191,65 @@ if (  ! function_exists( 'nyt_template_loop_product_item_image_container_close' 
 }
 add_action( 'woocommerce_before_shop_loop_item_title', 'nyt_template_loop_product_item_image_container_close', 14 );
 
+
 if (  ! function_exists( 'nyt_template_loop_product_container_open' ) ) {
     function nyt_template_loop_product_container_open() {
-        echo '<div class="container"><div class="row"><div class="col-md-12"><div class="row"><div class="col-md-9 col-sm-8 col-xs-12 main-content">';
+        echo '<div class="container"><div class="row"><div class="col-md-12"><div class="row">';
     }
 }
-add_action( 'woocommerce_before_main_content', 'nyt_template_loop_product_container_open', 15 );
+add_action( 'woocommerce_archive_description', 'nyt_template_loop_product_container_open', 15 );
 
 if (  ! function_exists( 'nyt_template_loop_product_container_close' ) ) {
     function nyt_template_loop_product_container_close() {
-        echo '</div></div></div></div></div>';
+        echo '</div></div></div></div>';
     }
 }
 add_action( 'woocommerce_sidebar', 'nyt_template_loop_product_container_close', 15 );
 
+
+if (  ! function_exists( 'nyt_template_loop_product_toolbar_open' ) ) {
+    function nyt_template_loop_product_toolbar_open() {
+        echo '<div class="category-toolbar clearfix">';
+    }
+}
+add_action( 'woocommerce_before_shop_loop', 'nyt_template_loop_product_toolbar_open', 15 );
+
+if (  ! function_exists( 'nyt_template_loop_product_toolbar_close' ) ) {
+    function nyt_template_loop_product_toolbar_close() {
+        echo '</div>';
+    }
+}
+add_action( 'woocommerce_before_shop_loop', 'nyt_template_loop_product_toolbar_close', 35 );
+
+
+if (  ! function_exists( 'nyt_template_loop_product_main_content_open' ) ) {
+    function nyt_template_loop_product_main_content_open() {
+        echo '<div class="col-md-9 col-sm-8 col-xs-12 main-content">';
+    }
+}
+add_action( 'woocommerce_before_shop_loop', 'nyt_template_loop_product_main_content_open', 
+    10 );
+
+if (  ! function_exists( 'nyt_template_loop_product_main_content_close' ) ) {
+    function nyt_template_loop_product_main_content_close() {
+        echo '</div>';
+    }
+}
+add_action( 'woocommerce_sidebar', 'nyt_template_loop_product_main_content_close', 9 );
+
+
+if (  ! function_exists( 'nyt_template_loop_product_pagination_container_open' ) ) {
+    function nyt_template_loop_product_pagination_container_open() {
+        echo '<div class="pagination-container clearfix"><div class="pull-right">';
+    }
+}
+add_action( 'woocommerce_after_shop_loop', 'nyt_template_loop_product_pagination_container_open', 7 );
+
+if (  ! function_exists( 'nyt_template_loop_product_pagination_container_close' ) ) {
+    function nyt_template_loop_product_pagination_container_close() {
+        echo '</div></div>';
+    }
+}
+add_action( 'woocommerce_after_shop_loop', 'nyt_template_loop_product_pagination_container_close', 8 );
 
 ?>

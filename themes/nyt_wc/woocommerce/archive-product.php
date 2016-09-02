@@ -27,8 +27,7 @@ get_header( 'shop' ); ?>
 		 * woocommerce_before_main_content hook.
 		 *
 		 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-		 * @hooked nyt_template_loop_product_container_open - 15
-		 * @hooked woocommerce_breadcrumb - 20
+		 * @hooked woocommerce_breadcrumb - 10
 		 */
 		do_action( 'woocommerce_before_main_content' );
 	?>
@@ -39,6 +38,7 @@ get_header( 'shop' ); ?>
 			 *
 			 * @hooked woocommerce_taxonomy_archive_description - 10
 			 * @hooked woocommerce_product_archive_description - 10
+			 * @hooked nyt_template_loop_product_container_open - 15
 			 */
 			do_action( 'woocommerce_archive_description' );
 		?>
@@ -49,8 +49,11 @@ get_header( 'shop' ); ?>
 				/**
 				 * woocommerce_before_shop_loop hook.
 				 *
-				 * @hooked woocommerce_result_count - 20
+				 * @hooked nyt_template_loop_product_main_content_open - 10
+				 * @hooked nyt_template_loop_product_toolbar_open - 15
 				 * @hooked woocommerce_catalog_ordering - 30
+				 * @hooked woocommerce_pagination - 30
+				 * @hooked nyt_template_loop_product_toolbar_close - 35
 				 */
 				do_action( 'woocommerce_before_shop_loop' );
 			?>
@@ -71,8 +74,11 @@ get_header( 'shop' ); ?>
 				/**
 				 * woocommerce_after_shop_loop hook.
 				 *
-				 * @hooked woocommerce_pagination - 10
-				 */
+				 * @hooked nyt_template_loop_product_pagination_container_open - 7
+				 * @hooked woocommerce_pagination - 8
+				 * @hooked nyt_template_loop_product_pagination_container_close - 8
+ 				 *
+ 				 */
 				do_action( 'woocommerce_after_shop_loop' );
 			?>
 
@@ -84,21 +90,24 @@ get_header( 'shop' ); ?>
 
 	<?php
 		/**
-		 * woocommerce_after_main_content hook.
-		 *
-		 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
-		 */
-		do_action( 'woocommerce_after_main_content' );
-	?>
-
-	<?php
-		/**
 		 * woocommerce_sidebar hook.
 		 *
+		 * @hooked nyt_template_loop_product_main_content_close - 9
 		 * @hooked woocommerce_get_sidebar - 10
 		 * @hooked nyt_template_loop_product_container_close - 15
 		 */
 		do_action( 'woocommerce_sidebar' );
 	?>
+
+	<?php
+		/**
+		 * woocommerce_after_main_content hook.
+		 *
+		 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+		 *
+		 */
+		do_action( 'woocommerce_after_main_content' );
+	?>
+	
 
 <?php get_footer( 'shop' ); ?>
