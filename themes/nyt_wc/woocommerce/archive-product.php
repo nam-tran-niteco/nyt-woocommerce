@@ -31,77 +31,80 @@ get_header( 'shop' ); ?>
 		 */
 		do_action( 'woocommerce_before_main_content' );
 	?>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+				<?php
+					/**
+					 * woocommerce_archive_description hook.
+					 *
+					 * @hooked woocommerce_taxonomy_archive_description - 10
+					 * @hooked woocommerce_product_archive_description - 10
+					 */
+					do_action( 'woocommerce_archive_description' );
+				?>
 
-		<?php
-			/**
-			 * woocommerce_archive_description hook.
-			 *
-			 * @hooked woocommerce_taxonomy_archive_description - 10
-			 * @hooked woocommerce_product_archive_description - 10
-			 * @hooked nyt_template_loop_product_container_open - 15
-			 */
-			do_action( 'woocommerce_archive_description' );
-		?>
+				<?php if ( have_posts() ) : ?>
+					<div class="col-md-9 col-sm-8 col-xs-12 main-content">
+						<div class="category-toolbar clearfix">
+						<?php
+							/**
+							 * woocommerce_before_shop_loop hook.
+							 *
+							 * @hooked nyt_template_loop_product_toolbar_open - 15
+							 * @hooked woocommerce_catalog_ordering - 30
+							 * @hooked woocommerce_pagination - 30
+							 * @hooked nyt_template_loop_product_toolbar_close - 35
+							 */
+							do_action( 'woocommerce_before_shop_loop' );
+						?>
+						</div>
 
-		<?php if ( have_posts() ) : ?>
+						<?php woocommerce_product_loop_start(); ?>
 
-			<?php
-				/**
-				 * woocommerce_before_shop_loop hook.
-				 *
-				 * @hooked nyt_template_loop_product_main_content_open - 10
-				 * @hooked nyt_template_loop_product_toolbar_open - 15
-				 * @hooked woocommerce_catalog_ordering - 30
-				 * @hooked woocommerce_pagination - 30
-				 * @hooked nyt_template_loop_product_toolbar_close - 35
-				 */
-				do_action( 'woocommerce_before_shop_loop' );
-			?>
+							<?php woocommerce_product_subcategories(); ?>
 
-			<?php woocommerce_product_loop_start(); ?>
+							<?php while ( have_posts() ) : the_post(); ?>
 
-				<?php woocommerce_product_subcategories(); ?>
+								<div class="col-md-4 col-sm-6 col-xs-12">
 
-				<?php while ( have_posts() ) : the_post(); ?>
+									<?php wc_get_template_part( 'content', 'product' ); ?>
 
-					<div class="col-md-4 col-sm-6 col-xs-12">
+								</div>
 
-						<?php wc_get_template_part( 'content', 'product' ); ?>
+							<?php endwhile; // end of the loop. ?>
 
-					</div>
+						<?php woocommerce_product_loop_end(); ?>
 
-				<?php endwhile; // end of the loop. ?>
+						<?php
+							/**
+							 * woocommerce_after_shop_loop hook.
+							 *
+							 * @hooked woocommerce_pagination - 8
+			 				 *
+			 				 */
+							do_action( 'woocommerce_after_shop_loop' );
+						?>
 
-			<?php woocommerce_product_loop_end(); ?>
+					<?php elseif ( ! woocommerce_product_subcategories( array( 'before' => woocommerce_product_loop_start( false ), 'after' => woocommerce_product_loop_end( false ) ) ) ) : ?>
 
-			<?php
-				/**
-				 * woocommerce_after_shop_loop hook.
-				 *
-				 * @hooked nyt_template_loop_product_pagination_container_open - 7
-				 * @hooked woocommerce_pagination - 8
-				 * @hooked nyt_template_loop_product_pagination_container_close - 8
- 				 *
- 				 */
-				do_action( 'woocommerce_after_shop_loop' );
-			?>
+						<?php wc_get_template( 'loop/no-products-found.php' ); ?>
 
-		<?php elseif ( ! woocommerce_product_subcategories( array( 'before' => woocommerce_product_loop_start( false ), 'after' => woocommerce_product_loop_end( false ) ) ) ) : ?>
-
-			<?php wc_get_template( 'loop/no-products-found.php' ); ?>
-
-		<?php endif; ?>
-
-	<?php
-		/**
-		 * woocommerce_sidebar hook.
-		 *
-		 * @hooked nyt_template_loop_product_main_content_close - 9
-		 * @hooked woocommerce_get_sidebar - 10
-		 * @hooked nyt_template_loop_product_container_close - 15
-		 */
-		do_action( 'woocommerce_sidebar' );
-	?>
+					<?php endif; ?>
+				</div>
+				<?php
+					/**
+					 * woocommerce_sidebar hook.
+					 *
+					 * @hooked woocommerce_get_sidebar - 10
+					 */
+					do_action( 'woocommerce_sidebar' );
+				?>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<?php
 		/**

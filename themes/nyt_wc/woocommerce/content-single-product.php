@@ -22,23 +22,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<?php
-	/**
-	 * woocommerce_before_single_product hook.
-	 *
-	 * @hooked wc_print_notices - 10
-	 */
-	 do_action( 'woocommerce_before_single_product' );
-
-	 if ( post_password_required() ) {
-	 	echo get_the_password_form();
-	 	return;
-	 }
-?>
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
+			<?php
+				/**
+				 * woocommerce_before_single_product hook.
+				 *
+				 * @hooked wc_print_notices - 10
+				 */
+				 do_action( 'woocommerce_before_single_product' );
+
+				 if ( post_password_required() ) {
+				 	echo get_the_password_form();
+				 	return;
+				 }
+			?>
+
 			<div class="row">
 				<div class="col-md-6 col-sm-12 col-xs-12 product-viewer clearfix">
 				<?php
@@ -68,37 +68,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 						 */
 						do_action( 'woocommerce_single_product_summary' );
 					?>
+				</div>
+			</div><!-- .summary -->
+
+			<div class="lg-margin2x"></div><!-- End .space -->
+
+			<div class="row">
+    			<div class="col-md-9 col-sm-12 col-xs-12">
+
+    				<?php wc_get_template( 'single-product/tabs/tabs.php' ); ?>
+
+    				<div class="lg-margin visible-xs"></div>
+    			</div>
+
+    			<div class="lg-margin2x visible-sm visible-xs"></div>
+
+    			<div class="col-md-3 col-sm-12 col-xs-12 sidebar">
+					<div class="widget related">
+						<h3>Related</h3>
+
+						<div class="related-slider flexslider sidebarslider">
+							<ul class="related-list clearfix">
+								<?php woocommerce_output_related_products(); ?>
+							</ul>
+						</div>
 					</div>
-				</div><!-- .summary -->
+				</div>
 
-				<div class="lg-margin2x"></div><!-- End .space -->
+    		</div>
 
-				<div class="row">
-        			<div class="col-md-9 col-sm-12 col-xs-12">
+    		<?php
+			/**
+			 * woocommerce_after_single_product_summary hook.
+			 *
+			 * @hooked woocommerce_upsell_display - 15
+			 */
+				do_action( 'woocommerce_after_single_product_summary' );
+			?>
 
-        				<?php wc_get_template( 'single-product/tabs/tabs.php' ); ?>
-
-        				<div class="lg-margin visible-xs"></div>
-        			</div>
-
-        			<div class="lg-margin2x visible-sm visible-xs"></div>
-
-        		</div>
-
-        		<?php
-				/**
-				 * woocommerce_after_single_product_summary hook.
-				 *
-				 * @hooked woocommerce_upsell_display - 15
-				 */
-					do_action( 'woocommerce_after_single_product_summary' );
-				?>
-
-				<meta itemprop="url" content="<?php the_permalink(); ?>" />
-				
-			</div>
-
-			<?php do_action( 'woocommerce_after_single_product' ); ?>
+			<meta itemprop="url" content="<?php the_permalink(); ?>" />
+			
+			<?php do_action( 'woocommerce_after_single_product' ); ?>	
 		</div>
 	</div>
 </div>

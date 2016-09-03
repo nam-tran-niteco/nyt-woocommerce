@@ -161,22 +161,6 @@ if ( ! function_exists( 'woocommerce_catalog_ordering' ) ) {
     }
 }
 
-
-if (  ! function_exists( 'nyt_template_loop_product_item_meta_container_open' ) ) {
-    function nyt_template_loop_product_item_meta_container_open() {
-        echo '<div class="item-meta-container">';
-    }
-}
-add_action( 'woocommerce_before_shop_loop_item_title', 'nyt_template_loop_product_item_meta_container_open', 15 );
-
-if (  ! function_exists( 'nyt_template_loop_product_item_meta_container_close' ) ) {
-    function nyt_template_loop_product_item_meta_container_close() {
-        echo '</div>';
-    }
-}
-add_action( 'woocommerce_after_shop_loop_item_title', 'nyt_template_loop_product_item_meta_container_close', 15 );
-
-
 if (  ! function_exists( 'nyt_template_loop_product_item_image_container_open' ) ) {
     function nyt_template_loop_product_item_image_container_open() {
         echo '<div class="item-image-container">';
@@ -192,65 +176,19 @@ if (  ! function_exists( 'nyt_template_loop_product_item_image_container_close' 
 add_action( 'woocommerce_before_shop_loop_item_title', 'nyt_template_loop_product_item_image_container_close', 14 );
 
 
-if (  ! function_exists( 'nyt_template_loop_product_container_open' ) ) {
-    function nyt_template_loop_product_container_open() {
-        echo '<div class="container"><div class="row"><div class="col-md-12"><div class="row">';
+if (  ! function_exists( 'nyt_template_loop_product_item_meta_container_open' ) ) {
+    function nyt_template_loop_product_item_meta_container_open() {
+        echo '<div class="item-meta-container">';
     }
 }
-add_action( 'woocommerce_archive_description', 'nyt_template_loop_product_container_open', 15 );
+add_action( 'woocommerce_before_shop_loop_item_title', 'nyt_template_loop_product_item_meta_container_open', 15 );
 
-if (  ! function_exists( 'nyt_template_loop_product_container_close' ) ) {
-    function nyt_template_loop_product_container_close() {
-        echo '</div></div></div></div>';
-    }
-}
-add_action( 'woocommerce_sidebar', 'nyt_template_loop_product_container_close', 15 );
-
-
-if (  ! function_exists( 'nyt_template_loop_product_toolbar_open' ) ) {
-    function nyt_template_loop_product_toolbar_open() {
-        echo '<div class="category-toolbar clearfix">';
-    }
-}
-add_action( 'woocommerce_before_shop_loop', 'nyt_template_loop_product_toolbar_open', 15 );
-
-if (  ! function_exists( 'nyt_template_loop_product_toolbar_close' ) ) {
-    function nyt_template_loop_product_toolbar_close() {
+if (  ! function_exists( 'nyt_template_loop_product_item_meta_container_close' ) ) {
+    function nyt_template_loop_product_item_meta_container_close() {
         echo '</div>';
     }
 }
-add_action( 'woocommerce_before_shop_loop', 'nyt_template_loop_product_toolbar_close', 35 );
-
-
-if (  ! function_exists( 'nyt_template_loop_product_main_content_open' ) ) {
-    function nyt_template_loop_product_main_content_open() {
-        echo '<div class="col-md-9 col-sm-8 col-xs-12 main-content">';
-    }
-}
-add_action( 'woocommerce_before_shop_loop', 'nyt_template_loop_product_main_content_open', 
-    10 );
-
-if (  ! function_exists( 'nyt_template_loop_product_main_content_close' ) ) {
-    function nyt_template_loop_product_main_content_close() {
-        echo '</div>';
-    }
-}
-add_action( 'woocommerce_sidebar', 'nyt_template_loop_product_main_content_close', 9 );
-
-
-if (  ! function_exists( 'nyt_template_loop_product_pagination_container_open' ) ) {
-    function nyt_template_loop_product_pagination_container_open() {
-        echo '<div class="pagination-container clearfix"><div class="pull-right">';
-    }
-}
-add_action( 'woocommerce_after_shop_loop', 'nyt_template_loop_product_pagination_container_open', 7 );
-
-if (  ! function_exists( 'nyt_template_loop_product_pagination_container_close' ) ) {
-    function nyt_template_loop_product_pagination_container_close() {
-        echo '</div></div>';
-    }
-}
-add_action( 'woocommerce_after_shop_loop', 'nyt_template_loop_product_pagination_container_close', 8 );
+add_action( 'woocommerce_after_shop_loop_item_title', 'nyt_template_loop_product_item_meta_container_close', 15 );
 
 
 /*
