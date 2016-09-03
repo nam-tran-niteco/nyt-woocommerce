@@ -27,8 +27,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
-<div class="col-md-4 col-sm-6 col-xs-12">
-	<div class="item">
+<div class="item">
 	<?php
 	/**
 	 * woocommerce_before_shop_loop_item hook.
@@ -72,5 +71,4 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 */
 	do_action( 'woocommerce_after_shop_loop_item' );
 	?>
-	</div>
 </div>

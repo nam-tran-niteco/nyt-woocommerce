@@ -64,7 +64,11 @@ get_header( 'shop' ); ?>
 
 				<?php while ( have_posts() ) : the_post(); ?>
 
-					<?php wc_get_template_part( 'content', 'product' ); ?>
+					<div class="col-md-4 col-sm-6 col-xs-12">
+
+						<?php wc_get_template_part( 'content', 'product' ); ?>
+
+					</div>
 
 				<?php endwhile; // end of the loop. ?>
 
