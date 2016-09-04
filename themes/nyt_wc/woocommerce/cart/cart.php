@@ -106,9 +106,15 @@ if (!defined('ABSPATH')) {
                                     <div class="custom-quantity-input">
                                         <?php
                                         if ($_product->is_sold_individually()) {
-                                            $product_quantity = sprintf('1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key);
+                                            $product_quantity = sprintf('1 <input type="hidden" class="quantity" name="cart[%s][qty]" value="1" />', $cart_item_key);
                                         } else {
-                                            $product_quantity = sprintf('<input type="number" name="cart[%s][qty] max="%d" min="0" value="%d" step="1" />', $cart_item_key, $_product->backorders_allowed() ? '' : $_product->get_stock_quantity(), $cart_item['quantity']);
+//                                            $product_quantity = sprintf('<input type="number" class="quantity" name="cart[%s][qty] max="%d" min="0" value="%d" step="1" />', $cart_item_key, $_product->backorders_allowed() ? '' : $_product->get_stock_quantity(), $cart_item['quantity']);
+                                            $product_quantity = woocommerce_quantity_input( array(
+									'input_name'  => "cart[{$cart_item_key}][qty]",
+									'input_value' => $cart_item['quantity'],
+									'max_value'   => $_product->backorders_allowed() ? '' : $_product->get_stock_quantity(),
+									'min_value'   => '0'
+								), $_product, false );
                                         }
 
                                         echo apply_filters('woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item);
@@ -232,10 +238,59 @@ if (!defined('ABSPATH')) {
     </div>
 </form>
 
-<div class="cart-collaterals">
+<div class="lg-margin2x"></div>
 
-    <?php //do_action('woocommerce_cart_collaterals');    ?>
+<div class="similiar-items-container carousel-wrapper">
+    <header class="content-title">
+        <div class="title-bg">
+            <h2 class="title">Similiar Products</h2>
+        </div><!-- End .title-bg -->
+        <p class="title-desc">Note the similar products - after buying for more than $500 you can get a discount.</p>
+    </header>
 
-</div>
+    <div class="carousel-controls">
+        <div id="similiar-items-slider-prev" class="carousel-btn carousel-btn-prev"></div><!-- End .carousel-prev -->
+        <div id="similiar-items-slider-next" class="carousel-btn carousel-btn-next carousel-space"></div><!-- End .carousel-next -->
+    </div><!-- End .carousel-controls -->
+    <div class="similiar-items-slider owl-carousel">
+        <div class="item">
+            
+            <?php wc_get_template_part('cart/cross', 'sells') ?>
+<!--            <div class="item-image-container">
+                <figure>
+                    <a href="product.html">
+                        <img src="images/products/item3.jpg" alt="item3" class="item-image">
+                        <img src="images/products/item3-hover.jpg" alt="item3 Hover" class="item-image-hover">
+                    </a>
+                </figure>
+                <div class="item-price-container">
+                    <span class="item-price">$160<span class="sub-price">.99</span></span>
+                </div>
+                <span class="new-rect">New</span>
+                <span class="discount-rect">-10%</span>
+            </div> End .item-image 
+            <div class="item-meta-container">
+                <div class="ratings-container">
+                    <div class="ratings">
+                        <div class="ratings-result" data-result="95"></div>
+                    </div> End .ratings 
+                    <span class="ratings-amount">
+                        1 Reviews
+                    </span>
+                </div> End .rating-container 
+                <h3 class="item-name"><a href="product.html">Lorem Ipsum Dolla</a></h3>
+                <div class="item-action">
+                    <a href="#" class="item-add-btn">
+                        <span class="icon-cart-text">Add to Cart</span>
+                    </a>
+                    <div class="item-action-inner">
+                        <a href="#" class="icon-button icon-like">Favourite</a>
+                        <a href="#" class="icon-button icon-compare">Checkout</a>
+                    </div> End .item-action-inner 
+                </div> End .item-action 
+            </div> End .item-meta-container  -->
+        </div><!-- End .item -->
+    </div><!--purchased-items-slider -->
+</div><!-- End .purchased-items-container -->
 
 <?php do_action('woocommerce_after_cart'); ?>

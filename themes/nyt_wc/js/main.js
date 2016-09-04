@@ -50,8 +50,9 @@
             var current_input_value = parseInt(input.val());
             var max = input.attr('max');
             var min = input.attr('min') !== undefined ? parseInt(input.attr('min')) : 0;
+            var new_val;
             if( $(this).hasClass('fa-angle-up') ) {
-                var new_val = (current_input_value + step);
+                new_val = (current_input_value + step);
                 if ( max !== undefined ) {
                     if ( (new_val = current_input_value + step) <= parseInt(max) ) {
                         input.val(new_val);
@@ -63,12 +64,61 @@
                 }
             }
             else {
-                var new_val;
                 if ( (new_val = current_input_value - step) >= min ) {
                     input.val(new_val);
                 }
             }
+            
+            // wc_cart_params is required to continue, ensure the object exists
+            if ( typeof wc_cart_params === 'undefined' ) {
+                return false;
+            }
+            
+            var item_hash = input.attr( 'name' ).replace(/cart\[([\w]+)\]\[qty\]/g, "$1");
+            var data = {
+                    action: 'wc_update_total_price',
+                    security: wc_cart_params.wc_update_total_price_nonce,
+                    quantity: new_val,
+                    hash : item_hash 
+                };
+
+            $.post( wc_cart_params.ajax_url, data, function( response ) {
+
+//                $( 'div.cart_totals' ).replaceWith( response );
+                alert (response);
+                $( 'body' ).trigger( 'wc_update_total_price' );
+
+            });
+            return false;
         });
+        
+        
+
+        // Cart price update depends on quantity
+//        $( 'input.quantity' ).on('input', function() {
+//            alert("change");
+//            var qty = $( this ).val();
+//            var currentVal  = parseFloat(qty);
+//
+//            $( 'div.cart_totals' ).block({ message: null, overlayCSS: { background: '#fff url(' + wc_cart_params.ajax_loader_url + ') no-repeat center', backgroundSize: '16px 16px', opacity: 0.6 } });
+//
+//            var item_hash = $( this ).attr( 'name' ).replace(/cart\[([\w]+)\]\[qty\]/g, "$1");
+//            var data = {
+//                    action: 'rf_update_total_price',
+//                    security: rf_cart_params.rf_update_total_price_nonce,
+//                    quantity: currentVal,
+//                    hash : item_hash 
+//                };
+//
+//            $.post( rf_cart_params.ajax_url, data, function( response ) {
+//
+////                $( 'div.cart_totals' ).replaceWith( response );
+//                alert (response);
+//                $( 'body' ).trigger( 'rf_update_total_price' );
+//
+//            });
+//            return false;
+//        });
 	
 
 /* =========================================
@@ -511,22 +561,23 @@ function checkSupport(elemname, pluginname) {
 
 	var  similiarItems = $('.similiar-items-slider.owl-carousel');
 	if (checkSupport(similiarItems, $.fn.owlCarousel)) {
-        similiarItems.owlCarousel({
-            items: 4,
-            itemsDesktop : [1199,4],
-            itemsDesktopSmall: [979,3],
-            itemsTablet: [768,2],
-            itemsMobile : [479,1],
-            slideSpeed: 400,
-            autoPlay: 8000,
-            stopOnHover: true,
-            navigation: false,
-            pagination: false,
-            responsive: true,
-            mouseDrag: false,
-            autoHeight : true
-        }).data('navigationBtns', ['#similiar-items-slider-prev', '#similiar-items-slider-next']);
-    }
+            console.log("carousel");
+            similiarItems.owlCarousel({
+                items: 4,
+                itemsDesktop : [1199,4],
+                itemsDesktopSmall: [979,3],
+                itemsTablet: [768,2],
+                itemsMobile : [479,1],
+                slideSpeed: 400,
+                autoPlay: 8000,
+                stopOnHover: true,
+                navigation: false,
+                pagination: false,
+                responsive: true,
+                mouseDrag: false,
+                autoHeight : true
+            }).data('navigationBtns', ['#similiar-items-slider-prev', '#similiar-items-slider-next']);
+        }
 
 
 /* =========================================
