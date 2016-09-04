@@ -132,6 +132,10 @@ blockquote:before{
 	background-position: 0 -150px;
 }
 
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none
+}
+
 /* =============================================
 ----------------- Helper Classes -------------
 ==============================================*/
@@ -6133,3 +6137,23 @@ html[xmlns] .slides {display: block;}
 .woocommerce-ordering {
 	display: inline-block;
 }
+
+.woocommerce-info h3, .woocommerce-error h3, .woocommerce-message h3{
+    font-size: 17px;
+    height: 60px;
+    padding: 17px 0 0 25px;
+    margin-bottom: 10px;
+    border: 1px solid #d9d9d9;
+    border-top: 4px solid;
+}
+
+.woocommerce-info h3 {
+    color: #7bae23;
+    border-top-color: #7bae23;
+}
+
+.woocommerce-error h3 {
+    color: red;
+    border-top-color: red;
+}
+
