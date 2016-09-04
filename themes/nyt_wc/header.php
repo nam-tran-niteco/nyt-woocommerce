@@ -124,7 +124,6 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12 clearfix">
-
                                     <nav id="main-nav">
                                         <div id="responsive-nav">
                                             <div id="responsive-nav-button">

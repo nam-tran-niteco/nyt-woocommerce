@@ -550,7 +550,7 @@ function checkSupport(elemname, pluginname) {
             pagination: false,
             responsive: true,
             mouseDrag: false,
-            autoHeight : true
+            autoHeight : false
         }).data('navigationBtns', ['#purchased-items-slider-prev', '#purchased-items-slider-next']);
     }
 
