@@ -126,8 +126,6 @@
                             <div class="row">
                                 <div class="col-md-12 clearfix">
                                     <nav id="main-nav">
-
-                                        <?php wp_nav_menu(array('theme_location', 'main-nav'))?>
                                         <div id="responsive-nav">
                                             <div id="responsive-nav-button">
                                                 Menu <span id="responsive-nav-button-icon"></span>
