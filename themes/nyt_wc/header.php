@@ -9,14 +9,14 @@
 
         <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic%7CPT+Gudea:400,700,400italic%7CPT+Oswald:400,700,300" rel="stylesheet" id="googlefont">
 
-<!--        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/prettyPhoto.css">
-        <link rel="stylesheet" href="css/colpick.css">
-        <link rel="stylesheet" href="css/sequence-slider.css">
-        <link rel="stylesheet" href="css/owl.carousel.css">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/responsive.css">-->
+        <!--        <link rel="stylesheet" href="css/bootstrap.min.css">
+                <link rel="stylesheet" href="css/font-awesome.min.css">
+                <link rel="stylesheet" href="css/prettyPhoto.css">
+                <link rel="stylesheet" href="css/colpick.css">
+                <link rel="stylesheet" href="css/sequence-slider.css">
+                <link rel="stylesheet" href="css/owl.carousel.css">
+                <link rel="stylesheet" href="css/style.css">
+                <link rel="stylesheet" href="css/responsive.css">-->
 
         <!-- Favicon and Apple Icons -->
         <link rel="icon" type="image/png" href="images/icons/icon.html">
@@ -36,7 +36,7 @@
         </style>
         <style>.sequence-preloader{height: 100%;position: absolute;width: 100%;z-index: 999999;}@keyframes preload{0%{opacity: 1;}50%{opacity: 0;}100%{opacity: 1;}}.sequence-preloader .preloading .circle{fill: #ff9442;display: inline-block;height: 12px;position: relative;top: -50%;width: 12px;animation: preload 1s infinite; animation: preload 1s infinite;}.preloading{display:block;height: 12px;margin: 0 auto;top: 50%;margin-top:-6px;position: relative;width: 48px;}.sequence-preloader .preloading .circle:nth-child(2){animation-delay: .15s; animation-delay: .15s;}.sequence-preloader .preloading .circle:nth-child(3){animation-delay: .3s; animation-delay: .3s;}.preloading-complete{opacity: 0;visibility: hidden;transition-duration: 1s; transition-duration: 1s;}div.inline{background-color: #ff9442; margin-right: 4px; float: left;}</style><style type="text/css">.fancybox-margin{margin-right:17px;}
         </style>
-        
+
         <?php wp_head() ?>
     </head>
 
@@ -103,8 +103,8 @@
 
                                 <div class="header-box contact-infos pull-right">
                                     <ul>
-                                        <li><span class="header-box-icon header-box-icon-skype"></span>venedor_support</li>
-                                        <li><span class="header-box-icon header-box-icon-email"></span><a href="mailto:venedor@gmail.com">venedor@gmail.com</a></li>
+                                        <li><span class="header-box-icon header-box-icon-skype"></span>nyt_cms_support</li>
+                                        <li><span class="header-box-icon header-box-icon-email"></span><a href="nyt_cms@gmail.com">nyt_cms@gmail.com</a></li>
                                     </ul>
                                 </div><!-- End .contact-infos -->
 
@@ -130,81 +130,125 @@
                                             <div id="responsive-nav-button">
                                                 Menu <span id="responsive-nav-button-icon"></span>
                                             </div><!-- responsive-nav-button -->
-                                            
+
                                             <!--Mobile Menu-->
-                                            <?php wp_nav_menu(array(
-                                                'theme_location' => 'mobile_menu', 
+                                            <?php
+                                            wp_nav_menu(array(
+                                                'theme_location' => 'mobile_menu',
                                                 'container' => '',
-                                                'menu_class' => 'clearfix responsive-nav'))?>
+                                                'menu_class' => 'clearfix responsive-nav'))
+                                            ?>
                                         </div>
-                                        
+
                                         <!--Top Menu-->
-                                        <?php wp_nav_menu(array(
+                                        <?php
+                                        wp_nav_menu(array(
                                             'theme_location' => 'top_menu',
                                             'container' => '',
-                                            'menu_class' => 'menu clearfix'))?>
+                                            'menu_class' => 'menu clearfix'))
+                                        ?>
                                     </nav>
 
+                                    <!--Show mini info for all products in cart-->
+                                    <?php if ( !is_page('cart') ):?>
                                     <div id="quick-access">
                                         <div class="dropdown-cart-menu-container pull-right">
                                             <div class="btn-group dropdown-cart">
+                                                <?php
+                                                $items = WC()->cart->get_cart();
+                                                $total_cost = WC()->cart->get_cart_total();
+                                                
+                                                // display MAX products for best display
+                                                $MAX_PRODUCT = 5;
+                                                $item_count = 0;
+                                                
+                                                $cart_button_title = "Cart";
+                                                ?>
                                                 <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
                                                     <span class="cart-menu-icon"></span>
-                                                    0 item(s) <span class="drop-price">- $0.00</span>
+                                                    <?php echo sizeof($items) > 1 ? '' . sizeof($items) . ' items' : '' . sizeof($items) . ' item' ?> <span class="drop-price">- <?php echo $total_cost ?></span>
                                                 </button>
 
                                                 <div class="dropdown-menu dropdown-cart-menu pull-right clearfix" role="menu">
-                                                    <p class="dropdown-cart-description">Recently added item(s).</p>
+                                                    <p class="dropdown-cart-description">Products in shopping cart</p>
                                                     <ul class="dropdown-cart-product-list">
-                                                        <li class="item clearfix">
-                                                            <a href="#" title="Delete item" class="delete-item"><i class="fa fa-times"></i></a>
-                                                            <a href="#" title="Edit item" class="edit-item"><i class="fa fa-pencil"></i></a>
-                                                            <figure>
-                                                                <a href="product.html"><img src="images/products/thumbnails/phone4.jpg" alt="phone 4"></a>
-                                                            </figure>
-                                                            <div class="dropdown-cart-details">
-                                                                <p class="item-name">
-                                                                    <a href="product.html">Cam Optia AF Webcam </a>
-                                                                </p>
-                                                                <p>
-                                                                    1x
-                                                                    <span class="item-price">$499</span>
-                                                                </p>
-                                                            </div><!-- End .dropdown-cart-details -->
-                                                        </li>
-                                                        <li class="item clearfix">
-                                                            <a href="#" title="Delete item" class="delete-item"><i class="fa fa-times"></i></a>
-                                                            <a href="#" title="Edit item" class="edit-item"><i class="fa fa-pencil"></i></a>
-                                                            <figure>
-                                                                <a href="product.html"><img src="images/products/thumbnails/phone2.jpg" alt="phone 2"></a>
-                                                            </figure>
-                                                            <div class="dropdown-cart-details">
-                                                                <p class="item-name">
-                                                                    <a href="product.html">Iphone Case Cover Original</a>
-                                                                </p>
-                                                                <p>
-                                                                    1x
-                                                                    <span class="item-price">$499<span class="sub-price">.99</span></span>
-                                                                </p>
-                                                            </div><!-- End .dropdown-cart-details -->
-                                                        </li>
+                                                        <?php
+                                                        foreach ($items as $cart_item_key => $cart_item):
+                                                            $item_count++;
+                                                            if ($item_count > $MAX_PRODUCT) {
+                                                                $cart_button_title = "See all";
+                                                                break;
+                                                            }
+                                                            $_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
+                                                            $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
+                                                            ?>
+                                                            <li class="item clearfix">
+                                                                
+                                                                <!--Button delete product-->
+                                                                <?php
+                                                                echo apply_filters('woocommerce_cart_item_remove_link', sprintf(
+                                                                                '<a href="%s" class="delete-item" title="%s" data-product_id="%s" data-product_sku="%s"><i class="fa fa-times"></i></a>', esc_url(WC()->cart->get_remove_url($cart_item_key)), __('Remove this item', 'woocommerce'), esc_attr($product_id), esc_attr($_product->get_sku())
+                                                                        ), $cart_item_key);
+                                                                ?>
+                                                                
+                                                                <!--Product thumbnail-->
+                                                                <figure>
+                                                                    <?php
+                                                                    $thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
+
+                                                                    if (!$product_permalink) {
+                                                                        echo $thumbnail;
+                                                                    } else {
+                                                                        printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail);
+                                                                    }
+                                                                    ?>
+                                                                </figure>
+                                                                
+                                                                <!--Product detail--> 
+                                                                <div class="dropdown-cart-details">
+                                                                    <p class="item-name">
+                                                                        <?php
+                                                                        if (!$product_permalink) {
+                                                                            echo apply_filters('woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key) . '&nbsp;';
+                                                                        } else {
+                                                                            echo apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_permalink), $_product->get_title()), $cart_item, $cart_item_key);
+                                                                        }
+
+                                                                        // Meta data
+                                                                        echo WC()->cart->get_item_data($cart_item);
+
+                                                                        // Backorder notification
+                                                                        if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) {
+                                                                            echo '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>';
+                                                                        }
+                                                                        ?>
+                                                                    </p>
+                                                                    <p>
+                                                                        <?php echo $cart_item['quantity'] ?>x
+                                                                        <span class="item-price"><?php echo apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_price($_product), $cart_item, $cart_item_key); ?></span>
+                                                                    </p>
+                                                                </div><!-- End .dropdown-cart-details -->
+                                                            </li>
+                                                        <?php endforeach; ?>
                                                     </ul>
 
                                                     <ul class="dropdown-cart-total">
                                                         <li><span class="dropdown-cart-total-title">Shipping:</span>$7</li>
-                                                        <li><span class="dropdown-cart-total-title">Total:</span>$1005<span class="sub-price">.99</span></li>
+                                                        <li><span class="dropdown-cart-total-title">Total:</span><?php echo $total_cost?><!--<span class="sub-price">.99</span>--></li>
                                                     </ul><!-- .dropdown-cart-total -->
                                                     <div class="dropdown-cart-action">
-                                                        <p><a href="cart.html" class="btn btn-custom-2 btn-block">Cart</a></p>
-                                                        <p><a href="checkout.html" class="btn btn-custom btn-block">Checkout</a></p>
+                                                        <p><a href="/cart" class="btn btn-custom-2 btn-block"><?php echo $cart_button_title?></a></p>
+                                                        <p><a href="/checkout" class="btn btn-custom btn-block">Checkout</a></p>
                                                     </div><!-- End .dropdown-cart-action -->
 
                                                 </div><!-- End .dropdown-cart -->
                                             </div><!-- End .btn-group -->
                                         </div><!-- End .dropdown-cart-menu-container -->
+                                        <?php endif;?>
+                                        
                                         
                                         <!--Search form-->
-                                        <?php get_product_search_form(true)?>
+                                        <?php get_product_search_form(true) ?>
                                     </div><!-- End #quick-access -->
                                 </div><!-- End .col-md-12 -->
                             </div><!-- End .row -->
