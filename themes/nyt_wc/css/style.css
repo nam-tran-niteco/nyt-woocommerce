@@ -6133,3 +6133,19 @@ html[xmlns] .slides {display: block;}
 .woocommerce-ordering {
 	display: inline-block;
 }
+
+table.variations {
+	margin-bottom: 20px;
+}
+
+table.variations .label {
+	display: none;
+}
+
+table.variations .value select {
+	height: 40px;
+	width: 140px;
+	padding: 0;
+	border: 1px solid #ddd;
+	margin-right: 30px;
+}

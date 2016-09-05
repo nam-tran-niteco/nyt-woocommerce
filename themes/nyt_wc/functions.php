@@ -144,7 +144,7 @@ if ( ! function_exists( 'woocommerce_catalog_ordering' ) ) {
             'menu_order' => __( 'Default', 'woocommerce' ),
             'popularity' => __( 'Popularity', 'woocommerce' ),
             'rating'     => __( 'Average rating', 'woocommerce' ),
-            'date'       => __( 'Newnest', 'woocommerce' ),
+            'date'       => __( 'Newness', 'woocommerce' ),
             'price'      => __( 'Price: low to high', 'woocommerce' ),
             'price-desc' => __( 'Price: high to low', 'woocommerce' )
         ) );
