@@ -42,18 +42,11 @@ $woocommerce_loop['columns'] = apply_filters('woocommerce_cross_sells_columns', 
 
 if ($products->have_posts()) :
     ?>
-
-    <?php woocommerce_product_loop_start(); ?>
-
     <?php while ($products->have_posts()) : $products->the_post(); ?>
 
-        <?php wc_get_template_part('content', 'product'); ?>
+        <?php wc_get_template_part('content', 'product-carousel'); ?>
 
     <?php endwhile; // end of the loop.  ?>
-
-    <?php woocommerce_product_loop_end(); ?>
-
-
 <?php
 
 endif;

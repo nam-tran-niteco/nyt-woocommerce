@@ -109,12 +109,12 @@ if (!defined('ABSPATH')) {
                                             $product_quantity = sprintf('1 <input type="hidden" class="quantity" name="cart[%s][qty]" value="1" />', $cart_item_key);
                                         } else {
 //                                            $product_quantity = sprintf('<input type="number" class="quantity" name="cart[%s][qty] max="%d" min="0" value="%d" step="1" />', $cart_item_key, $_product->backorders_allowed() ? '' : $_product->get_stock_quantity(), $cart_item['quantity']);
-                                            $product_quantity = woocommerce_quantity_input( array(
-									'input_name'  => "cart[{$cart_item_key}][qty]",
-									'input_value' => $cart_item['quantity'],
-									'max_value'   => $_product->backorders_allowed() ? '' : $_product->get_stock_quantity(),
-									'min_value'   => '0'
-								), $_product, false );
+                                            $product_quantity = woocommerce_quantity_input(array(
+                                                'input_name' => "cart[{$cart_item_key}][qty]",
+                                                'input_value' => $cart_item['quantity'],
+                                                'max_value' => $_product->backorders_allowed() ? '' : $_product->get_stock_quantity(),
+                                                'min_value' => '0'
+                                                    ), $_product, false);
                                         }
 
                                         echo apply_filters('woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item);
@@ -152,55 +152,23 @@ if (!defined('ABSPATH')) {
                 <ul class="nav-tabs" style="height: 315px;">
                     <li class="active"><a href="#shipping" data-toggle="tab">Shipping &amp; Taxes</a></li>
                     <li class=""><a href="#discount" data-toggle="tab">Discount Code</a></li>
-                    <li class=""><a href="#gift" data-toggle="tab" style="border-bottom-color: transparent;">Gift voucher </a></li>
+                    <!--<li class=""><a href="#gift" data-toggle="tab" style="border-bottom-color: transparent;">Gift voucher </a></li>-->
 
                 </ul>
                 <div class="tab-content clearfix">
                     <div class="tab-pane active" id="shipping">
-
-
-                        <form action="#" id="shipping-form">
-                            <p>Enter your destination to get a shipping estimate.</p>
-                            <div class="xs-margin"></div>
-                            <?php if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : ?>
-
-                                <?php do_action('woocommerce_cart_totals_before_shipping'); ?>
-
-                                <?php wc_cart_totals_shipping_html(); ?>
-
-                                <?php do_action('woocommerce_cart_totals_after_shipping'); ?>
-
-                            <?php elseif (WC()->cart->needs_shipping() && 'yes' === get_option('woocommerce_enable_shipping_calc')) : ?>
-
-                                <tr class="shipping">
-                                    <th><?php _e('Shipping', 'woocommerce'); ?></th>
-                                    <td data-title="<?php esc_attr_e('Shipping', 'woocommerce'); ?>"><?php woocommerce_shipping_calculator(); ?></td>
-                                </tr>
-
-                            <?php endif; ?>
-                            <p class="text-right">
-                                <input type="submit" class="btn btn-custom-2" value="GET QUOTES">
-                            </p>
-                        </form>
+                        <h4>Enter your destination to get a shipping estimate.</h4>
+                        <?php wc_cart_totals_shipping_html()?>
 
                     </div><!-- End .tab-pane -->
 
                     <div class="tab-pane" id="discount">
-                        <p>Enter your discount coupon code here.</p>
-                        <form action="#">
-                            <?php foreach (WC()->cart->get_coupons() as $code => $coupon) : ?>
-                                <tr class="cart-discount coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
-                                    <th><?php wc_cart_totals_coupon_label($coupon); ?></th>
-                                    <td data-title="<?php echo esc_attr(wc_cart_totals_coupon_label($coupon, false)); ?>"><?php wc_cart_totals_coupon_html($coupon); ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                            <input type="submit" class="btn btn-custom-2" value="APPLY COUPON">
-                        </form>
+                        <?php wc_get_template_part('cart/cart', 'coupon')?>
                     </div><!-- End .tab-pane -->
 
-                    <div class="tab-pane" id="gift">
+<!--                    <div class="tab-pane" id="gift">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi dignissimos nostrum debitis optio molestiae in quam dicta labore obcaecati ullam necessitatibus animi deleniti minima dolor suscipit nobis est excepturi inventore.</p>
-                    </div><!-- End .tab-pane -->
+                    </div> End .tab-pane -->
 
                 </div><!-- End .tab-content -->
             </div><!-- End .tab-container -->
@@ -216,18 +184,14 @@ if (!defined('ABSPATH')) {
                         <td data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>"><?php wc_cart_totals_subtotal_html(); ?></td>
                     </tr>
                     <tr>
-                        <td class="total-table-title">Shipping:</td>
-                        <td>$6.00</td>
-                    </tr>
-                    <tr>
                         <td class="total-table-title">TAX (0%):</td>
-                        <td>$0.00</td>
+                        <td><?php wc_cart_totals_taxes_total_html()?></td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td>Total:</td>
-                        <td>$440.50</td>
+                        <td><?php wc_cart_totals_order_total_html()?></td>
                     </tr>
                 </tfoot>
             </table>
@@ -245,7 +209,6 @@ if (!defined('ABSPATH')) {
         <div class="title-bg">
             <h2 class="title">Similiar Products</h2>
         </div><!-- End .title-bg -->
-        <p class="title-desc">Note the similar products - after buying for more than $500 you can get a discount.</p>
     </header>
 
     <div class="carousel-controls">
@@ -253,43 +216,7 @@ if (!defined('ABSPATH')) {
         <div id="similiar-items-slider-next" class="carousel-btn carousel-btn-next carousel-space"></div><!-- End .carousel-next -->
     </div><!-- End .carousel-controls -->
     <div class="similiar-items-slider owl-carousel">
-        <div class="item">
-            
-            <?php wc_get_template_part('cart/cross', 'sells') ?>
-<!--            <div class="item-image-container">
-                <figure>
-                    <a href="product.html">
-                        <img src="images/products/item3.jpg" alt="item3" class="item-image">
-                        <img src="images/products/item3-hover.jpg" alt="item3 Hover" class="item-image-hover">
-                    </a>
-                </figure>
-                <div class="item-price-container">
-                    <span class="item-price">$160<span class="sub-price">.99</span></span>
-                </div>
-                <span class="new-rect">New</span>
-                <span class="discount-rect">-10%</span>
-            </div> End .item-image 
-            <div class="item-meta-container">
-                <div class="ratings-container">
-                    <div class="ratings">
-                        <div class="ratings-result" data-result="95"></div>
-                    </div> End .ratings 
-                    <span class="ratings-amount">
-                        1 Reviews
-                    </span>
-                </div> End .rating-container 
-                <h3 class="item-name"><a href="product.html">Lorem Ipsum Dolla</a></h3>
-                <div class="item-action">
-                    <a href="#" class="item-add-btn">
-                        <span class="icon-cart-text">Add to Cart</span>
-                    </a>
-                    <div class="item-action-inner">
-                        <a href="#" class="icon-button icon-like">Favourite</a>
-                        <a href="#" class="icon-button icon-compare">Checkout</a>
-                    </div> End .item-action-inner 
-                </div> End .item-action 
-            </div> End .item-meta-container  -->
-        </div><!-- End .item -->
+        <?php wc_get_template_part('cart/cross', 'sells') ?>
     </div><!--purchased-items-slider -->
 </div><!-- End .purchased-items-container -->
 

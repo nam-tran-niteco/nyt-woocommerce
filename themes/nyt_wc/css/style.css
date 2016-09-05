@@ -6153,6 +6153,10 @@ html[xmlns] .slides {display: block;}
     border-top-color: red;
 }
 
+.woocommerce-message h3 {
+    border-top-color: #7bae23
+}
+
 .woocommerce-ordering {
 	display: inline-block;
 }
