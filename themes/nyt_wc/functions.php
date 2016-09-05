@@ -6,6 +6,9 @@ require_once('plugins/get-the-pagination.php');
 add_theme_support( 'post-thumbnails' );
 add_theme_support( 'woocommerce' );
 
+// remove all default woocommerce style
+add_filter( 'woocommerce_enqueue_styles', '__return_false' );
+
 register_nav_menus(
     array(
         'top_menu' => 'Top Menu',
