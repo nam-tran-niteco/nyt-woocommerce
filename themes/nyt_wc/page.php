@@ -12,7 +12,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                
                     <?php
                     // Start the loop.
                     while (have_posts()) : the_post();

@@ -74,7 +74,6 @@ function venedor_scripts() {
 }
 add_action('wp_enqueue_scripts', 'venedor_scripts');
 
-
 /*
  * CUSTOMIZE SHOP PAGE
  * */

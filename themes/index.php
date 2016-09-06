@@ -1,2 +1,4 @@
 <?php
-// Silence is golden.
+<?php wp_head(); ?>
+<?php wp_fotter(); ?>
+?>
