@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $post, $product, $woocommerce;
 
 $attachment_ids = $product->get_gallery_attachment_ids();
+$attachment_ids[] = get_post_thumbnail_id( $product->id );
 
 if ( $attachment_ids ) {
 	$loop 		= 0;
@@ -53,10 +54,8 @@ if ( $attachment_ids ) {
 			echo apply_filters(
 				'woocommerce_single_product_image_thumbnail_html',
 				sprintf(
-					'<li><a href="%s" class="%s" title="%s" data-rel="prettyPhoto[product-gallery]">%s</a></li>',
+					'<li><a href="%s" data-rel="prettyPhoto">%s</a></li>',
 					esc_url( $props['url'] ),
-					esc_attr( $image_class ),
-					esc_attr( $props['caption'] ),
 					wp_get_attachment_image( $attachment_id, apply_filters( 'single_product_small_thumbnail_size', 'shop_thumbnail' ), 0, $props )
 				),
 				$attachment_id,
