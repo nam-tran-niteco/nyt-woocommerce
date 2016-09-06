@@ -42,6 +42,33 @@
 	function checkWindowWidth() {
 		return $(window).width();
 	}
+        
+        // increase/decrease input button click
+        $('a.quantity-btn i').on('click', function(){
+            var input = $(this).parent().siblings('input');
+            var step = input.attr('step') !== undefined ? parseInt(input.attr('step')) : 1;
+            var current_input_value = parseInt(input.val());
+            var max = input.attr('max');
+            var min = input.attr('min') !== undefined ? parseInt(input.attr('min')) : 0;
+            if( $(this).hasClass('fa-angle-up') ) {
+                var new_val = (current_input_value + step);
+                if ( max !== undefined ) {
+                    if ( (new_val = current_input_value + step) <= parseInt(max) ) {
+                        input.val(new_val);
+                    }
+                }
+                else {
+                    new_val = current_input_value + step;
+                    input.val(new_val);
+                }
+            }
+            else {
+                var new_val;
+                if ( (new_val = current_input_value - step) >= min ) {
+                    input.val(new_val);
+                }
+            }
+        });
 	
 
 /* =========================================
@@ -473,7 +500,7 @@ function checkSupport(elemname, pluginname) {
             pagination: false,
             responsive: true,
             mouseDrag: false,
-            autoHeight : true
+            autoHeight : false
         }).data('navigationBtns', ['#purchased-items-slider-prev', '#purchased-items-slider-next']);
     }
 
