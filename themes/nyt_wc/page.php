@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-md-12">
                 <header class="content-title">
-                    <h1 class="title">Shopping Cart</h1>
+                    <h1 class="title"><?php echo get_the_title()?></h1>
                     <p class="title-desc">Just this week, you can use the free premium delivery.</p>
                 </header>
                 <div class="xs-margin"></div><!-- space -->

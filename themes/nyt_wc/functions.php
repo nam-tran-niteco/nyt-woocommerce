@@ -75,4 +75,7 @@ function venedor_scripts() {
     wp_enqueue_script('main', get_template_directory_uri(). '/js/main.js', array(), '', true);
 }
 add_action('wp_enqueue_scripts', 'venedor_scripts');
+
+
+
 ?>

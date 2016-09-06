@@ -222,7 +222,7 @@
                                         </div><!-- End .dropdown-cart-menu-container -->
                                         
                                         <!--Search form-->
-                                        <?php get_product_search_form(true)?>
+                                       <!-- <?php get_product_search_form(true)?> -->
                                     </div><!-- End #quick-access -->
                                 </div><!-- End .col-md-12 -->
                             </div><!-- End .row -->

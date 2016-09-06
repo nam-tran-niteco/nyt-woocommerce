@@ -3270,6 +3270,19 @@ noUi-target,
   margin-bottom: 20px;
   background-color: transparent;
   border:none;
+
+
+
+
+
+
+
+
+
+
+
+
+
   border-radius: 0;
   -webkit-box-shadow:none;
           box-shadow:none;
@@ -6129,4 +6142,17 @@ html[xmlns] .slides {display: block;}
 }
 #option-panel #panel-font .panel {
 	margin-bottom:10px;
+}
+
+/*================ ADDITION ============================= */
+.panel{
+	border: none;
+}
+.payment-icon{
+	float: left;
+}
+
+.payment-icon img{
+	height: 100px;	
+	width: 300px;
 }
