@@ -39,6 +39,6 @@ global $product;
 
 	<div class="item-action-inner">
 		<a href="#" class="icon-button icon-like">Favourite</a>
-		<a href="#" class="icon-button icon-compare">Checkout</a>
+		<a href="/checkout" class="icon-button icon-compare">Checkout</a>
 	</div>
 </div>
