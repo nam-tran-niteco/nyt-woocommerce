@@ -3,6 +3,9 @@
 (function ($) {
 	"use strict";
 
+	// Checkout page - toggle step 1
+	
+
 	// Sequence.js Slider Plugin
 	var options = {
 		nextButton: true,

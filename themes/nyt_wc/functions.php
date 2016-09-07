@@ -223,6 +223,10 @@ if (  ! function_exists( 'nyt_template_single_favorite_and_checkout' ) ) {
 add_action( 'woocommerce_single_product_summary', 'nyt_template_single_favorite_and_checkout', 31 );
 
 
+// CHECKOUT
+// override
+
+
 ?>
 
 
