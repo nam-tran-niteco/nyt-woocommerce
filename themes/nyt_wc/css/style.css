@@ -6194,9 +6194,7 @@ html[xmlns] .slides {display: block;}
     border: 1px solid #dcdcdc;
     height: 100%;
 }
-.input-text #username{
-	margin-left: 20px;
-}
-.input-text #password{
-	margin-left: 81px;
+#item-quantity{
+	color: #555;
+	font: 700 20px "Gudea", Arial, sans-serif;
 }

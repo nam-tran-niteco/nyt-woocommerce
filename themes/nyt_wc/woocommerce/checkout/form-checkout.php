@@ -75,20 +75,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		</div>
 		<div class="panel">
 			<div class="accordion-header">
-				<div class="accordion-title">4 Step: <span>Delivery Method</span></div><!-- End .accordion-title -->
-				<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#delivery-method"></a>
-			</div><!-- End .accordion-header -->
-			
-			<div id="delivery-method" class="collapse">
-				<div class="panel-body">
-					<p><?php echo 'Choose your delivery method'?></p>
-				</div><!-- End .panel-body -->
-			</div><!-- End .panel-collapse -->
-			
-		</div>
-		<div class="panel">
-			<div class="accordion-header">
-				<div class="accordion-title">5 Step: <span>Payment Method</span></div><!-- End .accordion-title -->
+				<div class="accordion-title">4 Step: <span>Payment Method</span></div><!-- End .accordion-title -->
 				<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#payment-method"></a>
 			</div><!-- End .accordion-header -->
 			
@@ -105,7 +92,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		</div>
 		<div class="panel">
 			<div class="accordion-header">
-				<div class="accordion-title">6 Step: <span>Confirm Order</span></div><!-- End .accordion-title -->
+				<div class="accordion-title">5 Step: <span>Confirm Order</span></div><!-- End .accordion-title -->
 				<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#confirm"></a>
 			</div><!-- End .accordion-header -->
 			

@@ -100,11 +100,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</span>
 				</td>
 				<td>
-					<div class="custom-quantity-input">
+					<!--<div class="custom-quantity-input">
 						<input type="text" name="quantity" value="<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', sprintf( $cart_item['quantity'] ), $cart_item, $cart_item_key ); ?>">
-						<a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
-						<a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
-					</div>
+						<a href="#" onclick="return false;" class="quantity-btn quantity-input-up" id= "checkout-up"><i class="fa fa-angle-up"></i></a>
+						<a href="#" onclick="return false;" class="quantity-btn quantity-input-down" id= "checkout-down"><i class="fa fa-angle-down"></i></a>
+					</div>-->
+					<p id= "item-quantity"><?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', sprintf( $cart_item['quantity'] ), $cart_item, $cart_item_key ); ?></p>
 				</td>
 				<td class="item-total-col">
 					<span class="item-price-special">
