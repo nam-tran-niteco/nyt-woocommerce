@@ -22,8 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 wc_print_notices();
 
-do_action( 'woocommerce_before_checkout_form', $checkout );
-
 // If checkout registration is disabled and not logged in, the user cannot checkout
 if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_user_logged_in() ) {
 	echo apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) );
@@ -40,10 +38,14 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 			
 			<div id="checkout-option" class="collapse" style="height: 0px;">
 				<div class="panel-body">
+					<?php 
+						do_action( 'woocommerce_before_checkout_form', $checkout ); 
+						//wp_login_form(); 
+					?>
 				</div><!-- End .panel-body -->
 			</div><!-- End .panel-collapse -->
-			
 		</div>
+		
 		<div class="panel">
 			<div class="accordion-header">
 				<div class="accordion-title">2 Step: <span>Billing Infomation</span></div><!-- End .accordion-title -->
@@ -115,7 +117,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 						<?php do_action( 'woocommerce_checkout_order_review' ); ?>
 					</div>
 
-					<?php do_action( 'woocommerce_checkout_after_order_review' ); ?> -->
+					<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
 				</div><!-- End .panel-body -->
 			</div><!-- End .panel-collapse -->
 		</div>
