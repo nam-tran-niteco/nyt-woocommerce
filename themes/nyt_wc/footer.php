@@ -23,9 +23,9 @@
 	        			<div class="row">
 	        				<div class="col-md-7 col-sm-7 col-xs-12 footer-social-links-container">
 	        					<ul class="social-links clearfix">
-	        						<li><a href="#" class="social-icon icon-facebook"></a></li>
-	        						<li><a href="#" class="social-icon icon-twitter"></a></li>
-	        						<li><a href="#" class="social-icon icon-email"></a></li>
+	        						<li><a target="_blank" href="https://www.facebook.com/Niteco/" class="social-icon icon-facebook"></a></li>
+	        						<li><a target="_blank" href="https://twitter.com/nitecovietnam" class="social-icon icon-twitter"></a></li>
+	        						<li><a href="mailto:info@niteco.com" class="social-icon icon-email"></a></li>
 	        					</ul>
 	        				</div>
 

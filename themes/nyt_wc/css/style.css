@@ -4015,6 +4015,7 @@ ul.page-numbers > .disabled > a:focus {
 	font-size:25px;
 	line-height:21px;
 	color:#757575;
+	padding-right: 25px;
 }
 .custom-quantity-input .quantity-btn {
 	background: #fafafa;

@@ -91,6 +91,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 	<div class="product-add clearfix">
 		<div class="custom-quantity-input">
 			<input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->id ); ?>" />
+			<a class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
+			<a class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
 		</div>
 		<?php if ( $quantites_required ) : ?>
 

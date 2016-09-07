@@ -19,6 +19,19 @@
     homeSlider = $('#slider-sequence').sequence(options).data("sequence");
 
 
+    // quantity input buttons
+    var inputField = $(".input-text.qty.text");
+    $(".quantity-input-up").click(function() {
+    	inputField.val(parseInt(inputField.val()) + 1);
+    });
+    $(".quantity-input-down").click(function() {
+    	inputField.val(parseInt(inputField.val()) - 1);
+    	if (inputField.val() < 1) {
+    		inputField.val(1);
+    	}
+    });
+
+
     // Single Product Image Slide and Zoom
     $("#product-carousel li").first().addClass("active-slide");
 
