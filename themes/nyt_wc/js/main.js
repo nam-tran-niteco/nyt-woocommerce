@@ -29,6 +29,49 @@
     },
     homeSlider = $('#slider-sequence').sequence(options).data("sequence");
 
+
+    // Single Product Image Slide and Zoom
+    $("#product-carousel li").first().addClass("active-slide");
+
+	var carouselContainer = $('#product-carousel');
+	var productImg = $('#product-image');
+
+	productImg.removeAttr( 'srcset' );
+
+	carouselContainer.elastislide({
+		orientation : 'vertical'
+	});
+
+    productImg.mlens({
+        imgSrc: $("#product-image").attr("data-big"),         
+        lensShape: "square",
+        lensSize: 150,
+        borderSize: 4,
+        borderColor: "#999",
+        borderRadius: 0
+    });
+
+	var oldImg = productImg.attr('src');
+	carouselContainer.find('li').on('mouseover', function() {
+		
+		var newImg = $(this).find('a').attr('href');
+		
+        productImg.attr({'src': newImg + '?timestamp=' + new Date().getTime(), 'data-big': newImg}).trigger('imagechanged');
+        
+	});
+
+    // triggered with custom event
+    productImg.on('imagechanged', function() {
+        productImg.mlens("update", 0 ,{
+            imgSrc: productImg.attr("data-big"),
+            lensShape: "square",
+            lensSize: 150,
+            borderSize: 4,
+            borderColor: "#999"
+        });
+    });
+
+
 	// Check for Mobile device
 	var mobileDetected;
 	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {

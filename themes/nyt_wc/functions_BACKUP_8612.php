@@ -83,6 +83,7 @@ function venedor_scripts() {
 
 add_action('wp_enqueue_scripts', 'venedor_scripts');
 
+<<<<<<< HEAD
 function update_total_price() {
     // Skip product if no updated quantity was posted or no hash on WC_Cart
     if (!isset($_POST['hash']) || !isset($_POST['quantity'])) {
@@ -124,6 +125,8 @@ function update_total_price() {
     exit;
 }
 
+=======
+>>>>>>> master
 /*
  * CUSTOMIZE SHOP PAGE
  * */

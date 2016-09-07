@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="product-extra-box-container clearfix">
 		<div class="item-action-inner">
 			<a href="#" class="icon-button icon-like">Favourite</a>
-			<a href="#" class="icon-button icon-compare">Checkout</a>
+			<a href="/checkout" class="icon-button icon-compare">Checkout</a>
 		</div><!-- End .item-action-inner -->
 	</div>
 
