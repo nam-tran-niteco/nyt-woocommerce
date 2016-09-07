@@ -1,8 +1,11 @@
 <?php
 
+define('FACEBOOK_SDK_V4_SRC_DIR', get_template_directory(). '/plugins/php-graph-sdk-5.0.0/src/Facebook/');
+
 require_once('plugins/get-the-image.php');
 require_once('plugins/get-the-breadcrumbs.php');
 require_once('plugins/get-the-pagination.php');
+require_once(get_template_directory(). '/plugins/php-graph-sdk-5.0.0/src/Facebook/autoload.php');
 
 add_theme_support('post-thumbnails');
 add_theme_support('woocommerce');
@@ -268,5 +271,16 @@ if (  ! function_exists( 'nyt_template_single_favorite_and_checkout' ) ) {
     }
 }
 add_action( 'woocommerce_single_product_summary', 'nyt_template_single_favorite_and_checkout', 31 );
+
+
+// add action for user register
+add_action( 'user_register', 'myplugin_registration_save', 10, 1 );
+
+function myplugin_registration_save( $user_id ) {
+
+//    if ( isset( $_POST['password'] ) )
+        update_user_meta($user_id, 'first_name', 'Nam tran');
+
+}
 
 ?>
