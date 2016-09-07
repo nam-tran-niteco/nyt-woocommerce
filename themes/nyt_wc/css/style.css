@@ -1861,6 +1861,7 @@ select.input-lg {
 
 .input-group {
 	margin-bottom:25px;
+	height: 47px;
 }
 
 .input-group-addon {
@@ -1872,7 +1873,7 @@ select.input-lg {
 	border: 1px solid #dcdcdc;
 	border-radius:3px 3px 0 0;
 	min-width:150px;
-	position: relative;
+	
 }
 
 .input-group-addon  i {
@@ -6151,6 +6152,9 @@ html[xmlns] .slides {display: block;}
 .panel{
 	border: none;
 }
+#payment{
+	display: none;
+}
 .payment-icon{
 	float: left;
 }
@@ -6181,4 +6185,18 @@ html[xmlns] .slides {display: block;}
 .woocommerce-error h3 {
     color: red;
     border-top-color: red;
+}
+
+#select-country{
+	position: absolute;
+    width: 72%;
+    left: 150px;
+    border: 1px solid #dcdcdc;
+    height: 100%;
+}
+.input-text #username{
+	margin-left: 20px;
+}
+.input-text #password{
+	margin-left: 81px;
 }

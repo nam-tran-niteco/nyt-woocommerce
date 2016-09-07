@@ -224,3 +224,6 @@ add_action( 'woocommerce_single_product_summary', 'nyt_template_single_favorite_
 
 
 ?>
+
+
+
