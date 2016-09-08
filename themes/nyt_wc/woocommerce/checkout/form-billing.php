@@ -124,7 +124,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				I have read and agree to the <a href="#">Privacy Policy</a>.
 			
 	</div><!-- End .input-group -->
-	<a href="#" class="btn btn-custom-2">CONTINUE</a>
+	<a href="javascript:void(0);" class="btn btn-custom-2" id="continue-st2">CONTINUE</a>
 	</div><!-- End .col-md-6 -->
 	</div><!-- End .row -->
 

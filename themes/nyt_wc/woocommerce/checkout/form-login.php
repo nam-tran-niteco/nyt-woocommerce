@@ -24,7 +24,6 @@ if ( is_user_logged_in() || 'no' === get_option( 'woocommerce_enable_checkout_lo
 	return;
 }
 ?>
-
 <?php
 	woocommerce_login_form(
 		array(

@@ -53,12 +53,13 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 					
 				</div><!-- End .col-md-6 -->
 
-				<div class="hidden col-md-6 col-sm-6 col-xs-12">					   		
+				<div class="hidden col-md-6 col-sm-6 col-xs-12" id="regis-form">					   		
 					<h2 class="checkout-title">Registered Customers</h2>
 					<p>If you have an account with us, please log in.</p>
 					<div class="xs-margin"></div>
 					<?php 
 						do_action( 'woocommerce_before_checkout_form', $checkout );
+					
 					?>
 				</div>
 			</div>
@@ -73,7 +74,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#billing"></a>
 		</div><!-- End .accordion-header -->
 		
-		<div id="billing" class="collapse" style="height: 0px;">
+		<div id="billing" class="collapse">
 			<div class="panel-body">
 				<?php do_action( 'woocommerce_checkout_billing' ); ?>
 			</div><!-- End .panel-body -->
@@ -100,12 +101,12 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#payment-method"></a>
 		</div><!-- End .accordion-header -->
 		
-		<div id="payment-method" class="collapse" style="height: 0px;">
+		<div id="payment-method" class="collapse">
 			<div class="panel-body">
 				<p><?php echo 'Choose your payment method'?></p>
 				<ul> 
-					<li class = "payment-icon"><img class="paypal" src="../images/paypal.png"></img></li>
-					<li class= "payment-icon"><img class="nganluong" src="../images/nganluong-logo.jpg"></img></li>
+					<!--<li class = "payment-icon"><img class="paypal" src="../images/paypal.png"></img></li>
+					<li class= "payment-icon"><img class="nganluong" src="../images/nganluong-logo.jpg"></img></li>-->
 				</ul>
 			</div><!-- End .panel-body -->
 		</div><!-- End .panel-collapse -->
@@ -117,7 +118,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#confirm"></a>
 		</div><!-- End .accordion-header -->
 		
-		<div id="confirm" class="collapse" style="height: 0px;">
+		<div id="confirm" class="collapse">
 			<div class="panel-body">
 				<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 
