@@ -112,12 +112,12 @@
                                         <p class="header-link">
                                             <?php if (is_user_logged_in()) { ?>
 
-                                                Hello, <?php echo get_current_user(); ?>
+                                            Hello, <?php echo wp_get_current_user()->user_nicename ?>
 
                                                 &nbsp; <a href="<?php echo wp_logout_url(home_url()); ?>">Logout</a>
 
                                             <?php } else { ?>
-                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal">log in</a>&nbsp;or&nbsp;<a href="">create an account</a></p>
+                                                <a href="#" data-toggle="modal" data-target="#myModal">log in</a>&nbsp;or&nbsp;<a href="#">create an account</a></p>
                                         <?php } ?>
                                     </div><!-- End .pull-right -->
                                 </div><!-- End .header-top-right -->

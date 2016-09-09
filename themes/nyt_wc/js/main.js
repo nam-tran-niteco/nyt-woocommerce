@@ -105,6 +105,7 @@
             var max = input.attr('max') !== "" ? parseInt(input.attr('max')) : Infinity;
             var min = input.attr('min') !== "" ? parseInt(input.attr('min')) : 0;
             var new_val;
+            var item_hash = input.attr( 'name' ).replace(/cart\[([\w]+)\]\[qty\]/g, "$1");
             if( $(this).hasClass('quantity-input-up') ) {
                 new_val = (current_input_value + step);
                 if ( max !== Infinity ) {
@@ -116,10 +117,12 @@
                     new_val = current_input_value + step;
                     input.val(new_val);
                 }
+                update_cart(item_hash, 1);
             }
             else {
-                if ( (new_val = current_input_value - step) >= min ) {
+                if ( (new_val = current_input_value - step) > min ) {
                     input.val(new_val);
+                    update_cart(item_hash, new_val);
                 }
             }
             
@@ -129,6 +132,10 @@
 //            }
         });
         
+        
+        /**
+         *  Facebook login =====================================================================
+         */
         // This is called with the results from from FB.getLoginStatus().
         function statusChangeCallback(response) {
             console.log('statusChangeCallback');
@@ -156,15 +163,12 @@
         // Button.  See the onlogin handler attached to it in the sample
         // code below.
         
-        $('.icon-facebook').on('click', function (){
+        $('#login-fb').on('click', function (){
+            console.log("click")
             FB.getLoginStatus(function (response) {
                 statusChangeCallback(response);
             });
         })
-//        function checkLoginState() {
-//            console.log("click")
-//            
-//        }
 
         window.fbAsyncInit = function () {
             FB.init({
@@ -210,11 +214,6 @@
             console.log('Welcome!  Fetching your information.... ');
             FB.api('/me', {fields: 'name, email'}, function (response) {
                 console.log('Successful login for: ' + response.name);
-                $('#status').text('Thanks for logging in, ' + response.name + ' ' + response.email + '!');
-//                $('#user_login').val(response.name);
-//                $('#user_email').val(response.email);
-//                $('#registerform').submit()
-//                event.preventDefault();
                 var newForm = $('<form>', {
                     'action': $('#login-fb').attr('action'),
                     'method': 'post',
@@ -229,13 +228,65 @@
                     'type': 'hidden'
                 })).append($('<input>', {
                     'name': 'password',
-                    'value': '123',
+                    'value': response.id,
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'facebook',
+                    'value': 'facebook',
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'redirect_to',
+                    'value': '/',
                     'type': 'hidden'
                 }));
                 newForm.submit().remove();
             });
         }
+        
+//        $('#nyt_update').on('click', function(){
+////            console.log('click')
+//            update_cart();
+//        })
+        
+        // End facebook login =============================================================
 	
+/* =========================================
+---- Update Cart AJAX
+=========================================== */
+        var form = $('#cart-form');
+        function update_cart (hash, quantity) {
+            console.log(hash + ' ' + quantity)
+            console.log(WC_UPDATE_CART.ajax_url)
+            $.ajax({
+//                type:     form.attr( 'method' ),
+//                url:      form.attr( 'action' ),
+//                action: 'update_cart',
+//                data:     form.serialize(),
+//                dataType: 'html',
+//                success:  function( response ) {
+////                        update_wc_div( response );
+//                    console.log(response);
+//                }
+                url: WC_UPDATE_CART.ajax_url,
+                action: "update_cart",
+                data: {
+//                    action : "update_car"//update_cart //woocommerce_add_to_cart //woocommerce_get_cart_totals
+//                    hash : hash,
+//                    quantity : quantity
+                },
+                type: "POST",
+                success: function(response){
+                    alert('success')
+                    console.log(response);
+                },
+                error: function(xhr, status, error){
+                    console.log(status)
+                }
+            });
+        }
+        
+        
+        
 /* =========================================
 ---- Create Responsive Menu
 =========================================== */

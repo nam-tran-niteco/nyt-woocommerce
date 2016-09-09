@@ -24,7 +24,8 @@ if (!defined('ABSPATH')) {
     <p class="title-desc">Just this week, you can use the free premium delivery.</p>
 </header>
 <div class="xs-margin"></div><!-- space -->
-<form action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+<div class="cart-form">
+<form action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post" >
     <div class="row">
 
         <?php
@@ -103,7 +104,7 @@ if (!defined('ABSPATH')) {
                                 </td>
 
                                 <td data-title="<?php _e('Quantity', 'woocommerce'); ?>">
-                                    <div class="custom-quantity-input">
+                                    <div class="custom-quantity-input" data="<?php echo $cart_item['product_id']?>">
                                         <?php
                                         if ($_product->is_sold_individually()) {
                                             $product_quantity = sprintf('1 <input type="hidden" class="quantity" name="cart[%s][qty]" value="1" />', $cart_item_key);
@@ -139,10 +140,17 @@ if (!defined('ABSPATH')) {
                         }
                     }
                     ?>
+                            <tr>
+                                <td colspan="5">
+                                    <input type="button" id="nyt_update" value="Update Cart"/>
+                                </td>
+                            </tr>
                 </tbody>
             </table>
         </div>
     </div>
+</form>
+</div>
     <div class="lg-margin"></div>
 
     <div class="row">
@@ -200,8 +208,6 @@ if (!defined('ABSPATH')) {
             <a href="/checkout" class="btn btn-custom">CHECKOUT</a>
         </div><!-- End .col-md-4 -->
     </div>
-</form>
-
 <div class="lg-margin2x"></div>
 
 <div class="similiar-items-container carousel-wrapper">
