@@ -6152,9 +6152,7 @@ html[xmlns] .slides {display: block;}
 .panel{
 	border: none;
 }
-#payment{
-	display: none;
-}
+
 .payment-icon{
 	float: left;
 }
@@ -6187,7 +6185,7 @@ html[xmlns] .slides {display: block;}
     border-top-color: red;
 }
 
-#select-country{
+#billing_country{
 	position: absolute;
     width: 72%;
     left: 150px;

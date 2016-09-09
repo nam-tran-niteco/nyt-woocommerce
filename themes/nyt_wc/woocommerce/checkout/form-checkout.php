@@ -46,7 +46,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 					<label for="option1">Checkout as Guest</label>
 					<div class="xs-margin"></div>
 					<input type="radio" name="radio-option" id="option2">
-					<label for="option2">Register</label>
+					<label for="option2">Login</label>
 					<div class="sm-margin"></div>
 					<p class="">By creating an account with our store, you will be able to move through the checkout process faster, 
 					store multiple shipping addresses, view and track your orders in your account and more.</p>
@@ -54,7 +54,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 				</div><!-- End .col-md-6 -->
 
 				<div class="hidden col-md-6 col-sm-6 col-xs-12" id="regis-form">					   		
-					<h2 class="checkout-title">Registered Customers</h2>
+					<h2 class="checkout-title">Login</h2>
 					<p>If you have an account with us, please log in.</p>
 					<div class="xs-margin"></div>
 					<?php 
@@ -91,6 +91,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		<div id="delivery-details" class="collapse">
 			<div class="panel-body">
 				<p><?php echo 'Details about delivery ' ?></p>
+			<!--	<?php do_action( 'woocommerce_checkout_shipping' ); ?> -->
 			</div><!-- End .panel-body -->
 		</div><!-- End .panel-collapse -->
 		
@@ -104,10 +105,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		<div id="payment-method" class="collapse">
 			<div class="panel-body">
 				<p><?php echo 'Choose your payment method'?></p>
-				<ul> 
-					<!--<li class = "payment-icon"><img class="paypal" src="../images/paypal.png"></img></li>
-					<li class= "payment-icon"><img class="nganluong" src="../images/nganluong-logo.jpg"></img></li>-->
-				</ul>
+				
 			</div><!-- End .panel-body -->
 		</div><!-- End .panel-collapse -->
 		
@@ -132,4 +130,4 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 	</div>
 </form>
 
-
+<?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

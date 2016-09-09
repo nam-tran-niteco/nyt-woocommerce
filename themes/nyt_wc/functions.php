@@ -225,7 +225,13 @@ add_action( 'woocommerce_single_product_summary', 'nyt_template_single_favorite_
 
 // CHECKOUT
 // override
+function custom_override_checkout_fields( $fields = array() ) {
 
+
+    return fields;
+}
+
+//add_filter('woocommerce_billing_fields', 'custom_override_checkout_fields');
 
 ?>
 
