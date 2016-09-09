@@ -27,100 +27,107 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 	echo apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) );
 	return;
 }
-?> 
+?>
+
+<div class="panel">
+	<div class="accordion-header">
+		<div class="accordion-title">Step 1: <span>Checkout Option</span></div><!-- End .accordion-title -->
+		<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#checkout-option"></a>
+	</div><!-- End .accordion-header -->
+	
+	<div id="checkout-option" class="collapse in">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12">					   		
+					<h2 class="checkout-title">New Customer</h2>
+					<p>Register with us for future convenience:</p>
+					<div class="xs-margin"></div>
+					<input type="radio" name="radio-option" id="option1"> 
+					<label for="option1">Checkout as Guest</label>
+					<div class="xs-margin"></div>
+					<input type="radio" name="radio-option" id="option2">
+					<label for="option2">Login</label>
+					<div class="sm-margin"></div>
+					<p class="">By creating an account with our store, you will be able to move through the checkout process faster, 
+					store multiple shipping addresses, view and track your orders in your account and more.</p>
+					
+				</div><!-- End .col-md-6 -->
+
+				<div class="hidden col-md-6 col-sm-6 col-xs-12" id="regis-form">					   		
+					<h2 class="checkout-title">Login</h2>
+					<p>If you have an account with us, please log in.</p>
+					<div class="xs-margin"></div>
+					<?php 
+						do_action( 'woocommerce_before_checkout_form', $checkout );
+					
+					?>
+				</div>
+			</div>
+		</div><!-- End .panel-body -->
+	</div><!-- End .panel-collapse -->
+</div>
 
 <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
-		<div class="panel">
-			<div class="accordion-header">
-				<div class="accordion-title">1 Step: <span>Checkout Option</span></div><!-- End .accordion-title -->
-				<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#checkout-option"></a>
-			</div><!-- End .accordion-header -->
-			
-			<div id="checkout-option" class="collapse" style="height: 0px;">
-				<div class="panel-body">
-					<?php 
-						do_action( 'woocommerce_before_checkout_form', $checkout ); 
-						//wp_login_form(); 
-					?>
-				</div><!-- End .panel-body -->
-			</div><!-- End .panel-collapse -->
-		</div>
+	<div class="panel">
+		<div class="accordion-header">
+			<div class="accordion-title">Step 2: <span>Billing Infomation</span></div><!-- End .accordion-title -->
+			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#billing"></a>
+		</div><!-- End .accordion-header -->
 		
-		<div class="panel">
-			<div class="accordion-header">
-				<div class="accordion-title">2 Step: <span>Billing Infomation</span></div><!-- End .accordion-title -->
-				<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#billing"></a>
-			</div><!-- End .accordion-header -->
-			
-			<div id="billing" class="collapse" style="height: 0px;">
-				<div class="panel-body">
-					<?php do_action( 'woocommerce_checkout_billing' ); ?>
-				</div><!-- End .panel-body -->
-			</div><!-- End .panel-collapse -->
-			
-		</div>
+		<div id="billing" class="collapse">
+			<div class="panel-body">
+				<?php do_action( 'woocommerce_checkout_billing' ); ?>
+			</div><!-- End .panel-body -->
+		</div><!-- End .panel-collapse -->
+		
+	</div>
 
-		<div class="panel">
-			<div class="accordion-header">
-				<div class="accordion-title">3 Step: <span>Delivery Details</span></div><!-- End .accordion-title -->
-				<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#delivery-details"></a>
-			</div><!-- End .accordion-header -->
-			
-			<div id="delivery-details" class="collapse">
-				<div class="panel-body">
-					<p><?php echo 'Details about delivery ' ?></p>
-				</div><!-- End .panel-body -->
-			</div><!-- End .panel-collapse -->
-			
-		</div>
-		<div class="panel">
-			<div class="accordion-header">
-				<div class="accordion-title">4 Step: <span>Delivery Method</span></div><!-- End .accordion-title -->
-				<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#delivery-method"></a>
-			</div><!-- End .accordion-header -->
-			
-			<div id="delivery-method" class="collapse">
-				<div class="panel-body">
-					<p><?php echo 'Choose your delivery method'?></p>
-				</div><!-- End .panel-body -->
-			</div><!-- End .panel-collapse -->
-			
-		</div>
-		<div class="panel">
-			<div class="accordion-header">
-				<div class="accordion-title">5 Step: <span>Payment Method</span></div><!-- End .accordion-title -->
-				<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#payment-method"></a>
-			</div><!-- End .accordion-header -->
-			
-			<div id="payment-method" class="collapse" style="height: 0px;">
-				<div class="panel-body">
-					<p><?php echo 'Choose your payment method'?></p>
-					<ul> 
-						<li class = "payment-icon"><img class="paypal" src="../images/paypal.png"></img></li>
-						<li class= "payment-icon"><img class="nganluong" src="../images/nganluong-logo.jpg"></img></li>
-					</ul>
-				</div><!-- End .panel-body -->
-			</div><!-- End .panel-collapse -->
-			
-		</div>
-		<div class="panel">
-			<div class="accordion-header">
-				<div class="accordion-title">6 Step: <span>Confirm Order</span></div><!-- End .accordion-title -->
-				<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#confirm"></a>
-			</div><!-- End .accordion-header -->
-			
-			<div id="confirm" class="collapse" style="height: 0px;">
-				<div class="panel-body">
-					<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
+	<div class="panel">
+		<div class="accordion-header">
+			<div class="accordion-title">Step 3: <span>Delivery Details</span></div><!-- End .accordion-title -->
+			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#delivery-details"></a>
+		</div><!-- End .accordion-header -->
+		
+		<div id="delivery-details" class="collapse">
+			<div class="panel-body">
+				<p><?php echo 'Details about delivery ' ?></p>
+			<!--	<?php do_action( 'woocommerce_checkout_shipping' ); ?> -->
+			</div><!-- End .panel-body -->
+		</div><!-- End .panel-collapse -->
+		
+	</div>
+	<div class="panel">
+		<div class="accordion-header">
+			<div class="accordion-title">Step 4: <span>Payment Method</span></div><!-- End .accordion-title -->
+			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#payment-method"></a>
+		</div><!-- End .accordion-header -->
+		
+		<div id="payment-method" class="collapse">
+			<div class="panel-body">
+				<p><?php echo 'Choose your payment method'?></p>
+				
+			</div><!-- End .panel-body -->
+		</div><!-- End .panel-collapse -->
+		
+	</div>
+	<div class="panel">
+		<div class="accordion-header">
+			<div class="accordion-title">Step 5: <span>Confirm Order</span></div><!-- End .accordion-title -->
+			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#confirm"></a>
+		</div><!-- End .accordion-header -->
+		
+		<div id="confirm" class="collapse">
+			<div class="panel-body">
+				<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 
-					<div id="order_review" class="woocommerce-checkout-review-order">
-						<?php do_action( 'woocommerce_checkout_order_review' ); ?>
-					</div>
+				<div id="order_review" class="woocommerce-checkout-review-order">
+					<?php do_action( 'woocommerce_checkout_order_review' ); ?>
+				</div>
 
-					<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
-				</div><!-- End .panel-body -->
-			</div><!-- End .panel-collapse -->
-		</div>
+				<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
+			</div><!-- End .panel-body -->
+		</div><!-- End .panel-collapse -->
+	</div>
 </form>
 
-
+<?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

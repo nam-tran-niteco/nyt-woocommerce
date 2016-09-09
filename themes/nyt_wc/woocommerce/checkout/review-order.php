@@ -82,16 +82,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<a href="#"><?php echo $_product->get_image();?></a>
 						
 					</figure>
-					<header class="item-name">
+					<header class="item-name ">
 						<a href="#">
 							<?php echo apply_filters( 'woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key ) . '&nbsp;'; ?>
 							<?php echo WC()->cart->get_item_data( $cart_item ); ?>
 						</a>
 					</header>
-					<ul>
-						<li>Color: White</li>
-						<li>Size: SM</li>
-					</ul>
 				</td>
 				<td class="item-code">N/A</td>
 				<td class="item-price-col">
@@ -100,17 +96,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</span>
 				</td>
 				<td>
-					<div class="custom-quantity-input">
-						<input type="text" name="quantity" value="<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', sprintf( $cart_item['quantity'] ), $cart_item, $cart_item_key ); ?>">
-						<a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
-						<a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
-					</div>
+					<p id= "item-quantity"><?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', sprintf( $cart_item['quantity'] ), $cart_item, $cart_item_key ); ?></p>
 				</td>
 				<td class="item-total-col">
 					<span class="item-price-special">
 						<?php echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); ?>
 					</span>
-					<a href="#" class="close-button"></a>
 				</td>
 			</tr>
 			<?php
@@ -121,14 +112,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 		</tbody>
 		<tfoot>
-			<tr>
+			
+			<!--<tr>
 				<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
 						<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
 							<th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
 							<td><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
 						</tr>
 					<?php endforeach; ?>
-
+			</tr> -->
+			
+			<tr class="cart-subtotal">
+				<td class="checkout-table-title" colspan="4"><strong>SUBTOTAL:</strong></td>
+				<td class="checkout-table-price">
+					<strong><?php wc_cart_totals_subtotal_html(); ?></strong>
+				</td>
 			</tr>
 			<tr>
 				<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
@@ -136,26 +134,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td class="checkout-table-price">
 						<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
 						<strong><?php wc_cart_totals_fee_html( $shipping ); ?></strong>
-						
 						<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
 					</td>
 				<?php endif; ?>
-			</tr>
+			</tr> 
 			<tr>
 				<td class="checkout-table-title" colspan="4"><strong>TAX:</strong></td>
 				<td class="checkout-table-price">
 					<strong><?php wc_cart_totals_taxes_total_html(); ?></strong>
 				</td>
 			</tr>
-			<tr>
+			<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
+			<tr class="order-total">
 				<td class="checkout-total-title" colspan="4"><strong>TOTAL:</strong></td>
 				<td class="checkout-total-price cart-total"><strong><?php wc_cart_totals_order_total_html(); ?></strong></td>
 			</tr>
+			<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
 		</tfoot>
 	</table>
 </div><!-- End .table-reponsive -->
 <div class="lg-margin"></div><!-- space -->
 	<div class="text-right">
-		<input type="submit" class="btn btn-custom-2" value="CONFIRM ORDER">
+		<noscript>
+			<?php _e( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'woocommerce' ); ?>
+			<br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e( 'Update totals', 'woocommerce' ); ?>" />
+		</noscript>
+
+		<?php wc_get_template( 'checkout/terms.php' ); ?>
+
+		<?php do_action( 'woocommerce_review_order_before_submit' ); ?>
+
+		<?php echo apply_filters( 'woocommerce_order_button_html', '<input type="submit" class="button alt" name="woocommerce_checkout_place_order" id="place_order" value="' . esc_attr( $order_button_text ) . '" data-value="' . esc_attr( $order_button_text ) . '" />' ); ?>
+
+		<?php do_action( 'woocommerce_review_order_after_submit' ); ?>
+
+		<?php wp_nonce_field( 'woocommerce-process_checkout' ); ?>
 	</div>
 </div>
