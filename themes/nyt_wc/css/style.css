@@ -6166,6 +6166,22 @@ html[xmlns] .slides {display: block;}
 	display: inline-block;
 }
 
+table.variations {
+	margin-bottom: 20px;
+}
+
+table.variations .label {
+	display: none;
+}
+
+table.variations .value select {
+	height: 40px;
+	width: 140px;
+	padding: 0;
+	border: 1px solid #ddd;
+	margin-right: 30px;
+}
+
 .woocommerce-info h3, .woocommerce-error h3, .woocommerce-message h3{
     font-size: 17px;
     height: 60px;

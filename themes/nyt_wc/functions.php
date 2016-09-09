@@ -49,6 +49,7 @@ add_action('wp_enqueue_scripts', 'venedor_css');
  * LOAD JAVASCRIPT
  * */
 function venedor_scripts() {
+    wp_enqueue_script('modernizr', get_template_directory_uri() . '/js/modernizr.custom.js', array(), '', true);
     wp_enqueue_script('jquery', get_template_directory_uri() . '/js/jquery-1.11.0.min.js', array(), '', true);
     wp_enqueue_script('jquery_appear', get_template_directory_uri() . '/js/jquery.appear.js', array(), '', true);
     wp_enqueue_script('jquery_elastislide', get_template_directory_uri() . '/js/jquery.elastislide.js', array(), '', true);
@@ -59,7 +60,6 @@ function venedor_scripts() {
     wp_enqueue_script('jquery_mousewheel', get_template_directory_uri() . '/js/jquery.mousewheel.js', array(), '', true);
     wp_enqueue_script('jquery_nouislider', get_template_directory_uri() . '/js/jquery.nouislider.min.js', array(), '', true);
     wp_enqueue_script('jquery_parallax', get_template_directory_uri() . '/js/jquery.parallax-1.1.3.js', array(), '', true);
-    wp_enqueue_script('modernizr', get_template_directory_uri() . '/js/modernizr.custom.js', array(), '', true);
     wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true);
     wp_enqueue_script('smoothscroll', get_template_directory_uri() . '/js/smoothscroll.js', array(), '', true);
     wp_enqueue_script('retina', get_template_directory_uri() . '/js/retina-1.1.0.min.js', array(), '', true);
@@ -146,7 +146,7 @@ if ( ! function_exists( 'woocommerce_catalog_ordering' ) ) {
             'menu_order' => __( 'Default', 'woocommerce' ),
             'popularity' => __( 'Popularity', 'woocommerce' ),
             'rating'     => __( 'Average rating', 'woocommerce' ),
-            'date'       => __( 'Newnest', 'woocommerce' ),
+            'date'       => __( 'Newness', 'woocommerce' ),
             'price'      => __( 'Price: low to high', 'woocommerce' ),
             'price-desc' => __( 'Price: high to low', 'woocommerce' )
         ) );

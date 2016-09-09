@@ -35,7 +35,7 @@ global $post, $product;
 				'title'	 => $props['title'],
 				'alt'    => $props['alt'],
 				'data-big' => wp_get_attachment_url( get_post_thumbnail_id($post->ID) ),
-				'data-id' => get_post_thumbnail_id($post->ID),
+				'id' => "product-image",
 			) );
 			echo apply_filters(
 				'woocommerce_single_product_image_html',
