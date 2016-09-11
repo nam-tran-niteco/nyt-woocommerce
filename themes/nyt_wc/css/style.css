@@ -6206,3 +6206,10 @@ table.variations .value select {
 .woocommerce-ordering {
 	display: inline-block;
 }
+
+/*Custom Subtotal class*/
+.item-total-col .woocommerce-Price-amount {
+    color: red;
+    font-size: 18px;
+    font-weight: 600;
+}

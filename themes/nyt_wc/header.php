@@ -38,7 +38,7 @@
         </style>
 
         <?php wp_head() ?>
-        <script>
+<!--        <script>
             window.fbAsyncInit = function() {
             FB.init({
             appId      : 'YOUR_APP_ID', // App ID
@@ -56,7 +56,7 @@
         js.src = "//connect.facebook.net/en_US/all.js";
         ref.parentNode.insertBefore(js, ref);
         }(document));
-     </script>
+     </script>-->
     </head>
 
     <body>

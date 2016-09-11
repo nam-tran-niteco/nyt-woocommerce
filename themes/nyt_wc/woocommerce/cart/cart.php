@@ -24,19 +24,19 @@ if (!defined('ABSPATH')) {
     <p class="title-desc">Just this week, you can use the free premium delivery.</p>
 </header>
 <div class="xs-margin"></div><!-- space -->
-<div class="cart-form">
-<form action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post" >
+<!--<div class="cart-form">-->
+<form action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post" id="cart-form">
     <div class="row">
 
         <?php
         wc_print_notices();
 
-        //do_action('woocommerce_before_cart');
+        do_action('woocommerce_before_cart');
         ?>
 
         <div class="col-md-12 table-responsive">
 
-            <?php //do_action('woocommerce_before_cart_table'); ?>
+            <?php do_action('woocommerce_before_cart_table'); ?>
 
             <table class="shop_table shop_table_responsive cart-table table" cellspacing="0">
                 <thead>
@@ -141,8 +141,11 @@ if (!defined('ABSPATH')) {
                     }
                     ?>
                             <tr>
-                                <td colspan="5">
-                                    <input type="button" id="nyt_update" value="Update Cart"/>
+                                <td colspan="3">
+                                </td>
+                                <td colspan="2">
+                                     <a href="javascript:void(0)" id="update_cart" class="btn btn-custom" >UPDATE CART</a>
+                                    <?php wp_nonce_field( 'woocommerce-cart' ); ?>
                                 </td>
                             </tr>
                 </tbody>
@@ -150,12 +153,10 @@ if (!defined('ABSPATH')) {
         </div>
     </div>
 </form>
-</div>
     <div class="lg-margin"></div>
 
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12">
-
             <div class="tab-container left clearfix">
                 <ul class="nav-tabs" style="height: 315px;">
                     <li class="active"><a href="#shipping" data-toggle="tab">Shipping &amp; Taxes</a></li>
@@ -183,8 +184,7 @@ if (!defined('ABSPATH')) {
 
         </div><!-- End .col-md-8 -->
         <div class="lg-margin visible-sm visible-xs"></div><!-- space -->
-        <div class="col-md-4 col-sm-12 col-xs-12">
-
+        <div class="col-md-4 col-sm-12 col-xs-12" id="cart_totals">
             <table class="table total-table">
                 <tbody>
                     <tr>
