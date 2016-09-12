@@ -6228,3 +6228,7 @@ table.variations .value select {
 	color: #555;
 	font: 700 20px "Gudea", Arial, sans-serif;
 }
+/* hide "view cart" */
+.added_to_cart.wc-forward {
+	display: none;
+}

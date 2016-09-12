@@ -2,17 +2,41 @@
 ----------- Venedor ---------- */
 (function ($) {
 	"use strict";
+
+    $('#billing_address_2').change(function () {
+        var billing_address_2 = $('#billing_address_2').val();
+        var shipping_cost = 50;
+        var data = {
+            action: 'woocommerce_apply_billing_address_2',
+            security: wc_checkout_params.apply_billing_address_2_nonce,
+            billing_address_2: billing_address_2,
+            shipping_cost: shipping_cost
+        };
+ 
+        $.ajax({
+            type: 'POST',
+            url: wc_checkout_params.ajax_url,
+            data: data,
+            success: function (code) {
+                if (code === '0') {
+                    $('body').trigger('update_checkout');
+                }
+            },
+            dataType: 'html'
+        });
+    });
+
         
-        // replace Vietnamese
-        function removeVietnameseWord(str) {
-            str = str.toLowerCase();
-            str = str.replace(/[àáãảạăằắẳẵặầấẩẫậ]/g,"a");
-            str = str.replace(/[eèéẻẽẹêềếểễệ]/g,"e");
-            str = str.replace(/[oòóỏõọôồốổỗộơờớởỡợ]/g,"o");
-            str = str.replace(/[iìíỉĩị]/g,"i");
-            str = str.replace(/[uùúủũụưừứửữự]/g,"u");
-            return str;
-        }
+    // replace Vietnamese
+    function removeVietnameseWord(str) {
+        str = str.toLowerCase();
+        str = str.replace(/[àáãảạăằắẳẵặầấẩẫậ]/g,"a");
+        str = str.replace(/[eèéẻẽẹêềếểễệ]/g,"e");
+        str = str.replace(/[oòóỏõọôồốổỗộơờớởỡợ]/g,"o");
+        str = str.replace(/[iìíỉĩị]/g,"i");
+        str = str.replace(/[uùúủũụưừứửữự]/g,"u");
+        return str;
+    }
 
 	//CHECKOUT_PAGE
 	 	//toggle step 1
@@ -44,20 +68,6 @@
 		animateStartingFrameIn: true
     },
     homeSlider = $('#slider-sequence').sequence(options).data("sequence");
-
-
-    // quantity input buttons
-    var inputField = $(".input-text.qty.text");
-    $(".quantity-input-up").click(function() {
-    	inputField.val(parseInt(inputField.val()) + 1);
-    });
-    $(".quantity-input-down").click(function() {
-    	inputField.val(parseInt(inputField.val()) - 1);
-    	if (inputField.val() < 1) {
-    		inputField.val(1);
-    	}
-    });
-
 
     // Single Product Image Slide and Zoom
     $("#product-carousel li").first().addClass("active-slide");

@@ -406,4 +406,26 @@ function update_cart(){
 }
 
 
+// calculate shipping
+wp_localize_script('billing_address_2', 'wc_checkout_params', array('ajaxurl' => admin_url('admin-ajax.php')));
+
+ function calculate() {
+    if (isset($_POST['billing_address_2'])) {
+        global $woocommerce;
+        $billing_address_2 = $_POST['billing_address_2'];
+
+        session_start();
+        $_SESSION['val'] = $_POST['shipping_cost'];
+    }
+}
+add_action('wp_ajax_woocommerce_apply_billing_address_2', 'calculate', 10);
+add_action('wp_ajax_nopriv_woocommerce_apply_billing_address_2', 'calculate', 10);
+
+function nyt_add_ship_fee() {
+    @session_start();
+    $customshipcost = $_SESSION['val'];
+    WC()->cart->add_fee('Shipping ', $customshipcost);
+}
+add_action('woocommerce_cart_calculate_fees', 'nyt_add_ship_fee');
+
 ?>
