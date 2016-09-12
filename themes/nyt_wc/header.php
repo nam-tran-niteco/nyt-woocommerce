@@ -60,6 +60,13 @@
     </head>
 
     <body>
+        <!--
+          Below we include the Login Button social plugin. This button uses
+          the JavaScript SDK to present a graphical Login button that triggers
+          the FB.login() function when clicked.
+        -->
+        <div id="status">
+        </div>
         <div class="wrapper">
             <header id="header">
                 <div id="header-top">
@@ -101,7 +108,17 @@
 
                                     <div class="header-text-container pull-right">
                                         <p class="header-text">Welcome to Venedor!</p>
-                                        <p class="header-link"><a href="#">login</a>&nbsp;or&nbsp;<a href="#">create an account</a></p>
+                                        <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+                                        <p class="header-link">
+                                            <?php if (is_user_logged_in()) { ?>
+
+                                                Hello, <?php echo get_current_user(); ?>
+
+                                                &nbsp; <a href="<?php echo wp_logout_url(home_url()); ?>">Logout</a>
+
+                                            <?php } else { ?>
+                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal">log in</a>&nbsp;or&nbsp;<a href="">create an account</a></p>
+                                        <?php } ?>
                                     </div><!-- End .pull-right -->
                                 </div><!-- End .header-top-right -->
                             </div><!-- End .col-md-12 -->
@@ -168,103 +185,103 @@
                                     </nav>
 
                                     <!--Show mini info for all products in cart-->
-                                    <?php if ( !is_page('cart') ):?>
-                                    <div id="quick-access">
-                                        <div class="dropdown-cart-menu-container pull-right">
-                                            <div class="btn-group dropdown-cart">
-                                                <?php
-                                                $items = WC()->cart->get_cart();
-                                                $total_cost = WC()->cart->get_cart_total();
-                                                
-                                                // display MAX products for best display
-                                                $MAX_PRODUCT = 5;
-                                                $item_count = 0;
-                                                
-                                                $cart_button_title = "Cart";
-                                                ?>
-                                                <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
-                                                    <span class="cart-menu-icon"></span>
-                                                    <?php echo sizeof($items) > 1 ? '' . sizeof($items) . ' items' : '' . sizeof($items) . ' item' ?> <span class="drop-price">- <?php echo $total_cost ?></span>
-                                                </button>
+                                    <?php if (!is_page('cart')): ?>
+                                        <div id="quick-access">
+                                            <div class="dropdown-cart-menu-container pull-right">
+                                                <div class="btn-group dropdown-cart">
+                                                    <?php
+                                                    $items = WC()->cart->get_cart();
+                                                    $total_cost = WC()->cart->get_cart_total();
 
-                                                <div class="dropdown-menu dropdown-cart-menu pull-right clearfix" role="menu">
-                                                    <p class="dropdown-cart-description">Products in shopping cart</p>
-                                                    <ul class="dropdown-cart-product-list">
-                                                        <?php
-                                                        foreach ($items as $cart_item_key => $cart_item):
-                                                            $item_count++;
-                                                            if ($item_count > $MAX_PRODUCT) {
-                                                                $cart_button_title = "See all";
-                                                                break;
-                                                            }
-                                                            $_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
-                                                            $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
-                                                            ?>
-                                                            <li class="item clearfix">
-                                                                
-                                                                <!--Button delete product-->
-                                                                <?php
-                                                                echo apply_filters('woocommerce_cart_item_remove_link', sprintf(
-                                                                                '<a href="%s" class="delete-item" title="%s" data-product_id="%s" data-product_sku="%s"><i class="fa fa-times"></i></a>', esc_url(WC()->cart->get_remove_url($cart_item_key)), __('Remove this item', 'woocommerce'), esc_attr($product_id), esc_attr($_product->get_sku())
-                                                                        ), $cart_item_key);
+                                                    // display MAX products for best display
+                                                    $MAX_PRODUCT = 5;
+                                                    $item_count = 0;
+
+                                                    $cart_button_title = "Cart";
+                                                    ?>
+                                                    <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
+                                                        <span class="cart-menu-icon"></span>
+                                                        <?php echo sizeof($items) > 1 ? '' . sizeof($items) . ' items' : '' . sizeof($items) . ' item' ?> <span class="drop-price">- <?php echo $total_cost ?></span>
+                                                    </button>
+
+                                                    <div class="dropdown-menu dropdown-cart-menu pull-right clearfix" role="menu">
+                                                        <p class="dropdown-cart-description">Products in shopping cart</p>
+                                                        <ul class="dropdown-cart-product-list">
+                                                            <?php
+                                                            foreach ($items as $cart_item_key => $cart_item):
+                                                                $item_count++;
+                                                                if ($item_count > $MAX_PRODUCT) {
+                                                                    $cart_button_title = "See all";
+                                                                    break;
+                                                                }
+                                                                $_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
+                                                                $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
                                                                 ?>
-                                                                
-                                                                <!--Product thumbnail-->
-                                                                <figure>
+                                                                <li class="item clearfix">
+
+                                                                    <!--Button delete product-->
                                                                     <?php
-                                                                    $thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
-
-                                                                    if (!$product_permalink) {
-                                                                        echo $thumbnail;
-                                                                    } else {
-                                                                        printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail);
-                                                                    }
+                                                                    echo apply_filters('woocommerce_cart_item_remove_link', sprintf(
+                                                                                    '<a href="%s" class="delete-item" title="%s" data-product_id="%s" data-product_sku="%s"><i class="fa fa-times"></i></a>', esc_url(WC()->cart->get_remove_url($cart_item_key)), __('Remove this item', 'woocommerce'), esc_attr($product_id), esc_attr($_product->get_sku())
+                                                                            ), $cart_item_key);
                                                                     ?>
-                                                                </figure>
-                                                                
-                                                                <!--Product detail--> 
-                                                                <div class="dropdown-cart-details">
-                                                                    <p class="item-name">
+
+                                                                    <!--Product thumbnail-->
+                                                                    <figure>
                                                                         <?php
+                                                                        $thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
+
                                                                         if (!$product_permalink) {
-                                                                            echo apply_filters('woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key) . '&nbsp;';
+                                                                            echo $thumbnail;
                                                                         } else {
-                                                                            echo apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_permalink), $_product->get_title()), $cart_item, $cart_item_key);
-                                                                        }
-
-                                                                        // Meta data
-                                                                        echo WC()->cart->get_item_data($cart_item);
-
-                                                                        // Backorder notification
-                                                                        if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) {
-                                                                            echo '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>';
+                                                                            printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail);
                                                                         }
                                                                         ?>
-                                                                    </p>
-                                                                    <p>
-                                                                        <?php echo $cart_item['quantity'] ?>x
-                                                                        <span class="item-price"><?php echo apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_price($_product), $cart_item, $cart_item_key); ?></span>
-                                                                    </p>
-                                                                </div><!-- End .dropdown-cart-details -->
-                                                            </li>
-                                                        <?php endforeach; ?>
-                                                    </ul>
+                                                                    </figure>
 
-                                                    <ul class="dropdown-cart-total">
-                                                        <li><span class="dropdown-cart-total-title">Shipping:</span>$7</li>
-                                                        <li><span class="dropdown-cart-total-title">Total:</span><?php echo $total_cost?><!--<span class="sub-price">.99</span>--></li>
-                                                    </ul><!-- .dropdown-cart-total -->
-                                                    <div class="dropdown-cart-action">
-                                                        <p><a href="/cart" class="btn btn-custom-2 btn-block"><?php echo $cart_button_title?></a></p>
-                                                        <p><a href="/checkout" class="btn btn-custom btn-block">Checkout</a></p>
-                                                    </div><!-- End .dropdown-cart-action -->
+                                                                    <!--Product detail--> 
+                                                                    <div class="dropdown-cart-details">
+                                                                        <p class="item-name">
+                                                                            <?php
+                                                                            if (!$product_permalink) {
+                                                                                echo apply_filters('woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key) . '&nbsp;';
+                                                                            } else {
+                                                                                echo apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_permalink), $_product->get_title()), $cart_item, $cart_item_key);
+                                                                            }
 
-                                                </div><!-- End .dropdown-cart -->
-                                            </div><!-- End .btn-group -->
-                                        </div><!-- End .dropdown-cart-menu-container -->
-                                        <?php endif;?>
-                                        
-                                        
+                                                                            // Meta data
+                                                                            echo WC()->cart->get_item_data($cart_item);
+
+                                                                            // Backorder notification
+                                                                            if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) {
+                                                                                echo '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>';
+                                                                            }
+                                                                            ?>
+                                                                        </p>
+                                                                        <p>
+                                                                            <?php echo $cart_item['quantity'] ?>x
+                                                                            <span class="item-price"><?php echo apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_price($_product), $cart_item, $cart_item_key); ?></span>
+                                                                        </p>
+                                                                    </div><!-- End .dropdown-cart-details -->
+                                                                </li>
+                                                            <?php endforeach; ?>
+                                                        </ul>
+
+                                                        <ul class="dropdown-cart-total">
+                                                            <li><span class="dropdown-cart-total-title">Shipping:</span>$7</li>
+                                                            <li><span class="dropdown-cart-total-title">Total:</span><?php echo $total_cost ?><!--<span class="sub-price">.99</span>--></li>
+                                                        </ul><!-- .dropdown-cart-total -->
+                                                        <div class="dropdown-cart-action">
+                                                            <p><a href="/cart" class="btn btn-custom-2 btn-block"><?php echo $cart_button_title ?></a></p>
+                                                            <p><a href="/checkout" class="btn btn-custom btn-block">Checkout</a></p>
+                                                        </div><!-- End .dropdown-cart-action -->
+
+                                                    </div><!-- End .dropdown-cart -->
+                                                </div><!-- End .btn-group -->
+                                            </div><!-- End .dropdown-cart-menu-container -->
+                                        <?php endif; ?>
+
+
                                         <!--Search form-->
                                         <?php get_product_search_form(true) ?>
                                     </div><!-- End #quick-access -->

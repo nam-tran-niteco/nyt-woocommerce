@@ -2,6 +2,20 @@
 ----------- Venedor ---------- */
 (function ($) {
 	"use strict";
+        
+        // replace Vietnamese
+        function removeVietnameseWord(str) {
+            str = str.toLowerCase();
+            str = str.replace(/[àáãảạăằắẳẵặầấẩẫậ]/g,"a");
+            str = str.replace(/[eèéẻẽẹêềếểễệ]/g,"e");
+            str = str.replace(/[oòóỏõọôồốổỗộơờớởỡợ]/g,"o");
+            str = str.replace(/[iìíỉĩị]/g,"i");
+            str = str.replace(/[uùúủũụưừứửữự]/g,"u");
+            return str;
+        }
+
+	// Checkout page - toggle step 1
+	
 
 	// Sequence.js Slider Plugin
 	var options = {
@@ -100,15 +114,16 @@
 	}
         
         // increase/decrease input button click
-        $('a.quantity-btn i').on('click', function(){
-            var input = $(this).parent().siblings('input');
+        $('a.quantity-btn').on('click', function(){
+            var input = $(this).siblings('input');
             var step = input.attr('step') !== undefined ? parseInt(input.attr('step')) : 1;
             var current_input_value = parseInt(input.val());
-            var max = input.attr('max');
-            var min = input.attr('min') !== undefined ? parseInt(input.attr('min')) : 0;
-            if( $(this).hasClass('fa-angle-up') ) {
-                var new_val = (current_input_value + step);
-                if ( max !== undefined ) {
+            var max = input.attr('max') !== "" ? parseInt(input.attr('max')) : Infinity;
+            var min = input.attr('min') !== "" ? parseInt(input.attr('min')) : 0;
+            var new_val;
+            if( $(this).hasClass('quantity-input-up') ) {
+                new_val = (current_input_value + step);
+                if ( max !== Infinity ) {
                     if ( (new_val = current_input_value + step) <= parseInt(max) ) {
                         input.val(new_val);
                     }
@@ -119,14 +134,124 @@
                 }
             }
             else {
-                var new_val;
                 if ( (new_val = current_input_value - step) >= min ) {
                     input.val(new_val);
                 }
             }
+            
+            // wc_cart_params is required to continue, ensure the object exists
+//            if ( typeof wc_cart_params === 'undefined' ) {
+//                return false;
+//            }
         });
-	
+        
+        // This is called with the results from from FB.getLoginStatus().
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                        'into this app.';
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                        'into Facebook.';
+            }
+        }
 
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        
+        $('.icon-facebook').on('click', function (){
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        })
+//        function checkLoginState() {
+//            console.log("click")
+//            
+//        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1810777952490968',
+                cookie: true, // enable cookies to allow the server to access 
+                // the session
+                xfbml: true, // parse social plugins on this page
+                version: 'v2.5' // use graph api version 2.5
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call 
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+//                FB.getLoginStatus(function (response) {
+//                    statusChangeCallback(response);
+//                });
+
+        };
+
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id))
+                return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function testAPI() {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', {fields: 'name, email'}, function (response) {
+                console.log('Successful login for: ' + response.name);
+                $('#status').text('Thanks for logging in, ' + response.name + ' ' + response.email + '!');
+//                $('#user_login').val(response.name);
+//                $('#user_email').val(response.email);
+//                $('#registerform').submit()
+//                event.preventDefault();
+                var newForm = $('<form>', {
+                    'action': $('#login-fb').attr('action'),
+                    'method': 'post',
+                    'name'  : 'registerform'
+                }).append($('<input>', {
+                    'name': 'user_login',
+                    'value': removeVietnameseWord(response.name),
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'user_email',
+                    'value': response.email,
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'password',
+                    'value': '123',
+                    'type': 'hidden'
+                }));
+                newForm.submit().remove();
+            });
+        }
+	
 /* =========================================
 ---- Create Responsive Menu
 =========================================== */
@@ -567,22 +692,23 @@ function checkSupport(elemname, pluginname) {
 
 	var  similiarItems = $('.similiar-items-slider.owl-carousel');
 	if (checkSupport(similiarItems, $.fn.owlCarousel)) {
-        similiarItems.owlCarousel({
-            items: 4,
-            itemsDesktop : [1199,4],
-            itemsDesktopSmall: [979,3],
-            itemsTablet: [768,2],
-            itemsMobile : [479,1],
-            slideSpeed: 400,
-            autoPlay: 8000,
-            stopOnHover: true,
-            navigation: false,
-            pagination: false,
-            responsive: true,
-            mouseDrag: false,
-            autoHeight : true
-        }).data('navigationBtns', ['#similiar-items-slider-prev', '#similiar-items-slider-next']);
-    }
+            console.log("carousel");
+            similiarItems.owlCarousel({
+                items: 4,
+                itemsDesktop : [1199,4],
+                itemsDesktopSmall: [979,3],
+                itemsTablet: [768,2],
+                itemsMobile : [479,1],
+                slideSpeed: 400,
+                autoPlay: 8000,
+                stopOnHover: true,
+                navigation: false,
+                pagination: false,
+                responsive: true,
+                mouseDrag: true,
+                autoHeight : true
+            }).data('navigationBtns', ['#similiar-items-slider-prev', '#similiar-items-slider-next']);
+        }
 
 
 /* =========================================

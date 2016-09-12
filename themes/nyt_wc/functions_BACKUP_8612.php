@@ -83,6 +83,7 @@ function venedor_scripts() {
 
 add_action('wp_enqueue_scripts', 'venedor_scripts');
 
+<<<<<<< HEAD
 function update_total_price() {
     // Skip product if no updated quantity was posted or no hash on WC_Cart
     if (!isset($_POST['hash']) || !isset($_POST['quantity'])) {
@@ -124,6 +125,8 @@ function update_total_price() {
     exit;
 }
 
+=======
+>>>>>>> master
 /*
  * CUSTOMIZE SHOP PAGE
  * */
@@ -273,7 +276,6 @@ if (  ! function_exists( 'nyt_template_single_favorite_and_checkout' ) ) {
 add_action( 'woocommerce_single_product_summary', 'nyt_template_single_favorite_and_checkout', 31 );
 
 
-
 // add action for user register
 add_action( 'user_register', 'myplugin_registration_save', 10, 1 );
 
@@ -285,4 +287,3 @@ function myplugin_registration_save( $user_id ) {
 }
 
 ?>
-

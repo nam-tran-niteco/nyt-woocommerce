@@ -4453,7 +4453,7 @@ ul.page-numbers > .disabled > a:focus {
 	height:30px;
 	background-color: #fafafa;
 	background-image: url('../images/sprites/sprite.png');
-	background-position: -146px -290px;
+	background-position: -118px -290px;
 	background-repeat: no-repeat;
 	border:1px solid #dcdcdc;
 	border-radius:3px 3px 0 0;
@@ -4473,7 +4473,7 @@ ul.page-numbers > .disabled > a:focus {
 
  .accordion-btn.opened {
 	border-radius:0 0 3px 3px !important;
-	background-position: -118px -290px;
+	background-position: -146px -290px;
 }
 
 .sm-accordion .accordion-btn{
@@ -6215,3 +6215,12 @@ table.variations .value select {
 	color: #555;
 	font: 700 20px "Gudea", Arial, sans-serif;
 }
+
+.woocommerce-message h3 {
+    border-top-color: #7bae23
+}
+
+.woocommerce-ordering {
+	display: inline-block;
+}
+
