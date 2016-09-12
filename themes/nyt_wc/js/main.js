@@ -17,6 +17,22 @@
 	// Checkout page - toggle step 1
 	
 
+	//CHECKOUT_PAGE
+	 	//toggle step 1
+	$('#option1').on('change', function(){
+		$('#billing').show();
+	})
+
+	$('#option2').on('change', function(){
+		$("#regis-form").removeClass('hidden');
+	})
+	
+		//continue step 2
+	$('#continue-st2').on('click',function(){
+		$('#delivery-details').show();
+	})
+	
+
 	// Sequence.js Slider Plugin
 	var options = {
 		nextButton: true,
