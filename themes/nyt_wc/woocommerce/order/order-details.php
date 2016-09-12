@@ -30,7 +30,7 @@ $show_customer_details = is_user_logged_in() && $order->get_user_id() === get_cu
 	<thead>
 		<tr>
 			<th class="product-name"><?php _e( 'Product', 'woocommerce' ); ?></th>
-			<th class="product-total"><?php _e( 'Total', 'woocommerce' ); ?></th>
+			<th class="product-quantity"><?php _e ('Quantity','woocommerce'); ?></th>
 		</tr>
 	</thead>
 	<tbody>
