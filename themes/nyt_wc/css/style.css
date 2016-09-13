@@ -6237,3 +6237,8 @@ table.variations .value select {
 	display: none;
 
 }
+
+/* add to cart button color after clicked */
+.item-added {
+	background-color: #7bae23;
+}

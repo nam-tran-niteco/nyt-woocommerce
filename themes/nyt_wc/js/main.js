@@ -3,6 +3,7 @@
 (function ($) {
 	"use strict";
 
+	// Custom shipping cost
     $('#billing_address_2').change(function () {
         var billing_address_2 = $('#billing_address_2').val();
         var shipping_cost = 50;
