@@ -4015,6 +4015,7 @@ ul.page-numbers > .disabled > a:focus {
 	font-size:25px;
 	line-height:21px;
 	color:#757575;
+	padding-right: 25px;
 }
 .custom-quantity-input .quantity-btn {
 	background: #fafafa;
@@ -6201,6 +6202,21 @@ table.variations .value select {
     border-top-color: red;
 }
 
+.woocommerce-message h3 {
+    border-top-color: #7bae23
+}
+
+.woocommerce-ordering {
+	display: inline-block;
+}
+
+/*Custom Subtotal class*/
+.item-total-col .woocommerce-Price-amount {
+    color: red;
+    font-size: 18px;
+    font-weight: 600;
+}
+
 #billing_country{
 	position: absolute;
     width: 72%;
@@ -6212,6 +6228,12 @@ table.variations .value select {
 	color: #555;
 	font: 700 20px "Gudea", Arial, sans-serif;
 }
+
 #order-details-head{
 	margin-top: 20px;
+}
+/* hide "view cart" */
+.added_to_cart.wc-forward {
+	display: none;
+
 }

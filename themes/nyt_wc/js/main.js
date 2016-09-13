@@ -3,6 +3,41 @@
 (function ($) {
 	"use strict";
 
+    $('#billing_address_2').change(function () {
+        var billing_address_2 = $('#billing_address_2').val();
+        var shipping_cost = 50;
+        var data = {
+            action: 'woocommerce_apply_billing_address_2',
+            security: wc_checkout_params.apply_billing_address_2_nonce,
+            billing_address_2: billing_address_2,
+            shipping_cost: shipping_cost
+        };
+ 
+        $.ajax({
+            type: 'POST',
+            url: wc_checkout_params.ajax_url,
+            data: data,
+            success: function (code) {
+                if (code === '0') {
+                    $('body').trigger('update_checkout');
+                }
+            },
+            dataType: 'html'
+        });
+    });
+
+        
+    // replace Vietnamese
+    function removeVietnameseWord(str) {
+        str = str.toLowerCase();
+        str = str.replace(/[àáãảạăằắẳẵặầấẩẫậ]/g,"a");
+        str = str.replace(/[eèéẻẽẹêềếểễệ]/g,"e");
+        str = str.replace(/[oòóỏõọôồốổỗộơờớởỡợ]/g,"o");
+        str = str.replace(/[iìíỉĩị]/g,"i");
+        str = str.replace(/[uùúủũụưừứửữự]/g,"u");
+        return str;
+    }
+
 	//CHECKOUT_PAGE
 	 	//toggle step 1
 	$('#option1').on('change', function(){
@@ -33,7 +68,6 @@
 		animateStartingFrameIn: true
     },
     homeSlider = $('#slider-sequence').sequence(options).data("sequence");
-
 
     // Single Product Image Slide and Zoom
     $("#product-carousel li").first().addClass("active-slide");
@@ -103,15 +137,17 @@
 	}
         
         // increase/decrease input button click
-        $('a.quantity-btn i').on('click', function(){
-            var input = $(this).parent().siblings('input');
+        $('a.quantity-btn').on('click', function(){
+            var input = $(this).siblings('input');
             var step = input.attr('step') !== undefined ? parseInt(input.attr('step')) : 1;
             var current_input_value = parseInt(input.val());
-            var max = input.attr('max');
-            var min = input.attr('min') !== undefined ? parseInt(input.attr('min')) : 0;
-            if( $(this).hasClass('fa-angle-up') ) {
-                var new_val = (current_input_value + step);
-                if ( max !== undefined ) {
+            var max = input.attr('max') !== "" ? parseInt(input.attr('max')) : Infinity;
+            var min = input.attr('min') !== "" ? parseInt(input.attr('min')) : 0;
+            var new_val;
+            var item_hash = input.attr( 'name' ).replace(/cart\[([\w]+)\]\[qty\]/g, "$1");
+            if( $(this).hasClass('quantity-input-up') ) {
+                new_val = (current_input_value + step);
+                if ( max !== Infinity ) {
                     if ( (new_val = current_input_value + step) <= parseInt(max) ) {
                         input.val(new_val);
                     }
@@ -120,16 +156,281 @@
                     new_val = current_input_value + step;
                     input.val(new_val);
                 }
+//                update_cart(item_hash, 1);
             }
             else {
-                var new_val;
-                if ( (new_val = current_input_value - step) >= min ) {
+                if ( (new_val = current_input_value - step) > min ) {
                     input.val(new_val);
+//                    update_cart(item_hash, new_val);
                 }
             }
+            
+            // wc_cart_params is required to continue, ensure the object exists
+//            if ( typeof wc_cart_params === 'undefined' ) {
+//                return false;
+//            }
         });
-	
+        
+        
+        /**
+         *  Facebook login =====================================================================
+         */
+        // This is called with the results from from FB.getLoginStatus().
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                        'into this app.';
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                        'into Facebook.';
+            }
+        }
 
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        
+        $('#login-fb').on('click', function (){
+            console.log("click")
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        })
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1810777952490968',
+                cookie: true, // enable cookies to allow the server to access 
+                // the session
+                xfbml: true, // parse social plugins on this page
+                version: 'v2.5' // use graph api version 2.5
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call 
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+//                FB.getLoginStatus(function (response) {
+//                    statusChangeCallback(response);
+//                });
+
+        };
+
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id))
+                return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function testAPI() {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', {fields: 'name, email'}, function (response) {
+                console.log('Successful login for: ' + response.name);
+                var newForm = $('<form>', {
+                    'action': $('#login-fb').attr('action'),
+                    'method': 'post',
+                    'name'  : 'registerform'
+                }).append($('<input>', {
+                    'name': 'user_login',
+                    'value': removeVietnameseWord(response.name),
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'user_email',
+                    'value': response.email,
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'password',
+                    'value': response.id,
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'facebook',
+                    'value': 'facebook',
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'redirect_to',
+                    'value': '/',
+                    'type': 'hidden'
+                }));
+                newForm.submit().remove();
+            });
+        }
+        
+        
+        
+        // End facebook login =============================================================
+	
+/* =========================================
+---- Update Cart AJAX
+=========================================== */
+        $('#update_cart').on('click', function(){
+            update_cart();
+        });
+    
+        function update_cart () {
+            var form = $('#cart-form');
+            var cart_totals = $('#cart_totals');
+            $( '<input />' ).attr( 'type', 'hidden' ).attr( 'name', 'update_cart' ).attr( 'value', 'Update Cart' ).appendTo( form );
+           
+            block(form);
+            block(cart_totals);
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'), 
+                data: form.serialize(),
+                dataType: 'html',
+                success: function(response){
+                    update_wc_div(response);
+                    
+                    unblock(form);
+                    unblock(cart_totals);
+                },
+                error: function(xhr, status, error){
+                    console.log(status);
+                }
+            });
+        }
+        
+        /**
+	 * Check if a node is blocked for processing.
+	 *
+	 * @param {JQuery Object} $node
+	 * @return {bool} True if the DOM Element is UI Blocked, false if not.
+	 */
+	function is_blocked ( $node ) {
+		return $node.is( '.processing' ) || $node.parents( '.processing' ).length;
+	};
+
+	/**
+	 * Block a node visually for processing.
+	 *
+	 * @param {JQuery Object} $node
+	 */
+	function block( $node ) {
+		if ( ! is_blocked( $node ) ) {
+			$node.addClass( 'processing' ).block( {
+				message: null,
+				overlayCSS: {
+					background: '#fff',
+					opacity: 0.6
+				}
+			} );
+		}
+	};
+
+	/**
+	 * Unblock a node after processing is complete.
+	 *
+	 * @param {JQuery Object} $node
+	 */
+	function unblock ( $node ) {
+		$node.removeClass( 'processing' ).unblock();
+	};
+        
+        /**
+	 * Update the .woocommerce div with a string of html.
+	 *
+	 * @param {String} html_str The HTML string with which to replace the div.
+	 */
+	function update_wc_div ( html_str ) {
+		var $html       = $.parseHTML( html_str );
+		var $new_form   = $( '#cart-form', $html );
+		var $new_totals = $( '#cart_totals', $html );
+
+		// Error message collection
+		var $error = $( '.woocommerce-error', $html );
+		var $message = $( '.woocommerce-message', $html );
+
+		// Remove errors
+		$( '.woocommerce-error, .woocommerce-message' ).remove();
+
+		if ( $new_form.length === 0 ) {
+			// If the checkout is also displayed on this page, trigger reload instead.
+			if ( $( '.woocommerce-checkout' ).length ) {
+				window.location.reload();
+				return;
+			}
+
+			// No items to display now! Replace all cart content.
+			var $cart_html = $( '.cart-empty', $html ).closest( '.woocommerce' );
+			$( '.shop_table.cart' ).closest( '.woocommerce' ).replaceWith( $cart_html );
+
+			// Display errors
+			if ( $error.length > 0 ) {
+				show_notice( $error, $( '.cart-empty' ).closest( '.woocommerce' ) );
+			} else if ( $message.length > 0 ) {
+				show_notice( $message, $( '.cart-empty' ).closest( '.woocommerce' ) );
+			}
+		} else {
+			// If the checkout is also displayed on this page, trigger update event.
+			if ( $( '.woocommerce-checkout' ).length ) {
+				$( document.body ).trigger( 'update_checkout' );
+			}
+
+			$( '#cart-form' ).replaceWith( $new_form );
+//			$( '#cart_totals' ).closest( 'form' ).find( 'input[name="update_cart"]' ).prop( 'disabled', true );
+
+			if ( $error.length > 0 ) {
+				show_notice( $error );
+			} else if ( $message.length > 0 ) {
+				show_notice( $message );
+			}
+
+			update_cart_totals_div( $new_totals );
+		}
+
+		$( document.body ).trigger( 'updated_wc_div' );
+	};
+        
+        /**
+	 * Update the .cart_totals div with a string of html.
+	 *
+	 * @param {String} html_str The HTML string with which to replace the div.
+	 */
+	var update_cart_totals_div = function( html_str ) {
+		$( '#cart_totals' ).replaceWith( html_str );
+		$( document.body ).trigger( 'updated_cart_totals' );
+	};
+        
+        /**
+	 * Clear previous notices and shows new one above form.
+	 *
+	 * @param {Object} The Notice HTML Element in string or object form.
+	 */
+	var show_notice = function( html_element, $target ) {
+		if ( ! $target ) {
+			$target = $( '.shop_table.cart' ).closest( 'form' );
+		}
+		$( '.woocommerce-error, .woocommerce-message' ).remove();
+		$target.before( html_element );
+	};
+        
 /* =========================================
 ---- Create Responsive Menu
 =========================================== */
@@ -570,22 +871,22 @@ function checkSupport(elemname, pluginname) {
 
 	var  similiarItems = $('.similiar-items-slider.owl-carousel');
 	if (checkSupport(similiarItems, $.fn.owlCarousel)) {
-        similiarItems.owlCarousel({
-            items: 4,
-            itemsDesktop : [1199,4],
-            itemsDesktopSmall: [979,3],
-            itemsTablet: [768,2],
-            itemsMobile : [479,1],
-            slideSpeed: 400,
-            autoPlay: 8000,
-            stopOnHover: true,
-            navigation: false,
-            pagination: false,
-            responsive: true,
-            mouseDrag: false,
-            autoHeight : true
-        }).data('navigationBtns', ['#similiar-items-slider-prev', '#similiar-items-slider-next']);
-    }
+            similiarItems.owlCarousel({
+                items: 4,
+                itemsDesktop : [1199,4],
+                itemsDesktopSmall: [979,3],
+                itemsTablet: [768,2],
+                itemsMobile : [479,1],
+                slideSpeed: 400,
+                autoPlay: 8000,
+                stopOnHover: true,
+                navigation: false,
+                pagination: false,
+                responsive: true,
+                mouseDrag: true,
+                autoHeight : true
+            }).data('navigationBtns', ['#similiar-items-slider-prev', '#similiar-items-slider-next']);
+        }
 
 
 /* =========================================
