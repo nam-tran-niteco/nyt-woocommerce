@@ -1,9 +1,8 @@
 <?php
 
-require_once('plugins/get-the-image.php');
-require_once('plugins/get-the-breadcrumbs.php');
-require_once('plugins/get-the-pagination.php');
-require_once(get_template_directory(). '/plugins/php-graph-sdk-5.0.0/src/Facebook/autoload.php');
+//require_once('plugins/get-the-image.php');
+//require_once('plugins/get-the-breadcrumbs.php');
+//require_once('plugins/get-the-pagination.php');
 
 add_theme_support('post-thumbnails');
 add_theme_support('woocommerce');
@@ -91,8 +90,8 @@ function venedor_scripts() {
     wp_enqueue_script('jquery_sequence', get_template_directory_uri() . '/js/jquery.sequence-min.js', array(), '', true);
     
     wp_enqueue_script('main', get_template_directory_uri() . '/js/main.js', array(), '', true);
-    $vars = array( 'ajax_url' => admin_url( 'admin-ajax.php' ) );
-    wp_localize_script( 'main', 'WC_UPDATE_CART', $vars );
+//    $vars = array( 'ajax_url' => admin_url( 'admin-ajax.php' ) );
+//    wp_localize_script( 'main', 'WC_UPDATE_CART', $vars );
 }
 
 add_action('wp_enqueue_scripts', 'venedor_scripts');
