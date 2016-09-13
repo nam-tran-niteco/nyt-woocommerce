@@ -79,16 +79,16 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		</div><!-- End .panel-collapse -->
 		
 	</div>
-<?php
-	if ( is_user_logged_in() ) {
-		echo '<script type="text/javascript">
-				$( document ).ready(function() {
-					$("#checkout-option").removeClass("in");
-					$("#billing").show();
-				}); 
-			</script>';
-	} 
-?>
+	<?php
+		if ( is_user_logged_in() ) {
+			echo '<script type="text/javascript">
+					$( document ).ready(function() {
+						$("#checkout-option").removeClass("in");
+						$("#billing").show();
+					}); 
+				</script>';
+		} 
+	?>
 	
 	<div class="panel">
 		<div class="accordion-header">
@@ -135,7 +135,6 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 				<?php woocommerce_checkout_payment(); ?>
 			</div><!-- End .panel-body -->
 		</div><!-- End .panel-collapse -->
-		
 	</div>
 	
 </form>
