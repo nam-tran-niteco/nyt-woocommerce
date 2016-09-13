@@ -24,18 +24,19 @@ if (!defined('ABSPATH')) {
     <p class="title-desc">Just this week, you can use the free premium delivery.</p>
 </header>
 <div class="xs-margin"></div><!-- space -->
-<form action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+<!--<div class="cart-form">-->
+<form action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post" id="cart-form">
     <div class="row">
 
         <?php
         wc_print_notices();
 
-        //do_action('woocommerce_before_cart');
+        do_action('woocommerce_before_cart');
         ?>
 
         <div class="col-md-12 table-responsive">
 
-            <?php //do_action('woocommerce_before_cart_table'); ?>
+            <?php do_action('woocommerce_before_cart_table'); ?>
 
             <table class="shop_table shop_table_responsive cart-table table" cellspacing="0">
                 <thead>
@@ -103,7 +104,7 @@ if (!defined('ABSPATH')) {
                                 </td>
 
                                 <td data-title="<?php _e('Quantity', 'woocommerce'); ?>">
-                                    <div class="custom-quantity-input">
+                                    <div class="custom-quantity-input" data="<?php echo $cart_item['product_id']?>">
                                         <?php
                                         if ($_product->is_sold_individually()) {
                                             $product_quantity = sprintf('1 <input type="hidden" class="quantity" name="cart[%s][qty]" value="1" />', $cart_item_key);
@@ -139,15 +140,23 @@ if (!defined('ABSPATH')) {
                         }
                     }
                     ?>
+                            <tr>
+                                <td colspan="3">
+                                </td>
+                                <td colspan="2">
+                                     <a href="javascript:void(0)" id="update_cart" class="btn btn-custom" >UPDATE CART</a>
+                                    <?php wp_nonce_field( 'woocommerce-cart' ); ?>
+                                </td>
+                            </tr>
                 </tbody>
             </table>
         </div>
     </div>
+</form>
     <div class="lg-margin"></div>
 
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12">
-
             <div class="tab-container left clearfix">
                 <ul class="nav-tabs" style="height: 315px;">
                     <li class="active"><a href="#shipping" data-toggle="tab">Shipping &amp; Taxes</a></li>
@@ -175,8 +184,7 @@ if (!defined('ABSPATH')) {
 
         </div><!-- End .col-md-8 -->
         <div class="lg-margin visible-sm visible-xs"></div><!-- space -->
-        <div class="col-md-4 col-sm-12 col-xs-12">
-
+        <div class="col-md-4 col-sm-12 col-xs-12" id="cart_totals">
             <table class="table total-table">
                 <tbody>
                     <tr>
@@ -200,7 +208,6 @@ if (!defined('ABSPATH')) {
             <a href="/checkout" class="btn btn-custom">CHECKOUT</a>
         </div><!-- End .col-md-4 -->
     </div>
-</form>
 
 <div class="lg-margin2x"></div>
 

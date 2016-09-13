@@ -52,24 +52,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<input type="text" class="form-control input-lg" placeholder="Your Fax" value= " ">
 			</div><!-- End .input-group -->
 			<div class="input-group xlg-margin form-row form-row form-row-wide" id="billing_company_field">
-				<span class="input-group-addon"><span class="input-icon input-icon-company"></span><span class="input-text">Company*</span></span>
+				<span class="input-group-addon"><span class="input-icon input-icon-company"></span><span class="input-text">Company</span></span>
 				<input name="billing_company" id="billing_company" type="text" required="" class="form-control input-lg" placeholder="Your Company" value= " ">
 			</div><!-- End .input-group -->
-			<div class="input-group custom-checkbox sm-margin">
-						<input type="checkbox"> <span class="checbox-container">
-						<i class="fa fa-check"></i>
-						</span>
-						I wish to subscribe to the Venedor newsletter.
-					
-			</div><!-- End .input-group -->
-
-			<div class="input-group custom-checkbox sm-margin">
-						<input type="checkbox"> <span class="checbox-container">
-						<i class="fa fa-check"></i>
-						</span>
-						My delivery and billing addresses are the same.
-					
-			</div><!-- End .input-group -->
+			
+			
 
 		</div><!-- End .col-md-6 -->
 
@@ -106,7 +93,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					?>
 			</div><!-- End .input-group -->
 
-			<div class="input-group custom-checkbox md-margin">
+			<!--<div class="input-group custom-checkbox md-margin">
 						<input type="checkbox"> <span class="checbox-container">
 						<i class="fa fa-check"></i>
 						</span>

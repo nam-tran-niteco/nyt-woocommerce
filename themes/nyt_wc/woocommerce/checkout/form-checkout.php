@@ -28,7 +28,6 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 	return;
 }
 ?>
-
 <div class="panel">
 	<div class="accordion-header">
 		<div class="accordion-title">Step 1: <span>Checkout Option</span></div><!-- End .accordion-title -->
@@ -39,8 +38,8 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-6 col-sm-6 col-xs-12">					   		
-					<h2 class="checkout-title">New Customer</h2>
-					<p>Register with us for future convenience:</p>
+					<h2 class="checkout-title">Customer Checkout</h2>
+					<p>Choose your own way to checkout:</p>
 					<div class="xs-margin"></div>
 					<input type="radio" name="radio-option" id="option1"> 
 					<label for="option1">Checkout as Guest</label>
@@ -48,8 +47,8 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 					<input type="radio" name="radio-option" id="option2">
 					<label for="option2">Login</label>
 					<div class="sm-margin"></div>
-					<p class="">By creating an account with our store, you will be able to move through the checkout process faster, 
-					store multiple shipping addresses, view and track your orders in your account and more.</p>
+					<!--<p class="">By creating an account with our store, you will be able to move through the checkout process faster, 
+					store multiple shipping addresses, view and track your orders in your account and more.</p>-->
 					
 				</div><!-- End .col-md-6 -->
 
@@ -80,7 +79,17 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		</div><!-- End .panel-collapse -->
 		
 	</div>
-
+<?php
+	if ( is_user_logged_in() ) {
+		echo '<script type="text/javascript">
+				$( document ).ready(function() {
+					$("#checkout-option").removeClass("in");
+					$("#billing").show();
+				}); 
+			</script>';
+	} 
+?>
+	
 	<div class="panel">
 		<div class="accordion-header">
 			<div class="accordion-title">Step 3: <span>Delivery Details</span></div><!-- End .accordion-title -->
@@ -90,28 +99,14 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		<div id="delivery-details" class="collapse">
 			<div class="panel-body">
 				<p><?php echo 'Details about delivery ' ?></p>
-			<!--	<?php do_action( 'woocommerce_checkout_shipping' ); ?> -->
+				<!--<?php do_action( 'woocommerce_checkout_shipping' ); ?>-->
 			</div><!-- End .panel-body -->
 		</div><!-- End .panel-collapse -->
 		
 	</div>
 	<div class="panel">
 		<div class="accordion-header">
-			<div class="accordion-title">Step 4: <span>Payment Method</span></div><!-- End .accordion-title -->
-			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#payment-method"></a>
-		</div><!-- End .accordion-header -->
-		
-		<div id="payment-method" class="collapse">
-			<div class="panel-body">
-				<p><?php echo 'Choose your payment method'?></p>
-				
-			</div><!-- End .panel-body -->
-		</div><!-- End .panel-collapse -->
-		
-	</div>
-	<div class="panel">
-		<div class="accordion-header">
-			<div class="accordion-title">Step 5: <span>Confirm Order</span></div><!-- End .accordion-title -->
+			<div class="accordion-title">Step 4: <span>Confirm Order</span></div><!-- End .accordion-title -->
 			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#confirm"></a>
 		</div><!-- End .accordion-header -->
 		
@@ -127,6 +122,22 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 			</div><!-- End .panel-body -->
 		</div><!-- End .panel-collapse -->
 	</div>
+	
+	<div class="panel">
+		<div class="accordion-header">
+			<div class="accordion-title">Step 5: <span>Payment Method</span></div><!-- End .accordion-title -->
+			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#payment-method"></a>
+		</div><!-- End .accordion-header -->
+		
+		<div id="payment-method" class="collapse">
+			<div class="panel-body">
+				<p><?php echo 'Choose your payment method'?></p>
+				<?php woocommerce_checkout_payment(); ?>
+			</div><!-- End .panel-body -->
+		</div><!-- End .panel-collapse -->
+		
+	</div>
+	
 </form>
 
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
