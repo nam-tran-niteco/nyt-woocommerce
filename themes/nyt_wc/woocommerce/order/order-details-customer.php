@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <header><h2><?php _e( 'Customer Details', 'woocommerce' ); ?></h2></header>
 
-<table class="shop_table customer_details">
+<table class="shop_table customer_details sm-margin">
 	<?php if ( $order->customer_note ) : ?>
 		<tr>
 			<th><?php _e( 'Note:', 'woocommerce' ); ?></th>
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( ! wc_ship_to_billing_address_only() && $order->needs_shipping_address() ) : ?>
 
-<div class="col2-set addresses xs-margin">
+<div class="col2-set addresses sm-margin">
 	<div class="col-1">
 
 <?php endif; ?>

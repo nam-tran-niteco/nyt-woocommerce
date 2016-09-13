@@ -55,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 	</tfoot>
-</table>  -->
+</table>  --> 
 
 							  
 <div class="table-responsive"> 
@@ -134,6 +134,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td class="checkout-table-price">
 						<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
 						<strong><?php wc_cart_totals_fee_html( $shipping ); ?></strong>
+						<!--<strong><?php wc_cart_totals_shipping_html(); ?></strong>-->
 						<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
 					</td>
 				<?php endif; ?>

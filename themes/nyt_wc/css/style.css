@@ -6212,3 +6212,6 @@ table.variations .value select {
 	color: #555;
 	font: 700 20px "Gudea", Arial, sans-serif;
 }
+#order-details-head{
+	margin-top: 20px;
+}

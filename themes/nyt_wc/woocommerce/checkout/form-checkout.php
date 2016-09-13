@@ -91,7 +91,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		<div id="delivery-details" class="collapse">
 			<div class="panel-body">
 				<p><?php echo 'Details about delivery ' ?></p>
-			<!--	<?php do_action( 'woocommerce_checkout_shipping' ); ?> -->
+				<!--<?php do_action( 'woocommerce_checkout_shipping' ); ?>-->
 			</div><!-- End .panel-body -->
 		</div><!-- End .panel-collapse -->
 		
