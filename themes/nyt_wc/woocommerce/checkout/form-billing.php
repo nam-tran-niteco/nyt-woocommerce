@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<input name="billing_address_1" id="billing_address_1" type="text" class="form-control input-lg" placeholder="Your Address" value= " ">
 			</div><!-- End .input-group -->
 			<div class="input-group form-row form-row form-row-wide address-field" id="billing_address_2_field">
-				<span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">Shipping Address*</span></span>
+				<span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">Address 2*</span></span>
 				<input name="billing_address_2" id="billing_address_2" type="text" required="" class="form-control input-lg" placeholder="Your Address" value= " ">
 			</div><!-- End .input-group -->
 			<div class="input-group form-row form-row form-row-wide address-field validate-required" id="billing_city_field">
