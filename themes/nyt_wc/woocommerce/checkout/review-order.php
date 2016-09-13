@@ -155,4 +155,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</table>
 </div><!-- End .table-reponsive -->
 <div class="lg-margin"></div><!-- space -->
-</div>
