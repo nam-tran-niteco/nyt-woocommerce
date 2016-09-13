@@ -90,6 +90,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 			</script>';
 	} 
 ?>
+	
 	<div class="panel">
 		<div class="accordion-header">
 			<div class="accordion-title">Step 3: <span>Delivery Details</span></div><!-- End .accordion-title -->
@@ -106,21 +107,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 	</div>
 	<div class="panel">
 		<div class="accordion-header">
-			<div class="accordion-title">Step 4: <span>Payment Method</span></div><!-- End .accordion-title -->
-			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#payment-method"></a>
-		</div><!-- End .accordion-header -->
-		
-		<div id="payment-method" class="collapse">
-			<div class="panel-body">
-				<p><?php echo 'Choose your payment method'?></p>
-				
-			</div><!-- End .panel-body -->
-		</div><!-- End .panel-collapse -->
-		
-	</div>
-	<div class="panel">
-		<div class="accordion-header">
-			<div class="accordion-title">Step 5: <span>Confirm Order</span></div><!-- End .accordion-title -->
+			<div class="accordion-title">Step 4: <span>Confirm Order</span></div><!-- End .accordion-title -->
 			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#confirm"></a>
 		</div><!-- End .accordion-header -->
 		
@@ -136,6 +123,22 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 			</div><!-- End .panel-body -->
 		</div><!-- End .panel-collapse -->
 	</div>
+	
+	<div class="panel">
+		<div class="accordion-header">
+			<div class="accordion-title">Step 5: <span>Payment Method</span></div><!-- End .accordion-title -->
+			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#payment-method"></a>
+		</div><!-- End .accordion-header -->
+		
+		<div id="payment-method" class="collapse">
+			<div class="panel-body">
+				<p><?php echo 'Choose your payment method'?></p>
+				<?php woocommerce_checkout_payment(); ?>
+			</div><!-- End .panel-body -->
+		</div><!-- End .panel-collapse -->
+		
+	</div>
+	
 </form>
 
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

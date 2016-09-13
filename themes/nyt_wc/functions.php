@@ -428,4 +428,8 @@ function nyt_add_ship_fee() {
 }
 add_action('woocommerce_cart_calculate_fees', 'nyt_add_ship_fee');
 
+
+// custom payment
+remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
+
 ?>
