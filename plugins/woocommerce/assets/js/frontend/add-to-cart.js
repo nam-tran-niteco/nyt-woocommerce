@@ -11,6 +11,10 @@ jQuery( function( $ ) {
 	// Ajax add to cart
 	$( document ).on( 'click', '.add_to_cart_button', function() {
 
+		// custom style change
+		$(this).text('Added');
+		$(this).addClass("item-added");
+
 		// AJAX add to cart request
 		var $thisbutton = $( this );
 
