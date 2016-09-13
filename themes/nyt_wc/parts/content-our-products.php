@@ -27,7 +27,7 @@
 
 			</div>
 
-		<?php endwhile; endif; ?>
+		<?php endwhile; wp_reset_postdata(); endif; ?>
 	</div>
 
 	<div class="tab-pane" id="featured">
@@ -52,7 +52,7 @@
 
 			</div>
 
-		<?php endwhile; endif; ?>
+		<?php endwhile; wp_reset_postdata(); endif; ?>
 	</div>
 
 	<div class="tab-pane" id="bestsellers">
@@ -72,7 +72,7 @@
 
 			</div>
 
-		<?php endwhile; endif; ?>
+		<?php endwhile; wp_reset_postdata(); endif; ?>
 	</div>
 
 </div>

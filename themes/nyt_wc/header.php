@@ -107,7 +107,7 @@
                                     </div><!-- End .header-top-dropdowns -->
 
                                     <div class="header-text-container pull-right">
-                                        <p class="header-text">Welcome to Venedor!</p>
+                                        <p class="header-text">Welcome to E-Shop!</p>
                                         <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
                                         <p class="header-link">
                                             <?php if (is_user_logged_in()) { ?>
@@ -131,8 +131,7 @@
                         <div class="row">
                             <div class="col-md-5 col-sm-5 col-xs-12 logo-container">
                                 <h1 class="logo clearfix">
-                                    <span>Responsive eCommerce Template</span>
-                                    <a href="/" title="Venedor eCommerce Template"><img src="<?php echo get_template_directory_uri() ?>/images/logo.png" alt="Venedor Commerce Template" width="238" height="76"></a>
+                                    <a href="/"><img src="<?php echo get_template_directory_uri() ?>/images/logo.png" alt="E-Shop Logo" width="200" height="76"></a>
                                 </h1>
                             </div><!-- End .col-md-5 -->
                             <div class="col-md-7 col-sm-7 col-xs-12 header-inner-right">

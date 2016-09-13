@@ -20,5 +20,5 @@
         <div class="sm-margin visible-xs"></div>
 		<img src="<?php the_post_thumbnail_url(); ?>" alt="Showcase Venedor" class="img-responsive">
 	</div>
-<?php endif; ?>
+<?php wp_reset_postdata(); endif; ?>
 </div>

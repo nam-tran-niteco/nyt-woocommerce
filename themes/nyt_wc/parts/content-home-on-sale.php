@@ -27,6 +27,7 @@
 				$the_query->the_post();
 				wc_get_template_part( 'content', 'product' );
 			}
+			wp_reset_postdata();
 		} ?>
 	</div>
 </div>
