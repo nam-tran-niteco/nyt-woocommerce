@@ -285,7 +285,6 @@ if (  ! function_exists( 'nyt_template_single_favorite_and_checkout' ) ) {
 }
 add_action( 'woocommerce_single_product_summary', 'nyt_template_single_favorite_and_checkout', 31 );
 
-
 // CHECKOUT
 // override
 function custom_override_checkout_fields( $fields = array() ) {
@@ -452,5 +451,9 @@ function nyt_add_ship_fee() {
     WC()->cart->add_fee('Shipping ', $customshipcost);
 }
 add_action('woocommerce_cart_calculate_fees', 'nyt_add_ship_fee');
+
+
+// custom payment
+remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
 
 ?>

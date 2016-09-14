@@ -4,7 +4,22 @@
 	"use strict";
     var SHIPPING_COST = 1;
     var DISTANCE_COUNT = 10;
-    
+        
+        // replace Vietnamese
+        function removeVietnameseWord(str) {
+            str = str.toLowerCase();
+            str = str.replace(/[àáãảạăằắẳẵặầấẩẫậ]/g,"a");
+            str = str.replace(/[eèéẻẽẹêềếểễệ]/g,"e");
+            str = str.replace(/[oòóỏõọôồốổỗộơờớởỡợ]/g,"o");
+            str = str.replace(/[iìíỉĩị]/g,"i");
+            str = str.replace(/[uùúủũụưừứửữự]/g,"u");
+            return str;
+        }
+
+	// Checkout page - toggle step 1
+	
+
+	// Custom shipping cost
     $('#billing_address_2').change(function () {
         var billing_address_2 = $('#billing_address_2').val();
         var shipping_cost = 10;
@@ -148,6 +163,7 @@
             var min = input.attr('min') !== "" ? parseInt(input.attr('min')) : 0;
             var new_val;
             var item_hash = input.attr( 'name' ).replace(/cart\[([\w]+)\]\[qty\]/g, "$1");
+
             if( $(this).hasClass('quantity-input-up') ) {
                 new_val = (current_input_value + step);
                 if ( max !== Infinity ) {
@@ -166,7 +182,7 @@
                 }
             }
         });
-        
+
         
 /* =========================================
 ---- Facebook login
@@ -539,6 +555,7 @@
 		$target.before( html_element );
 	};
         
+
 /* =========================================
 ---- Create Responsive Menu
 =========================================== */

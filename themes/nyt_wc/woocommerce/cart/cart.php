@@ -208,6 +208,7 @@ if (!defined('ABSPATH')) {
             <a href="/checkout" class="btn btn-custom">CHECKOUT</a>
         </div><!-- End .col-md-4 -->
     </div>
+
 <div class="lg-margin2x"></div>
 
 <div class="similiar-items-container carousel-wrapper">
