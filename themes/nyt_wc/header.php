@@ -248,7 +248,6 @@
                                                         </ul>
 
                                                         <ul class="dropdown-cart-total">
-                                                            <li><span class="dropdown-cart-total-title">Shipping:</span>$7</li>
                                                             <li><span class="dropdown-cart-total-title">Total:</span><?php echo $total_cost ?><!--<span class="sub-price">.99</span>--></li>
                                                         </ul><!-- .dropdown-cart-total -->
                                                         <div class="dropdown-cart-action">

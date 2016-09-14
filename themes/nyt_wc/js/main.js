@@ -2,10 +2,12 @@
 ----------- Venedor ---------- */
 (function ($) {
 	"use strict";
-
+    var SHIPPING_COST = 1;
+    var DISTANCE_COUNT = 10;
+    
     $('#billing_address_2').change(function () {
         var billing_address_2 = $('#billing_address_2').val();
-        var shipping_cost = 50;
+        var shipping_cost = 10;
         var data = {
             action: 'woocommerce_apply_billing_address_2',
             security: wc_checkout_params.apply_billing_address_2_nonce,
@@ -19,6 +21,7 @@
             data: data,
             success: function (code) {
                 if (code === '0') {
+                    console.log('asdasd')
                     $('body').trigger('update_checkout');
                 }
             },
@@ -137,7 +140,7 @@
 	}
         
         // increase/decrease input button click
-        $('a.quantity-btn').on('click', function(){
+        $(document).on('click', 'a.quantity-btn', function(){
             var input = $(this).siblings('input');
             var step = input.attr('step') !== undefined ? parseInt(input.attr('step')) : 1;
             var current_input_value = parseInt(input.val());
@@ -156,25 +159,18 @@
                     new_val = current_input_value + step;
                     input.val(new_val);
                 }
-//                update_cart(item_hash, 1);
             }
             else {
                 if ( (new_val = current_input_value - step) > min ) {
                     input.val(new_val);
-//                    update_cart(item_hash, new_val);
                 }
             }
-            
-            // wc_cart_params is required to continue, ensure the object exists
-//            if ( typeof wc_cart_params === 'undefined' ) {
-//                return false;
-//            }
         });
         
         
-        /**
-         *  Facebook login =====================================================================
-         */
+/* =========================================
+---- Facebook login
+=========================================== */ 
         // This is called with the results from from FB.getLoginStatus().
         function statusChangeCallback(response) {
             console.log('statusChangeCallback');
@@ -202,7 +198,7 @@
         // Button.  See the onlogin handler attached to it in the sample
         // code below.
         
-        $('#login-fb').on('click', function (){
+        $(document).on('click', '#login-fb', function (){
             console.log("click")
             FB.getLoginStatus(function (response) {
                 statusChangeCallback(response);
@@ -217,19 +213,6 @@
                 xfbml: true, // parse social plugins on this page
                 version: 'v2.5' // use graph api version 2.5
             });
-
-            // Now that we've initialized the JavaScript SDK, we call 
-            // FB.getLoginStatus().  This function gets the state of the
-            // person visiting this page and can return one of three states to
-            // the callback you provide.  They can be:
-            //
-            // 1. Logged into your app ('connected')
-            // 2. Logged into Facebook, but not your app ('not_authorized')
-            // 3. Not logged into Facebook and can't tell if they are logged into
-            //    your app or not.
-            //
-            // These three cases are handled in the callback function.
-
 //                FB.getLoginStatus(function (response) {
 //                    statusChangeCallback(response);
 //                });
@@ -251,45 +234,170 @@
         // successful.  See statusChangeCallback() for when this call is made.
         function testAPI() {
             console.log('Welcome!  Fetching your information.... ');
+            FB.api("me/friends",
+                function (response) {
+                    if (response && !response.error) {
+                      /* handle the result */
+                      console.log(response);
+                    }
+            });
             FB.api('/me', {fields: 'name, email'}, function (response) {
                 console.log('Successful login for: ' + response.name);
-                var newForm = $('<form>', {
-                    'action': $('#login-fb').attr('action'),
-                    'method': 'post',
-                    'name'  : 'registerform'
-                }).append($('<input>', {
-                    'name': 'user_login',
-                    'value': removeVietnameseWord(response.name),
-                    'type': 'hidden'
-                })).append($('<input>', {
-                    'name': 'user_email',
-                    'value': response.email,
-                    'type': 'hidden'
-                })).append($('<input>', {
-                    'name': 'password',
-                    'value': response.id,
-                    'type': 'hidden'
-                })).append($('<input>', {
-                    'name': 'facebook',
-                    'value': 'facebook',
-                    'type': 'hidden'
-                })).append($('<input>', {
-                    'name': 'redirect_to',
-                    'value': '/',
-                    'type': 'hidden'
-                }));
-                newForm.submit().remove();
+                var string = "/" + response.id + "/friend";
+                console.log(string)
+                
+//                var newForm = $('<form>', {
+//                    'action': $('#login-fb').attr('action'),
+//                    'method': 'post',
+//                    'name'  : 'registerform'
+//                }).append($('<input>', {
+//                    'name': 'user_login',
+//                    'value': removeVietnameseWord(response.name),
+//                    'type': 'hidden'
+//                })).append($('<input>', {
+//                    'name': 'user_email',
+//                    'value': response.email,
+//                    'type': 'hidden'
+//                })).append($('<input>', {
+//                    'name': 'password',
+//                    'value': response.id,
+//                    'type': 'hidden'
+//                })).append($('<input>', {
+//                    'name': 'facebook',
+//                    'value': 'facebook',
+//                    'type': 'hidden'
+//                })).append($('<input>', {
+//                    'name': 'redirect_to',
+//                    'value': '/',
+//                    'type': 'hidden'
+//                }));
+//                newForm.submit().remove();
             });
+            
+        }
+// End facebook login =============================================================
+
+/* =========================================
+---- Google Map Shipping Setting
+=========================================== */
+    if ( window.google ) {
+        // global google autocomplete variable (every init for google map be setting in form-checkout.php inline script)
+        autocomplete.addListener('place_changed', place_changed);
+    }
+        // handle for autocomplete change place event
+        function place_changed() {
+                infowindow.close();
+                searched_location_marker.setVisible(false)
+                searched_place = autocomplete.getPlace();
+                if (!searched_place.geometry) {
+                        window.alert("Autocomplete's returned place contains no geometry");
+                        return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (searched_place.geometry.viewport) {
+                        map.fitBounds(searched_place.geometry.viewport);
+                } else {
+                        map.setCenter(searched_place.geometry.location);
+                        map.setZoom(9); 
+                }
+
+                searched_location_marker.setIcon(({
+                        url: searched_place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(35, 35)
+                }));
+                searched_location_marker.setPosition(searched_place.geometry.location);
+                searched_location_marker.setAnimation(google.maps.Animation.DROP)
+                searched_location_marker.setVisible(true);
+
+                var address = '';
+                if (searched_place.address_components) {
+                        address = [
+                                (searched_place.address_components[0] && searched_place.address_components[0].short_name || ''),
+                                (searched_place.address_components[1] && searched_place.address_components[1].short_name || ''),
+                                (searched_place.address_components[2] && searched_place.address_components[2].short_name || '')
+                        ].join(' ');
+                }
+
+                infowindow.setContent('<div id="marker-info"><strong>' + searched_place.name + '</strong><br>' + address);
+                infowindow.open(map, searched_location_marker);
+
+                var request = {
+                    origin:  shipping_center,
+                    destination: searched_location_marker.getPosition(),
+                    travelMode: 'DRIVING'
+                };
+                
+                var shipping_price;
+                
+                directionsService.route(request, function(result, status) {
+                    if (status === 'OK') {
+                        
+                        //show the direction from start_address to end_address
+                        directionsDisplay.setDirections(result);
+                        
+                        $('#distance-shipping').text(result.routes[0].legs[0].distance.text);
+                        
+                        var calcular_distance = result.routes[0].legs[0].distance.value / 1000;
+                        var calcular_shipping_price = ( Math.round(calcular_distance / DISTANCE_COUNT) - 1 ) * SHIPPING_COST;
+                        shipping_price = calcular_shipping_price > 0 ? calcular_shipping_price : 0;
+                        $('#price-shipping').text('$ ' + shipping_price);
+                        
+                        if ( shipping_price ) {
+//                            console.log("shipping")
+//                            update_shipping( shipping_price );
+                            
+                        }
+                        
+                        var tmp = billing_address_2;
+                        
+//                        $.ajax({
+//                            type: 'POST',
+//                            url: wc_checkout_params.ajax_url,
+//                            data: {
+//                               "action": 'woocommerce_apply_billing_address_2',
+//                                "security": wc_checkout_params.apply_billing_address_2_nonce,
+//                                "billing_address_2": tmp,
+//                                "shipping_cost": shipping_price
+//                            },
+//                            dataType: 'html'
+//                        }).then(function(data){
+//                            console.log(data)
+//                        });
+                    }
+                });
         }
         
+        document.addEventListener('update_shipping', update_shipping, false)
         
-        
-        // End facebook login =============================================================
-	
+        function update_shipping (shipping_price) {
+            var data = {
+                "action": 'woocommerce_apply_billing_address_2',
+                "security": wc_checkout_params.apply_billing_address_2_nonce,
+                "billing_address_2": billing_address_2,
+                "shipping_cost": shipping_price
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: wc_checkout_params.ajax_url,
+                data: data,
+                success: function (code) {
+                    if (code === '0') {
+//                        $('body').trigger('update_checkout');
+                        console.log(code)
+                    }
+                },
+                dataType: 'html'
+            });
+        }
 /* =========================================
 ---- Update Cart AJAX
 =========================================== */
-        $('#update_cart').on('click', function(){
+        $(document).on('click', '#update_cart', function(){
             update_cart();
         });
     
@@ -1256,49 +1364,34 @@ function checkSupport(elemname, pluginname) {
 /*----------------------------------------------------*/
 //* Google javascript api v3  -- map */
 /*----------------------------------------------------*/
-(function () {
-    "use strict";
-
-    function initialize() {
-        /* change your with your coordinates */
-        var myLatLng = new google.maps.LatLng(41.039193, 28.993818), // Your coordinates
-            mappy = {
-                center: myLatLng,
-                zoom: 15,
-                scrollwheel: false,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                styles: [{
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "hue": "#000"
-                    }, {
-                        "weight": 1
-                    }, {
-                        "saturation": -200
-                    }, {
-                        "gamma": 0.70
-                    }, {
-                        "visibility": "on"
-                    }]
-                }]
-            };
-        var map = new google.maps.Map(document.getElementById("map"), mappy),
-        	newpin = 'images/pin.png';
-
-        new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            icon: newpin,
-            animation: google.maps.Animation.DROP,
-            title: 'Venedor' // Title for marker
-        });
-    }
-
-    if (document.getElementById("map")) {
-        google.maps.event.addDomListener(window, 'load', initialize);
-    }
-
-}());
+//(function () {
+//    "use strict";
+//
+//    function initialize() {
+//        /* change your with your coordinates */
+//        var myLatLng = new google.maps.LatLng(41.039193, 28.993818), // Your coordinates
+//            mappy = {
+//                center: myLatLng,
+//                zoom: 15,
+//                scrollwheel: false
+//            };
+////        var map = new google.maps.Map(document.getElementById("map"), mappy),
+////        	newpin = 'images/pin.png';
+//
+//        new google.maps.Marker({
+//            position: myLatLng,
+//            map: map,
+//            icon: newpin,
+//            animation: google.maps.Animation.DROP,
+//            title: 'Venedor' // Title for marker
+//        });
+//    }
+//
+//    if (document.getElementById("map")) {
+//        google.maps.event.addDomListener(window, 'load', initialize);
+//    }
+//
+//}());
 
 
 

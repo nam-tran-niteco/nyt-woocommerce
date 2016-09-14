@@ -31,6 +31,20 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 			$product_permalink = apply_filters( 'woocommerce_order_item_permalink', $is_visible ? $product->get_permalink( $item ) : '', $item, $order );
 
 			echo apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
+
+			do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
+
+			$order->display_item_meta( $item );
+			$order->display_item_downloads( $item );
+
+			do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
+		?>
+	</td>
+	<td class="product-name">
+		<?php
+			$is_visible        = $product && $product->is_visible();
+			$product_permalink = apply_filters( 'woocommerce_order_item_permalink', $is_visible ? $product->get_permalink( $item ) : '', $item, $order );
+
 			echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times; %s', $item['qty'] ) . '</strong>', $item );
 
 			do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
@@ -41,6 +55,7 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 			do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
 		?>
 	</td>
+	
 	
 </tr>
 <?php if ( $show_purchase_note && $purchase_note ) : ?>

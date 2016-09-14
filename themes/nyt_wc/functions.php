@@ -305,6 +305,31 @@ function nyt_user_register( $user_id ) {
     }
     
     nyt_wp_login_auto($_POST['user_login'], $_POST['password'], true);
+    
+    $amount = '10';  // Amount
+    $coupon_code = strtoupper(preg_replace('/\s+/', '', $_POST['user_login']) . $amount); // Code
+    $discount_type = 'percent'; // Type: fixed_cart, percent, fixed_product, percent_product
+
+    $coupon = array(
+            'post_title' => $coupon_code,
+            'post_content' => '',
+            'post_status' => 'publish',
+            'post_author' => 1,
+            'post_type'		=> 'shop_coupon'
+    );
+
+    $new_coupon_id = wp_insert_post( $coupon );
+
+    // Add meta
+    update_post_meta( $new_coupon_id, 'discount_type', $discount_type );
+    update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
+    update_post_meta( $new_coupon_id, 'individual_use', 'no' );
+    update_post_meta( $new_coupon_id, 'product_ids', '' );
+    update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
+    update_post_meta( $new_coupon_id, 'usage_limit', '1' );
+    update_post_meta( $new_coupon_id, 'expiry_date', '' );
+    update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
+    update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
 }
 
 add_action('register_post', 'nyt_register_fail_redirect', 99, 3);
@@ -354,56 +379,56 @@ function custom_after_cart() {
     </script>';
 }
 
-// Update Cart
-add_action( 'wp_ajax_nyt_update_cart', array( __CLASS__, 'update_cart' ) );
-add_action( 'wp_ajax_nopriv_nyt_update_cart', array( __CLASS__, 'update_cart' ) );
-
-function update_cart(){
-    ob_start();
-
-    // Skip product if no updated quantity was posted or no hash on WC_Cart
-    if( !isset( $_POST['hash'] ) || !isset( $_POST['quantity'] ) ){
-        exit;
-    }
-
-    $cart_item_key = $_POST['hash'];
-
-    if( !isset( WC()->cart->get_cart()[ $cart_item_key ] ) ){
-        exit;
-    }
-
-    $values = WC()->cart->get_cart()[ $cart_item_key ];
-
-    $_product = $values['data'];
-
-    // Sanitize
-    $quantity = apply_filters( 'woocommerce_stock_amount_cart_item', apply_filters( 'woocommerce_stock_amount', preg_replace( "/[^0-9\.]/", '', filter_var($_POST['quantity'], FILTER_SANITIZE_NUMBER_INT)) ), $cart_item_key );
-
-    if ( '' === $quantity || $quantity == $values['quantity'] )
-        exit;
-
-    // Update cart validation
-    $passed_validation  = apply_filters( 'woocommerce_update_cart_validation', true, $cart_item_key, $values, $quantity );
-
-    // is_sold_individually
-    if ( $_product->is_sold_individually() && $quantity > 1 ) {
-        wc_add_notice( sprintf( __( 'You can only have 1 %s in your cart.', 'woocommerce' ), $_product->get_title() ), 'error' );
-        $passed_validation = false;
-    }
-
-    if ( $passed_validation ) {
-        WC()->cart->set_quantity( $cart_item_key, $quantity, false );
-    }
-
-    // Recalc our totals
-    WC()->cart->calculate_totals();
-    woocommerce_cart_totals();
-    
-    wp_send_json('{"status": "success"}');
-    exit;
-    
-    die();
-}
+//// Update Cart
+//add_action( 'wp_ajax_nyt_update_cart', array( __CLASS__, 'update_cart' ) );
+//add_action( 'wp_ajax_nopriv_nyt_update_cart', array( __CLASS__, 'update_cart' ) );
+//
+//function update_cart(){
+//    ob_start();
+//
+//    // Skip product if no updated quantity was posted or no hash on WC_Cart
+//    if( !isset( $_POST['hash'] ) || !isset( $_POST['quantity'] ) ){
+//        exit;
+//    }
+//
+//    $cart_item_key = $_POST['hash'];
+//
+//    if( !isset( WC()->cart->get_cart()[ $cart_item_key ] ) ){
+//        exit;
+//    }
+//
+//    $values = WC()->cart->get_cart()[ $cart_item_key ];
+//
+//    $_product = $values['data'];
+//
+//    // Sanitize
+//    $quantity = apply_filters( 'woocommerce_stock_amount_cart_item', apply_filters( 'woocommerce_stock_amount', preg_replace( "/[^0-9\.]/", '', filter_var($_POST['quantity'], FILTER_SANITIZE_NUMBER_INT)) ), $cart_item_key );
+//
+//    if ( '' === $quantity || $quantity == $values['quantity'] )
+//        exit;
+//
+//    // Update cart validation
+//    $passed_validation  = apply_filters( 'woocommerce_update_cart_validation', true, $cart_item_key, $values, $quantity );
+//
+//    // is_sold_individually
+//    if ( $_product->is_sold_individually() && $quantity > 1 ) {
+//        wc_add_notice( sprintf( __( 'You can only have 1 %s in your cart.', 'woocommerce' ), $_product->get_title() ), 'error' );
+//        $passed_validation = false;
+//    }
+//
+//    if ( $passed_validation ) {
+//        WC()->cart->set_quantity( $cart_item_key, $quantity, false );
+//    }
+//
+//    // Recalc our totals
+//    WC()->cart->calculate_totals();
+//    woocommerce_cart_totals();
+//    
+//    wp_send_json('{"status": "success"}');
+//    exit;
+//    
+//    die();
+//}
 
 
 // calculate shipping
