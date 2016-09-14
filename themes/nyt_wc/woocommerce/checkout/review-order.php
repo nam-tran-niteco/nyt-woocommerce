@@ -125,7 +125,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr class="cart-subtotal">
 				<td class="checkout-table-title" colspan="4"><strong>SUBTOTAL:</strong></td>
 				<td class="checkout-table-price">
-					<strong><?php wc_cart_totals_subtotal_html(); ?></strong>
+                                    <strong id="subtotal-update"><?php wc_cart_totals_subtotal_html(); ?></strong>
 				</td>
 			</tr>
 			<tr>
@@ -133,7 +133,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td class="checkout-table-title" colspan="4"><strong>SHIPPING:</strong></td>
 					<td class="checkout-table-price">
 						<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
-						<strong><?php wc_cart_totals_fee_html( $shipping ); ?></strong>
+                                            <strong id="shipping-update"><?php wc_cart_totals_fee_html( $shipping ); ?></strong>
 						<!--<strong><?php wc_cart_totals_shipping_html(); ?></strong>-->
 						<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
 					</td>
@@ -148,7 +148,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 			<tr class="order-total">
 				<td class="checkout-total-title" colspan="4"><strong>TOTAL:</strong></td>
-				<td class="checkout-total-price cart-total"><strong><?php wc_cart_totals_order_total_html(); ?></strong></td>
+                                <td class="checkout-total-price cart-total"><strong id="total-order"><?php wc_cart_totals_order_total_html(); ?></strong></td>
 			</tr>
 			<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
 		</tfoot>

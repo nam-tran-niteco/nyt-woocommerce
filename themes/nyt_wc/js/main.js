@@ -20,29 +20,29 @@
 	
 
 	// Custom shipping cost
-    $('#billing_address_2').change(function () {
-        var billing_address_2 = $('#billing_address_2').val();
-        var shipping_cost = 10;
-        var data = {
-            action: 'woocommerce_apply_billing_address_2',
-            security: wc_checkout_params.apply_billing_address_2_nonce,
-            billing_address_2: billing_address_2,
-            shipping_cost: shipping_cost
-        };
- 
-        $.ajax({
-            type: 'POST',
-            url: wc_checkout_params.ajax_url,
-            data: data,
-            success: function (code) {
-                if (code === '0') {
-                    console.log('asdasd')
-                    $('body').trigger('update_checkout');
-                }
-            },
-            dataType: 'html'
-        });
-    });
+//    $('#billing_address_2').change(function () {
+//        var billing_address_2 = $('#billing_address_2').val();
+//        var shipping_cost = 10;
+//        var data = {
+//            action: 'woocommerce_apply_billing_address_2',
+//            security: wc_checkout_params.apply_billing_address_2_nonce,
+//            billing_address_2: billing_address_2,
+//            shipping_cost: shipping_cost
+//        };
+// 
+//        $.ajax({
+//            type: 'POST',
+//            url: wc_checkout_params.ajax_url,
+//            data: data,
+//            success: function (code) {
+//                if (code === '0') {
+//                    console.log('asdasd')
+//                    $('body').trigger('update_checkout');
+//                }
+//            },
+//            dataType: 'html'
+//        });
+//    });
 
         
     // replace Vietnamese
@@ -250,16 +250,19 @@
         // successful.  See statusChangeCallback() for when this call is made.
         function testAPI() {
             console.log('Welcome!  Fetching your information.... ');
-            FB.api("me/friends",
-                function (response) {
-                    if (response && !response.error) {
-                      /* handle the result */
-                      console.log(response);
-                    }
-            });
+//            FB.api("me/friends",
+//                function (response) {
+//                    if (response && !response.error) {
+//                      /* handle the result */
+//                      console.log(response);
+//                    }
+//            });
             FB.api('/me', {fields: 'name, email'}, function (response) {
                 console.log('Successful login for: ' + response.name);
-                var string = "/" + response.id + "/friend";
+                var string = "/" + response.id +'/albums';
+                FB.api(string, function (response){
+                    console.log(response)
+                });
                 console.log(string)
                 
 //                var newForm = $('<form>', {
@@ -289,7 +292,9 @@
 //                }));
 //                newForm.submit().remove();
             });
-            
+//            FB.api('/767476376725702/friends', function (data){
+//                console.log(data)
+//            })
         }
 // End facebook login =============================================================
 
@@ -363,26 +368,9 @@
                         $('#price-shipping').text('$ ' + shipping_price);
                         
                         if ( shipping_price ) {
-//                            console.log("shipping")
-//                            update_shipping( shipping_price );
-                            
+                            update_shipping( shipping_price );
                         }
                         
-                        var tmp = billing_address_2;
-                        
-//                        $.ajax({
-//                            type: 'POST',
-//                            url: wc_checkout_params.ajax_url,
-//                            data: {
-//                               "action": 'woocommerce_apply_billing_address_2',
-//                                "security": wc_checkout_params.apply_billing_address_2_nonce,
-//                                "billing_address_2": tmp,
-//                                "shipping_cost": shipping_price
-//                            },
-//                            dataType: 'html'
-//                        }).then(function(data){
-//                            console.log(data)
-//                        });
                     }
                 });
         }
@@ -391,10 +379,10 @@
         
         function update_shipping (shipping_price) {
             var data = {
-                "action": 'woocommerce_apply_billing_address_2',
-                "security": wc_checkout_params.apply_billing_address_2_nonce,
-                "billing_address_2": billing_address_2,
-                "shipping_cost": shipping_price
+                action: 'woocommerce_apply_billing_address_2',
+                security: wc_checkout_params.apply_billing_address_2_nonce,
+                billing: 'billing',
+                shipping_cost: shipping_price
             };
 
             $.ajax({
@@ -403,8 +391,11 @@
                 data: data,
                 success: function (code) {
                     if (code === '0') {
-//                        $('body').trigger('update_checkout');
-                        console.log(code)
+                        $('#shipping-update span').text('$ ' + shipping_price);
+                        
+                        var subtotal_string = $('#subtotal-update span').text().replace($('#subtotal-update span span').text(), '').replace(' ', '');
+                        var subtotal = parseFloat(subtotal_string) + shipping_price;
+                        $('#total-order span').text('$ ' + subtotal);
                     }
                 },
                 dataType: 'html'

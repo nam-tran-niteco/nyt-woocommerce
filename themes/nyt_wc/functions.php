@@ -434,9 +434,9 @@ function custom_after_cart() {
 wp_localize_script('billing_address_2', 'wc_checkout_params', array('ajaxurl' => admin_url('admin-ajax.php')));
 
  function calculate() {
-    if (isset($_POST['billing_address_2'])) {
+    if (isset($_POST['billing'])) {
         global $woocommerce;
-        $billing_address_2 = $_POST['billing_address_2'];
+//        $billing_address_2 = $_POST['billing_address_2'];
 
         session_start();
         $_SESSION['val'] = $_POST['shipping_cost'];

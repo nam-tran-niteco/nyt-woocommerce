@@ -103,12 +103,12 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
                                 <div class="delivery-info">
                                     <div class="delivery-distance">
                                         <h4>Your Distance</h4>
-                                        <span id="distance-shipping" class="distance">24km</span>
+                                        <span id="distance-shipping" class="distance">0 km</span>
                                     </div>
                                     
                                     <div class="shipping-price">
                                         <h4>Shipping price</h4>
-                                        <span id="price-shipping" class="price-shipping">$40</span>
+                                        <span id="price-shipping" class="price-shipping">$ 0</span>
                                     </div>
                                 </div>
                                 
