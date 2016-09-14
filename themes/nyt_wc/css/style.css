@@ -6222,7 +6222,7 @@ table.variations .value select {
 }
 
 #billing_country{
-	position: absolute;
+    position: absolute;
     width: 72%;
     left: 150px;
     border: 1px solid #dcdcdc;
@@ -6231,6 +6231,44 @@ table.variations .value select {
 #item-quantity{
 	color: #555;
 	font: 700 20px "Gudea", Arial, sans-serif;
+}
+
+/* hide "view cart" */
+.added_to_cart.wc-forward {
+	display: none;
+}
+#order-details-head{
+	margin-top: 20px;
+}
+
+.delivery-info {
+    float: left;
+}
+
+.delivery-info h4{
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+.delivery-info .distance {
+    font-size: 25px;
+}
+
+.delivery-info .price-shipping {
+    font-size: 30px;
+    color: red;
+}
+
+.checkout-map {
+    float: right;
+    width: 50%;
+}
+
+#map {
+    background-color: grey;
+    height: 400px;
+    position: relative;
+    width: 100%;
 }
 
 .woocommerce-message h3 {

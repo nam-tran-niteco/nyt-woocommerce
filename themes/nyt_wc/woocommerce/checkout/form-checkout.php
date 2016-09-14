@@ -96,10 +96,26 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 			<a class="accordion-btn collapsed" data-toggle="collapse" data-target="#delivery-details"></a>
 		</div><!-- End .accordion-header -->
 		
-		<div id="delivery-details" class="collapse">
+		<div id="delivery-details" class="collapse in">
 			<div class="panel-body">
 				<p><?php echo 'Details about delivery ' ?></p>
 				<!--<?php do_action( 'woocommerce_checkout_shipping' ); ?>-->
+                                <div class="delivery-info">
+                                    <div class="delivery-distance">
+                                        <h4>Your Distance</h4>
+                                        <span id="distance-shipping" class="distance">24km</span>
+                                    </div>
+                                    
+                                    <div class="shipping-price">
+                                        <h4>Shipping price</h4>
+                                        <span id="price-shipping" class="price-shipping">$40</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="checkout-map">
+                                    <div id="map"></div>
+                                </div>
+                                
 			</div><!-- End .panel-body -->
 		</div><!-- End .panel-collapse -->
 		
@@ -139,4 +155,48 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 	
 </form>
 
+<!--&libraries=places&callback=initMap-->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcYOezeTBP-c9bWFmUEXXpxWANYCSHazg&libraries=places&callback=initMap"></script>
+<script>
+// GOOGLE MAP SETTING
+// ==========================================
+var autocomplete;
+var infowindow;
+var shipping_center_marker;
+var shipping_center;
+var searched_location_marker;
+var searched_place;
+var map;
+var directionsService;
+var directionsDisplay;
+
+function initMap() {
+	var mapDiv = document.getElementById('map');
+        directionsService = new google.maps.DirectionsService();
+        directionsDisplay =  new google.maps.DirectionsRenderer();
+
+	shipping_center = new google.maps.LatLng(21.0128799, 105.83559579999996);
+	map = new google.maps.Map(mapDiv, {
+                center: shipping_center,
+                zoom: 10,
+                scrollwheel: false
+	});
+        
+        directionsDisplay.setMap(map);
+        
+        shipping_center_marker = new google.maps.Marker({
+            map: map,
+            position: shipping_center
+        })
+	infowindow = new google.maps.InfoWindow();
+	searched_location_marker = new google.maps.Marker({
+		map: map
+	})
+
+	autocomplete = new google.maps.places.Autocomplete(
+		(document.getElementById('billing_address_2')), {types: ['geocode']}
+	)
+
+}
+</script>
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
