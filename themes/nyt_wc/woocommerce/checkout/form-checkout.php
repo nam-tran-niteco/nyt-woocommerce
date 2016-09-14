@@ -58,7 +58,6 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 					<div class="xs-margin"></div>
 					<?php 
 						do_action( 'woocommerce_before_checkout_form', $checkout );
-					
 					?>
 				</div>
 			</div>

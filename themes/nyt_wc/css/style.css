@@ -6233,9 +6233,18 @@ table.variations .value select {
 	font: 700 20px "Gudea", Arial, sans-serif;
 }
 
+.woocommerce-message h3 {
+    border-top-color: #7bae23
+}
+
+.woocommerce-ordering {
+	display: inline-block;
+}
+
 #order-details-head{
 	margin-top: 20px;
 }
+
 /* hide "view cart" */
 .added_to_cart.wc-forward {
 	display: none;
