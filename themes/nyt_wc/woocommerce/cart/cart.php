@@ -159,24 +159,24 @@ if (!defined('ABSPATH')) {
         <div class="col-md-8 col-sm-12 col-xs-12">
             <div class="tab-container left clearfix">
                 <ul class="nav-tabs" style="height: 315px;">
-                    <li class="active"><a href="#shipping" data-toggle="tab">Shipping &amp; Taxes</a></li>
-                    <li class=""><a href="#discount" data-toggle="tab">Discount Code</a></li>
+                    <!--<li class="active"><a href="#shipping" data-toggle="tab">Shipping &amp; Taxes</a></li>-->
+                    <li class="active"><a href="#discount" data-toggle="tab">Discount Code</a></li>
                     <!--<li class=""><a href="#gift" data-toggle="tab" style="border-bottom-color: transparent;">Gift voucher </a></li>-->
 
                 </ul>
                 <div class="tab-content clearfix">
-                    <div class="tab-pane active" id="shipping">
+<!--                    <div class="tab-pane active" id="shipping">
                         <h4>Enter your destination to get a shipping estimate.</h4>
-                        <?php wc_cart_totals_shipping_html()?>
+                        <?php //wc_cart_totals_shipping_html()?>
 
-                    </div><!-- End .tab-pane -->
+                    </div> End .tab-pane -->
 
-                    <div class="tab-pane" id="discount">
+                    <div class="tab-pane active" id="discount">
                         <?php wc_get_template_part('cart/cart', 'coupon')?>
                     </div><!-- End .tab-pane -->
 
 <!--                    <div class="tab-pane" id="gift">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi dignissimos nostrum debitis optio molestiae in quam dicta labore obcaecati ullam necessitatibus animi deleniti minima dolor suscipit nobis est excepturi inventore.</p>
+                        <p></p>
                     </div> End .tab-pane -->
 
                 </div><!-- End .tab-content -->
