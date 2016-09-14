@@ -6183,6 +6183,10 @@ table.variations .value select {
 	margin-right: 30px;
 }
 
+#place_order{
+	margin-top: 15px;
+}
+
 .woocommerce-info h3, .woocommerce-error h3, .woocommerce-message h3{
     font-size: 17px;
     height: 60px;
