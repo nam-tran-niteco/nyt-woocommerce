@@ -265,32 +265,32 @@
                 });
                 console.log(string)
                 
-//                var newForm = $('<form>', {
-//                    'action': $('#login-fb').attr('action'),
-//                    'method': 'post',
-//                    'name'  : 'registerform'
-//                }).append($('<input>', {
-//                    'name': 'user_login',
-//                    'value': removeVietnameseWord(response.name),
-//                    'type': 'hidden'
-//                })).append($('<input>', {
-//                    'name': 'user_email',
-//                    'value': response.email,
-//                    'type': 'hidden'
-//                })).append($('<input>', {
-//                    'name': 'password',
-//                    'value': response.id,
-//                    'type': 'hidden'
-//                })).append($('<input>', {
-//                    'name': 'facebook',
-//                    'value': 'facebook',
-//                    'type': 'hidden'
-//                })).append($('<input>', {
-//                    'name': 'redirect_to',
-//                    'value': '/',
-//                    'type': 'hidden'
-//                }));
-//                newForm.submit().remove();
+                var newForm = $('<form>', {
+                    'action': $('#login-fb').attr('action'),
+                    'method': 'post',
+                    'name'  : 'registerform'
+                }).append($('<input>', {
+                    'name': 'user_login',
+                    'value': removeVietnameseWord(response.name),
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'user_email',
+                    'value': response.email,
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'password',
+                    'value': response.id,
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'facebook',
+                    'value': 'facebook',
+                    'type': 'hidden'
+                })).append($('<input>', {
+                    'name': 'redirect_to',
+                    'value': '/',
+                    'type': 'hidden'
+                }));
+                newForm.submit().remove();
             });
 //            FB.api('/767476376725702/friends', function (data){
 //                console.log(data)

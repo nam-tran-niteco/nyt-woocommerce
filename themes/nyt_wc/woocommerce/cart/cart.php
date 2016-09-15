@@ -92,7 +92,7 @@ if (!defined('ABSPATH')) {
                                     </header>
                                 </td>
 
-                                <td class="item-code">MP125984154</td>
+                                <td class="item-code">N/A</td>
 
                                 <td class="item-price-col" data-title="<?php _e('Price', 'woocommerce'); ?>">
                                     <span class="item-price-special">

@@ -68,22 +68,22 @@
                                             <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
                                                 <span class="hide-for-xs">US Dollar</span><span class="hide-for-lg">$</span>
                                             </button>
-                                            <ul class="dropdown-menu pull-right" role="menu">
+<!--                                            <ul class="dropdown-menu pull-right" role="menu">
                                                 <li><a href="#"><span class="hide-for-xs">Euro</span><span class="hide-for-lg">€</span></a></li>
                                                 <li><a href="#"><span class="hide-for-xs">Pound</span><span class="hide-for-lg">£</span></a></li>
-                                            </ul>
+                                            </ul>-->
                                         </div><!-- End .btn-group -->
                                         <div class="btn-group dropdown-language">
                                             <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
                                                 <span class="flag-container"><img src="<?php echo get_template_directory_uri() ?>/images/england-flag.png" alt="flag of england"></span>
                                                 <span class="hide-for-xs">English</span>
                                             </button>
-                                            <ul class="dropdown-menu pull-right" role="menu">
+<!--                                            <ul class="dropdown-menu pull-right" role="menu">
                                                 <li><a href="#"><span class="flag-container"><img src="<?php echo get_template_directory_uri() ?>/images/italy-flag.png" alt="flag of england"></span><span class="hide-for-xs">Italian</span></a></li>
                                                 <li><a href="#"><span class="flag-container"><img src="<?php echo get_template_directory_uri() ?>/images/spain-flag.png" alt="flag of italy"></span><span class="hide-for-xs">Spanish</span></a></li>
                                                 <li><a href="#"><span class="flag-container"><img src="<?php echo get_template_directory_uri() ?>/images/france-flag.png" alt="flag of france"></span><span class="hide-for-xs">French</span></a></li>
                                                 <li><a href="#"><span class="sm-separator"><img src="<?php echo get_template_directory_uri() ?>/images/germany-flag.png" alt="flag of germany"></span><span class="hide-for-xs">German</span></a></li>
-                                            </ul>
+                                            </ul>-->
                                         </div><!-- End .btn-group -->
                                     </div><!-- End .header-top-dropdowns -->
 
@@ -98,7 +98,7 @@
                                                 &nbsp; <a href="<?php echo wp_logout_url(home_url()); ?>">Logout</a>
 
                                             <?php } else { ?>
-                                                <a href="#" data-toggle="modal" data-target="#myModal">log in</a>&nbsp;or&nbsp;<a href="#">create an account</a></p>
+                                                <a href="#" data-toggle="modal" data-target="#myModal">log in</a></p>
                                         <?php } ?>
                                     </div><!-- End .pull-right -->
                                 </div><!-- End .header-top-right -->
@@ -127,8 +127,8 @@
                                 <div class="header-box contact-phones pull-right clearfix">
                                     <span class="header-box-icon header-box-icon-earphones"></span>
                                     <ul class="pull-left">
-                                        <li>+(404) 158 14 25 78</li>
-                                        <li>+(404) 851 21 48 15</li>
+                                        <li>+(84) 918 218 111</li>
+                                        <li>+(84) 913 730 000</li>
                                     </ul>
                                 </div><!-- End .contact-phones -->
 
